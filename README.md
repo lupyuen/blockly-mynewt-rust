@@ -2,9 +2,11 @@
 
 Create a Visual Embedded Rust program in a web browser and deploy it with Apache Mynewt to STM32 Blue Pill. See https://gist.github.com/lupyuen/bb5b3651a82b9722fdfa3e7457e220b7
 
-![Create a Visual Embedded Rust program in a web browser and deploy it with Apache Mynewt to STM32 Blue Pill](https://github.com/lupyuen/blockly-mynewt-rust/raw/master/images/visual-rust.png "Create a Visual Embedded Rust program in a web browser and deploy it with Apache Mynewt to STM32 Blue Pill")
+![Create a Visual Embedded Rust program in a web browser and deploy it with Apache Mynewt to STM32 Blue Pill](https://github.com/lupyuen/blockly-mynewt-rust/raw/master/images/visual-rust.png "Create a Visual Embedded Rust program in a web browser and deploy it with Apache Mynewt to STM32 Blue Pill") <br>
+_Create a Visual Embedded Rust program in a web browser and deploy it with Apache Mynewt to STM32 Blue Pill_
 
-![Copy Dart code generator to Rust since the languages are similar](https://github.com/lupyuen/blockly-mynewt-rust/raw/master/images/dart-to-rust.png "Copy Dart code generator to Rust since the languages are similar")
+![Copy Dart code generator to Rust since the languages are similar](https://github.com/lupyuen/blockly-mynewt-rust/raw/master/images/dart-to-rust.png "Copy Dart code generator to Rust since the languages are similar") <br>
+_Copy Dart code generator to Rust since the languages are similar_
 
 # Blockly [![Build Status]( https://travis-ci.org/google/blockly.svg?branch=master)](https://travis-ci.org/google/blockly)
 
