@@ -13,6 +13,7 @@
   <script src="../../php_compressed.js"></script>
   <script src="../../lua_compressed.js"></script>
   <script src="../../dart_compressed.js"></script>
+  <script src="../generators/rust.js"></script>
   <script src="code.js"></script>
 </head>
 <body>
@@ -33,6 +34,8 @@
         <table width="100%">
           <tr id="tabRow" height="1em">
             <td id="tab_blocks" class="tabon">...</td>
+            <td class="tabmin">&nbsp;</td>
+            <td id="tab_rust" class="taboff">Rust</td>
             <td class="tabmin">&nbsp;</td>
             <td id="tab_javascript" class="taboff">JavaScript</td>
             <td class="tabmin">&nbsp;</td>
@@ -66,6 +69,7 @@
     </tr>
   </table>
   <div id="content_blocks" class="content"></div>
+  <pre id="content_rust" class="content"></pre>
   <pre id="content_javascript" class="content"></pre>
   <pre id="content_python" class="content"></pre>
   <pre id="content_php" class="content"></pre>
