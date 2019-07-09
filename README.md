@@ -8,6 +8,9 @@ _Create a Visual Embedded Rust program in a web browser and deploy it with Apach
 ![Copy Dart code generator to Rust since the languages are similar](https://github.com/lupyuen/blockly-mynewt-rust/raw/master/images/dart-to-rust.png "Copy Dart code generator to Rust since the languages are similar") <br>
 _Copy Dart code generator to Rust since the languages are similar_
 
+![Create the Blocks for Embedded Rust / Mynewt](https://github.com/lupyuen/blockly-mynewt-rust/raw/master/images/create-blocks.png "Create the Blocks for Embedded Rust / Mynewt") <br>
+_Create the Blocks for Embedded Rust / Mynewt_
+
 # Blockly [![Build Status]( https://travis-ci.org/google/blockly.svg?branch=master)](https://travis-ci.org/google/blockly)
 
 
