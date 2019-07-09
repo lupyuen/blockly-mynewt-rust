@@ -19,24 +19,24 @@
  */
 
 /**
- * @fileoverview Generating Dart for logic blocks.
- * @author q.neutron@gmail.com (Quynh Neutron)
+ * @fileoverview Generating Rust for logic blocks.
+ * @author luppy@appkaki.com (Lee Lup Yuen)
  */
 'use strict';
 
-goog.provide('Blockly.Dart.logic');
+goog.provide('Blockly.Rust.logic');
 
-goog.require('Blockly.Dart');
+goog.require('Blockly.Rust');
 
 
-Blockly.Dart['controls_if'] = function(block) {
+Blockly.Rust['controls_if'] = function(block) {
   // If/elseif/else condition.
   var n = 0;
   var code = '', branchCode, conditionCode;
   do {
-    conditionCode = Blockly.Dart.valueToCode(block, 'IF' + n,
-      Blockly.Dart.ORDER_NONE) || 'false';
-    branchCode = Blockly.Dart.statementToCode(block, 'DO' + n);
+    conditionCode = Blockly.Rust.valueToCode(block, 'IF' + n,
+      Blockly.Rust.ORDER_NONE) || 'false';
+    branchCode = Blockly.Rust.statementToCode(block, 'DO' + n);
     code += (n > 0 ? 'else ' : '') +
         'if (' + conditionCode + ') {\n' + branchCode + '}';
 
@@ -44,15 +44,15 @@ Blockly.Dart['controls_if'] = function(block) {
   } while (block.getInput('IF' + n));
 
   if (block.getInput('ELSE')) {
-    branchCode = Blockly.Dart.statementToCode(block, 'ELSE');
+    branchCode = Blockly.Rust.statementToCode(block, 'ELSE');
     code += ' else {\n' + branchCode + '}';
   }
   return code + '\n';
 };
 
-Blockly.Dart['controls_ifelse'] = Blockly.Dart['controls_if'];
+Blockly.Rust['controls_ifelse'] = Blockly.Rust['controls_if'];
 
-Blockly.Dart['logic_compare'] = function(block) {
+Blockly.Rust['logic_compare'] = function(block) {
   // Comparison operator.
   var OPERATORS = {
     'EQ': '==',
@@ -64,20 +64,20 @@ Blockly.Dart['logic_compare'] = function(block) {
   };
   var operator = OPERATORS[block.getFieldValue('OP')];
   var order = (operator == '==' || operator == '!=') ?
-      Blockly.Dart.ORDER_EQUALITY : Blockly.Dart.ORDER_RELATIONAL;
-  var argument0 = Blockly.Dart.valueToCode(block, 'A', order) || '0';
-  var argument1 = Blockly.Dart.valueToCode(block, 'B', order) || '0';
+      Blockly.Rust.ORDER_EQUALITY : Blockly.Rust.ORDER_RELATIONAL;
+  var argument0 = Blockly.Rust.valueToCode(block, 'A', order) || '0';
+  var argument1 = Blockly.Rust.valueToCode(block, 'B', order) || '0';
   var code = argument0 + ' ' + operator + ' ' + argument1;
   return [code, order];
 };
 
-Blockly.Dart['logic_operation'] = function(block) {
+Blockly.Rust['logic_operation'] = function(block) {
   // Operations 'and', 'or'.
   var operator = (block.getFieldValue('OP') == 'AND') ? '&&' : '||';
-  var order = (operator == '&&') ? Blockly.Dart.ORDER_LOGICAL_AND :
-      Blockly.Dart.ORDER_LOGICAL_OR;
-  var argument0 = Blockly.Dart.valueToCode(block, 'A', order);
-  var argument1 = Blockly.Dart.valueToCode(block, 'B', order);
+  var order = (operator == '&&') ? Blockly.Rust.ORDER_LOGICAL_AND :
+      Blockly.Rust.ORDER_LOGICAL_OR;
+  var argument0 = Blockly.Rust.valueToCode(block, 'A', order);
+  var argument1 = Blockly.Rust.valueToCode(block, 'B', order);
   if (!argument0 && !argument1) {
     // If there are no arguments, then the return value is false.
     argument0 = 'false';
@@ -96,33 +96,33 @@ Blockly.Dart['logic_operation'] = function(block) {
   return [code, order];
 };
 
-Blockly.Dart['logic_negate'] = function(block) {
+Blockly.Rust['logic_negate'] = function(block) {
   // Negation.
-  var order = Blockly.Dart.ORDER_UNARY_PREFIX;
-  var argument0 = Blockly.Dart.valueToCode(block, 'BOOL', order) || 'true';
+  var order = Blockly.Rust.ORDER_UNARY_PREFIX;
+  var argument0 = Blockly.Rust.valueToCode(block, 'BOOL', order) || 'true';
   var code = '!' + argument0;
   return [code, order];
 };
 
-Blockly.Dart['logic_boolean'] = function(block) {
+Blockly.Rust['logic_boolean'] = function(block) {
   // Boolean values true and false.
   var code = (block.getFieldValue('BOOL') == 'TRUE') ? 'true' : 'false';
-  return [code, Blockly.Dart.ORDER_ATOMIC];
+  return [code, Blockly.Rust.ORDER_ATOMIC];
 };
 
-Blockly.Dart['logic_null'] = function(block) {
+Blockly.Rust['logic_null'] = function(block) {
   // Null data type.
-  return ['null', Blockly.Dart.ORDER_ATOMIC];
+  return ['null', Blockly.Rust.ORDER_ATOMIC];
 };
 
-Blockly.Dart['logic_ternary'] = function(block) {
+Blockly.Rust['logic_ternary'] = function(block) {
   // Ternary operator.
-  var value_if = Blockly.Dart.valueToCode(block, 'IF',
-      Blockly.Dart.ORDER_CONDITIONAL) || 'false';
-  var value_then = Blockly.Dart.valueToCode(block, 'THEN',
-      Blockly.Dart.ORDER_CONDITIONAL) || 'null';
-  var value_else = Blockly.Dart.valueToCode(block, 'ELSE',
-      Blockly.Dart.ORDER_CONDITIONAL) || 'null';
+  var value_if = Blockly.Rust.valueToCode(block, 'IF',
+      Blockly.Rust.ORDER_CONDITIONAL) || 'false';
+  var value_then = Blockly.Rust.valueToCode(block, 'THEN',
+      Blockly.Rust.ORDER_CONDITIONAL) || 'null';
+  var value_else = Blockly.Rust.valueToCode(block, 'ELSE',
+      Blockly.Rust.ORDER_CONDITIONAL) || 'null';
   var code = value_if + ' ? ' + value_then + ' : ' + value_else;
-  return [code, Blockly.Dart.ORDER_CONDITIONAL];
+  return [code, Blockly.Rust.ORDER_CONDITIONAL];
 };

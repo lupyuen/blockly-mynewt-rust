@@ -1,3 +1,7 @@
+# blockly-mynewt-rust
+
+Create a Visual Embedded Rust program in a web browser and deploy it with Apache Mynewt to STM32 Blue Pill. See https://gist.github.com/lupyuen/bb5b3651a82b9722fdfa3e7457e220b7
+
 # Blockly [![Build Status]( https://travis-ci.org/google/blockly.svg?branch=master)](https://travis-ci.org/google/blockly)
 
 

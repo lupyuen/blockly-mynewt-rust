@@ -19,28 +19,28 @@
  */
 
 /**
- * @fileoverview Generating Dart for variable blocks.
- * @author fraser@google.com (Neil Fraser)
+ * @fileoverview Generating Rust for variable blocks.
+ * @author luppy@appkaki.com (Lee Lup Yuen)
  */
 'use strict';
 
-goog.provide('Blockly.Dart.variables');
+goog.provide('Blockly.Rust.variables');
 
-goog.require('Blockly.Dart');
+goog.require('Blockly.Rust');
 
 
-Blockly.Dart['variables_get'] = function(block) {
+Blockly.Rust['variables_get'] = function(block) {
   // Variable getter.
-  var code = Blockly.Dart.variableDB_.getName(block.getFieldValue('VAR'),
+  var code = Blockly.Rust.variableDB_.getName(block.getFieldValue('VAR'),
       Blockly.Variables.NAME_TYPE);
-  return [code, Blockly.Dart.ORDER_ATOMIC];
+  return [code, Blockly.Rust.ORDER_ATOMIC];
 };
 
-Blockly.Dart['variables_set'] = function(block) {
+Blockly.Rust['variables_set'] = function(block) {
   // Variable setter.
-  var argument0 = Blockly.Dart.valueToCode(block, 'VALUE',
-      Blockly.Dart.ORDER_ASSIGNMENT) || '0';
-  var varName = Blockly.Dart.variableDB_.getName(block.getFieldValue('VAR'),
+  var argument0 = Blockly.Rust.valueToCode(block, 'VALUE',
+      Blockly.Rust.ORDER_ASSIGNMENT) || '0';
+  var varName = Blockly.Rust.variableDB_.getName(block.getFieldValue('VAR'),
       Blockly.Variables.NAME_TYPE);
   return varName + ' = ' + argument0 + ';\n';
 };

@@ -19,21 +19,21 @@
  */
 
 /**
- * @fileoverview Helper functions for generating Dart for blocks.
- * @author fraser@google.com (Neil Fraser)
+ * @fileoverview Helper functions for generating Rust for blocks.
+ * @author luppy@appkaki.com (Lee Lup Yuen)
  */
 'use strict';
 
-goog.provide('Blockly.Dart');
+goog.provide('Blockly.Rust');
 
 goog.require('Blockly.Generator');
 
 
 /**
- * Dart code generator.
+ * Rust code generator.
  * @type {!Blockly.Generator}
  */
-Blockly.Dart = new Blockly.Generator('Dart');
+Blockly.Rust = new Blockly.Generator('Rust');
 
 /**
  * List of illegal variable names.
@@ -42,7 +42,7 @@ Blockly.Dart = new Blockly.Generator('Dart');
  * accidentally clobbering a built-in object or function.
  * @private
  */
-Blockly.Dart.addReservedWords(
+Blockly.Rust.addReservedWords(
     // https://www.dartlang.org/docs/spec/latest/dart-language-specification.pdf
     // Section 16.1.1
     'assert,break,case,catch,class,const,continue,default,do,else,enum,' +
@@ -65,63 +65,63 @@ Blockly.Dart.addReservedWords(
  * Order of operation ENUMs.
  * https://www.dartlang.org/docs/dart-up-and-running/ch02.html#operator_table
  */
-Blockly.Dart.ORDER_ATOMIC = 0;         // 0 "" ...
-Blockly.Dart.ORDER_UNARY_POSTFIX = 1;  // expr++ expr-- () [] . ?.
-Blockly.Dart.ORDER_UNARY_PREFIX = 2;   // -expr !expr ~expr ++expr --expr
-Blockly.Dart.ORDER_MULTIPLICATIVE = 3; // * / % ~/
-Blockly.Dart.ORDER_ADDITIVE = 4;       // + -
-Blockly.Dart.ORDER_SHIFT = 5;          // << >>
-Blockly.Dart.ORDER_BITWISE_AND = 6;    // &
-Blockly.Dart.ORDER_BITWISE_XOR = 7;    // ^
-Blockly.Dart.ORDER_BITWISE_OR = 8;     // |
-Blockly.Dart.ORDER_RELATIONAL = 9;     // >= > <= < as is is!
-Blockly.Dart.ORDER_EQUALITY = 10;      // == !=
-Blockly.Dart.ORDER_LOGICAL_AND = 11;   // &&
-Blockly.Dart.ORDER_LOGICAL_OR = 12;    // ||
-Blockly.Dart.ORDER_IF_NULL = 13;       // ??
-Blockly.Dart.ORDER_CONDITIONAL = 14;   // expr ? expr : expr
-Blockly.Dart.ORDER_CASCADE = 15;       // ..
-Blockly.Dart.ORDER_ASSIGNMENT = 16;    // = *= /= ~/= %= += -= <<= >>= &= ^= |=
-Blockly.Dart.ORDER_NONE = 99;          // (...)
+Blockly.Rust.ORDER_ATOMIC = 0;         // 0 "" ...
+Blockly.Rust.ORDER_UNARY_POSTFIX = 1;  // expr++ expr-- () [] . ?.
+Blockly.Rust.ORDER_UNARY_PREFIX = 2;   // -expr !expr ~expr ++expr --expr
+Blockly.Rust.ORDER_MULTIPLICATIVE = 3; // * / % ~/
+Blockly.Rust.ORDER_ADDITIVE = 4;       // + -
+Blockly.Rust.ORDER_SHIFT = 5;          // << >>
+Blockly.Rust.ORDER_BITWISE_AND = 6;    // &
+Blockly.Rust.ORDER_BITWISE_XOR = 7;    // ^
+Blockly.Rust.ORDER_BITWISE_OR = 8;     // |
+Blockly.Rust.ORDER_RELATIONAL = 9;     // >= > <= < as is is!
+Blockly.Rust.ORDER_EQUALITY = 10;      // == !=
+Blockly.Rust.ORDER_LOGICAL_AND = 11;   // &&
+Blockly.Rust.ORDER_LOGICAL_OR = 12;    // ||
+Blockly.Rust.ORDER_IF_NULL = 13;       // ??
+Blockly.Rust.ORDER_CONDITIONAL = 14;   // expr ? expr : expr
+Blockly.Rust.ORDER_CASCADE = 15;       // ..
+Blockly.Rust.ORDER_ASSIGNMENT = 16;    // = *= /= ~/= %= += -= <<= >>= &= ^= |=
+Blockly.Rust.ORDER_NONE = 99;          // (...)
 
 /**
  * Initialise the database of variable names.
  * @param {!Blockly.Workspace} workspace Workspace to generate code from.
  */
-Blockly.Dart.init = function(workspace) {
+Blockly.Rust.init = function(workspace) {
   // Create a dictionary of definitions to be printed before the code.
-  Blockly.Dart.definitions_ = Object.create(null);
+  Blockly.Rust.definitions_ = Object.create(null);
   // Create a dictionary mapping desired function names in definitions_
   // to actual function names (to avoid collisions with user functions).
-  Blockly.Dart.functionNames_ = Object.create(null);
+  Blockly.Rust.functionNames_ = Object.create(null);
 
-  if (!Blockly.Dart.variableDB_) {
-    Blockly.Dart.variableDB_ =
-        new Blockly.Names(Blockly.Dart.RESERVED_WORDS_);
+  if (!Blockly.Rust.variableDB_) {
+    Blockly.Rust.variableDB_ =
+        new Blockly.Names(Blockly.Rust.RESERVED_WORDS_);
   } else {
-    Blockly.Dart.variableDB_.reset();
+    Blockly.Rust.variableDB_.reset();
   }
 
-  Blockly.Dart.variableDB_.setVariableMap(workspace.getVariableMap());
+  Blockly.Rust.variableDB_.setVariableMap(workspace.getVariableMap());
 
   var defvars = [];
   // Add developer variables (not created or named by the user).
   var devVarList = Blockly.Variables.allDeveloperVariables(workspace);
   for (var i = 0; i < devVarList.length; i++) {
-    defvars.push(Blockly.Dart.variableDB_.getName(devVarList[i],
+    defvars.push(Blockly.Rust.variableDB_.getName(devVarList[i],
         Blockly.Names.DEVELOPER_VARIABLE_TYPE));
   }
 
   // Add user variables, but only ones that are being used.
   var variables = Blockly.Variables.allUsedVarModels(workspace);
   for (var i = 0; i < variables.length; i++) {
-    defvars.push(Blockly.Dart.variableDB_.getName(variables[i].getId(),
+    defvars.push(Blockly.Rust.variableDB_.getName(variables[i].getId(),
         Blockly.Variables.NAME_TYPE));
   }
 
   // Declare all of the variables.
   if (defvars.length) {
-    Blockly.Dart.definitions_['variables'] =
+    Blockly.Rust.definitions_['variables'] =
         'var ' + defvars.join(', ') + ';';
   }
 };
@@ -131,18 +131,18 @@ Blockly.Dart.init = function(workspace) {
  * @param {string} code Generated code.
  * @return {string} Completed code.
  */
-Blockly.Dart.finish = function(code) {
+Blockly.Rust.finish = function(code) {
   // Indent every line.
   if (code) {
-    code = Blockly.Dart.prefixLines(code, Blockly.Dart.INDENT);
+    code = Blockly.Rust.prefixLines(code, Blockly.Rust.INDENT);
   }
   code = 'main() {\n' + code + '}';
 
   // Convert the definitions dictionary into a list.
   var imports = [];
   var definitions = [];
-  for (var name in Blockly.Dart.definitions_) {
-    var def = Blockly.Dart.definitions_[name];
+  for (var name in Blockly.Rust.definitions_) {
+    var def = Blockly.Rust.definitions_[name];
     if (def.match(/^import\s/)) {
       imports.push(def);
     } else {
@@ -150,9 +150,9 @@ Blockly.Dart.finish = function(code) {
     }
   }
   // Clean up temporary data.
-  delete Blockly.Dart.definitions_;
-  delete Blockly.Dart.functionNames_;
-  Blockly.Dart.variableDB_.reset();
+  delete Blockly.Rust.definitions_;
+  delete Blockly.Rust.functionNames_;
+  Blockly.Rust.variableDB_.reset();
   var allDefs = imports.join('\n') + '\n\n' + definitions.join('\n\n');
   return allDefs.replace(/\n\n+/g, '\n\n').replace(/\n*$/, '\n\n\n') + code;
 };
@@ -163,17 +163,17 @@ Blockly.Dart.finish = function(code) {
  * @param {string} line Line of generated code.
  * @return {string} Legal line of code.
  */
-Blockly.Dart.scrubNakedValue = function(line) {
+Blockly.Rust.scrubNakedValue = function(line) {
   return line + ';\n';
 };
 
 /**
- * Encode a string as a properly escaped Dart string, complete with quotes.
+ * Encode a string as a properly escaped Rust string, complete with quotes.
  * @param {string} string Text to encode.
- * @return {string} Dart string.
+ * @return {string} Rust string.
  * @private
  */
-Blockly.Dart.quote_ = function(string) {
+Blockly.Rust.quote_ = function(string) {
   // Can't use goog.string.quote since $ must also be escaped.
   string = string.replace(/\\/g, '\\\\')
                  .replace(/\n/g, '\\\n')
@@ -183,28 +183,28 @@ Blockly.Dart.quote_ = function(string) {
 };
 
 /**
- * Common tasks for generating Dart from blocks.
+ * Common tasks for generating Rust from blocks.
  * Handles comments for the specified block and any connected value blocks.
  * Calls any statements following this block.
  * @param {!Blockly.Block} block The current block.
- * @param {string} code The Dart code created for this block.
+ * @param {string} code The Rust code created for this block.
  * @param {boolean=} opt_thisOnly True to generate code for only this statement.
- * @return {string} Dart code with comments and subsequent blocks added.
+ * @return {string} Rust code with comments and subsequent blocks added.
  * @private
  */
-Blockly.Dart.scrub_ = function(block, code, opt_thisOnly) {
+Blockly.Rust.scrub_ = function(block, code, opt_thisOnly) {
   var commentCode = '';
   // Only collect comments for blocks that aren't inline.
   if (!block.outputConnection || !block.outputConnection.targetConnection) {
     // Collect comment for this block.
     var comment = block.getCommentText();
-    comment = Blockly.utils.wrap(comment, Blockly.Dart.COMMENT_WRAP - 3);
+    comment = Blockly.utils.wrap(comment, Blockly.Rust.COMMENT_WRAP - 3);
     if (comment) {
       if (block.getProcedureDef) {
         // Use documentation comment for function comments.
-        commentCode += Blockly.Dart.prefixLines(comment + '\n', '/// ');
+        commentCode += Blockly.Rust.prefixLines(comment + '\n', '/// ');
       } else {
-        commentCode += Blockly.Dart.prefixLines(comment + '\n', '// ');
+        commentCode += Blockly.Rust.prefixLines(comment + '\n', '// ');
       }
     }
     // Collect comments for all value arguments.
@@ -213,16 +213,16 @@ Blockly.Dart.scrub_ = function(block, code, opt_thisOnly) {
       if (block.inputList[i].type == Blockly.INPUT_VALUE) {
         var childBlock = block.inputList[i].connection.targetBlock();
         if (childBlock) {
-          var comment = Blockly.Dart.allNestedComments(childBlock);
+          var comment = Blockly.Rust.allNestedComments(childBlock);
           if (comment) {
-            commentCode += Blockly.Dart.prefixLines(comment, '// ');
+            commentCode += Blockly.Rust.prefixLines(comment, '// ');
           }
         }
       }
     }
   }
   var nextBlock = block.nextConnection && block.nextConnection.targetBlock();
-  var nextCode = opt_thisOnly ? '' : Blockly.Dart.blockToCode(nextBlock);
+  var nextCode = opt_thisOnly ? '' : Blockly.Rust.blockToCode(nextBlock);
   return commentCode + code + nextCode;
 };
 
@@ -235,22 +235,22 @@ Blockly.Dart.scrub_ = function(block, code, opt_thisOnly) {
  * @param {number=} opt_order The highest order acting on this value.
  * @return {string|number}
  */
-Blockly.Dart.getAdjusted = function(block, atId, opt_delta, opt_negate,
+Blockly.Rust.getAdjusted = function(block, atId, opt_delta, opt_negate,
     opt_order) {
   var delta = opt_delta || 0;
-  var order = opt_order || Blockly.Dart.ORDER_NONE;
+  var order = opt_order || Blockly.Rust.ORDER_NONE;
   if (block.workspace.options.oneBasedIndex) {
     delta--;
   }
   var defaultAtIndex = block.workspace.options.oneBasedIndex ? '1' : '0';
   if (delta) {
-    var at = Blockly.Dart.valueToCode(block, atId,
-        Blockly.Dart.ORDER_ADDITIVE) || defaultAtIndex;
+    var at = Blockly.Rust.valueToCode(block, atId,
+        Blockly.Rust.ORDER_ADDITIVE) || defaultAtIndex;
   } else if (opt_negate) {
-    var at = Blockly.Dart.valueToCode(block, atId,
-        Blockly.Dart.ORDER_UNARY_PREFIX) || defaultAtIndex;
+    var at = Blockly.Rust.valueToCode(block, atId,
+        Blockly.Rust.ORDER_UNARY_PREFIX) || defaultAtIndex;
   } else {
-    var at = Blockly.Dart.valueToCode(block, atId, order) ||
+    var at = Blockly.Rust.valueToCode(block, atId, order) ||
         defaultAtIndex;
   }
 
@@ -264,10 +264,10 @@ Blockly.Dart.getAdjusted = function(block, atId, opt_delta, opt_negate,
     // If the index is dynamic, adjust it in code.
     if (delta > 0) {
       at = at + ' + ' + delta;
-      var innerOrder = Blockly.Dart.ORDER_ADDITIVE;
+      var innerOrder = Blockly.Rust.ORDER_ADDITIVE;
     } else if (delta < 0) {
       at = at + ' - ' + -delta;
-      var innerOrder = Blockly.Dart.ORDER_ADDITIVE;
+      var innerOrder = Blockly.Rust.ORDER_ADDITIVE;
     }
     if (opt_negate) {
       if (delta) {
@@ -275,7 +275,7 @@ Blockly.Dart.getAdjusted = function(block, atId, opt_delta, opt_negate,
       } else {
         at = '-' + at;
       }
-      var innerOrder = Blockly.Dart.ORDER_UNARY_PREFIX;
+      var innerOrder = Blockly.Rust.ORDER_UNARY_PREFIX;
     }
     innerOrder = Math.floor(innerOrder);
     order = Math.floor(order);

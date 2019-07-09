@@ -19,17 +19,17 @@
  */
 
 /**
- * @fileoverview Generating Dart for dynamic variable blocks.
- * @author fenichel@google.com (Rachel Fenichel)
+ * @fileoverview Generating Rust for dynamic variable blocks.
+ * @author luppy@appkaki.com (Lee Lup Yuen)
  */
 'use strict';
 
-goog.provide('Blockly.Dart.variablesDynamic');
+goog.provide('Blockly.Rust.variablesDynamic');
 
-goog.require('Blockly.Dart');
-goog.require('Blockly.Dart.variables');
+goog.require('Blockly.Rust');
+goog.require('Blockly.Rust.variables');
 
 
-// Dart is dynamically typed.
-Blockly.Dart['variables_get_dynamic'] = Blockly.Dart['variables_get'];
-Blockly.Dart['variables_set_dynamic'] = Blockly.Dart['variables_set'];
+// Rust is dynamically typed.
+Blockly.Rust['variables_get_dynamic'] = Blockly.Rust['variables_get'];
+Blockly.Rust['variables_set_dynamic'] = Blockly.Rust['variables_set'];
