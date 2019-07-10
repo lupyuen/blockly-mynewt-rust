@@ -1,6 +1,10 @@
 # blockly-mynewt-rust
 
-Create a Visual Embedded Rust program in a web browser and deploy it with Apache Mynewt to STM32 Blue Pill. See https://gist.github.com/lupyuen/bb5b3651a82b9722fdfa3e7457e220b7
+Create a Visual Embedded Rust program in a web browser and deploy it with Apache Mynewt to STM32 Blue Pill. 
+
+Try it here: https://lupyuen.github.io/blockly-mynewt-rust/demos/code/
+
+Watch the demo: https://youtu.be/5hWq5TDEpIg
 
 ![Create a Visual Embedded Rust program in a web browser and deploy it with Apache Mynewt to STM32 Blue Pill](https://github.com/lupyuen/blockly-mynewt-rust/raw/master/images/visual-rust.png "Create a Visual Embedded Rust program in a web browser and deploy it with Apache Mynewt to STM32 Blue Pill") <br>
 _Create a Visual Embedded Rust program in a web browser and deploy it with Apache Mynewt to STM32 Blue Pill_
