@@ -1,5 +1,7 @@
+/// Custom blocks exported from Block Exporter based on mynewt_library.xml.
+/// See mynewt_functions.js for Code Generator Functions.
 var mynewt_blocks =
-// BEGIN
+// Begin Block Exporter
 [{
   "type": "digital_toggle_pin",
   "message0": "digital toggle pin %1",
@@ -151,5 +153,5 @@ var mynewt_blocks =
   "tooltip": "",
   "helpUrl": ""
 }]
-// END
+// End Block Exporter
 ;
