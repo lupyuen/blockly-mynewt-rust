@@ -38,7 +38,7 @@ Blockly.Rust['controls_if'] = function(block) {
       Blockly.Rust.ORDER_NONE) || 'false';
     branchCode = Blockly.Rust.statementToCode(block, 'DO' + n);
     code += (n > 0 ? 'else ' : '') +
-        'if (' + conditionCode + ') {\n' + branchCode + '}';
+        'if ' + conditionCode + ' {\n' + branchCode + '}';
 
     ++n;
   } while (block.getInput('IF' + n));

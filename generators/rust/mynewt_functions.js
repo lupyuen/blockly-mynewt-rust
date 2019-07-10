@@ -62,9 +62,9 @@ Blockly.Rust['digital_toggle_pin'] = function(block) {
 
 Blockly.Rust['digital_read_pin'] = function(block) {
   var dropdown_pin = block.getFieldValue('PIN');
-  // TODO: Assemble Rust into code variable.
-  var code = '...';
-  // TODO: Change ORDER_NONE to the correct strength.
+  //  TODO: gpio::init_in(MCU_GPIO_PORTC!(13)) ? ;
+  var code = '0 /* TODO: digital_read_pin */';
+  //  TODO: Change ORDER_NONE to the correct strength.
   return [code, Blockly.Rust.ORDER_NONE];
 };
 

@@ -89,7 +89,7 @@ Blockly.Rust['procedures_callnoreturn'] = function(block) {
     args[i] = Blockly.Rust.valueToCode(block, 'ARG' + i,
         Blockly.Rust.ORDER_NONE) || 'null';
   }
-  var code = funcName + '(' + args.join(', ') + ');\n';
+  var code = 'fn ' + funcName + '(' + args.join(', ') + ');\n';
   return code;
 };
 
@@ -97,7 +97,7 @@ Blockly.Rust['procedures_ifreturn'] = function(block) {
   // Conditionally return value from a procedure.
   var condition = Blockly.Rust.valueToCode(block, 'CONDITION',
       Blockly.Rust.ORDER_NONE) || 'false';
-  var code = 'if (' + condition + ') {\n';
+  var code = 'if ' + condition + ' {\n';
   if (block.hasReturnValue_) {
     var value = Blockly.Rust.valueToCode(block, 'VALUE',
         Blockly.Rust.ORDER_NONE) || 'null';

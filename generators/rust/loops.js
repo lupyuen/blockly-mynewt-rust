@@ -50,9 +50,7 @@ Blockly.Rust['controls_repeat_ext'] = function(block) {
         'repeat_end', Blockly.Variables.NAME_TYPE);
     code += 'var ' + endVar + ' = ' + repeats + ';\n';
   }
-  code += 'for (int ' + loopVar + ' = 0; ' +
-      loopVar + ' < ' + endVar + '; ' +
-      loopVar + '++) {\n' +
+  code += 'for ' + loopVar + ' in 0..' + endVar + ' {\n' +
       branch + '}\n';
   return code;
 };
@@ -70,7 +68,7 @@ Blockly.Rust['controls_whileUntil'] = function(block) {
   if (until) {
     argument0 = '!' + argument0;
   }
-  return 'while (' + argument0 + ') {\n' + branch + '}\n';
+  return 'while ' + argument0 + ' {\n' + branch + '}\n';
 };
 
 Blockly.Rust['controls_for'] = function(block) {
@@ -90,16 +88,17 @@ Blockly.Rust['controls_for'] = function(block) {
       Blockly.isNumber(increment)) {
     // All arguments are simple numbers.
     var up = parseFloat(argument0) <= parseFloat(argument1);
-    code = 'for (' + variable0 + ' = ' + argument0 + '; ' +
-        variable0 + (up ? ' <= ' : ' >= ') + argument1 + '; ' +
-        variable0;
+    code = 'for ' + variable0 + ' in ' + argument0 + ' .. ' +
+        argument1;
+    /* TODO:
     var step = Math.abs(parseFloat(increment));
     if (step == 1) {
       code += up ? '++' : '--';
     } else {
       code += (up ? ' += ' : ' -= ') + step;
     }
-    code += ') {\n' + branch + '}\n';
+    */
+    code += ' {\n' + branch + '}\n';
   } else {
     code = '';
     // Cache non-trivial values to variables to prevent repeated look-ups.
@@ -125,14 +124,11 @@ Blockly.Rust['controls_for'] = function(block) {
     } else {
       code += '(' + increment + ').abs();\n';
     }
-    code += 'if (' + startVar + ' > ' + endVar + ') {\n';
+    code += 'if ' + startVar + ' > ' + endVar + ' {\n';
     code += Blockly.Rust.INDENT + incVar + ' = -' + incVar + ';\n';
     code += '}\n';
-    code += 'for (' + variable0 + ' = ' + startVar + '; ' +
-        incVar + ' >= 0 ? ' +
-        variable0 + ' <= ' + endVar + ' : ' +
-        variable0 + ' >= ' + endVar + '; ' +
-        variable0 + ' += ' + incVar + ') {\n' +
+    code += 'for ' + variable0 + ' in ' + startVar + ' .. ' +
+        endVar + ' {\n' +
         branch + '}\n';
   }
   return code;
@@ -146,7 +142,7 @@ Blockly.Rust['controls_forEach'] = function(block) {
       Blockly.Rust.ORDER_ASSIGNMENT) || '[]';
   var branch = Blockly.Rust.statementToCode(block, 'DO');
   branch = Blockly.Rust.addLoopTrap(branch, block.id);
-  var code = 'for (var ' + variable0 + ' in ' + argument0 + ') {\n' +
+  var code = 'for ' + variable0 + ' in ' + argument0 + ' {\n' +
       branch + '}\n';
   return code;
 };
