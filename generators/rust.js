@@ -134,9 +134,37 @@ Blockly.Rust.init = function(workspace) {
 Blockly.Rust.finish = function(code) {
   // Indent every line.
   if (code) {
-    code = Blockly.Rust.prefixLines(code, Blockly.Rust.INDENT);
+    //code = Blockly.Rust.prefixLines(code, Blockly.Rust.INDENT);
   }
-  code = 'main() {\n' + code + '}';
+  code = [
+    code,
+    '',
+    '///  main() will be called at Mynewt startup. It replaces the C version of the `main()` function.',
+    '#[no_mangle]                 //  Don\'t mangle the name "main"',
+    'extern "C" fn main() -> ! {  //  Declare `extern "C"` because it will be called by Mynewt',
+    '    //  Initialise Mynewt OS.',
+    '    unsafe { base::rust_sysinit(); console_flush() };',
+    '',
+    '    //  Initialise the app.',
+    '    on_start()',
+    '        .expect("on_start fail");',
+    '',
+    '    //  Start the background task.',
+    '    start_task()',
+    '        .expect("background task fail");',
+    '',
+    '    //  Main event loop',
+    '    loop {                                //  Loop forever...',
+    '        unsafe {',
+    '            os::os_eventq_run(            //  Process events...',
+    '                os::os_eventq_dflt_get()  //  From default event queue.',
+    '            )',
+    '        }',
+    '    }',
+    '    //  Never comes here.',
+    '}',
+    ''
+  ].join('\n');
 
   // Convert the definitions dictionary into a list.
   var imports = [];
