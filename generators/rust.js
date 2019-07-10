@@ -35,7 +35,7 @@ goog.require('Blockly.Generator');
  */
 Blockly.Rust = new Blockly.Generator('Rust');
 
-/**
+/** TODO
  * List of illegal variable names.
  * This is not intended to be a security feature.  Blockly is 100% client-side,
  * so bypassing this list is trivial.  This is intended to prevent users from
@@ -61,7 +61,7 @@ Blockly.Rust.addReservedWords(
     'StateError,TypeError,UnimplementedError,UnsupportedError'
 );
 
-/**
+/** TODO
  * Order of operation ENUMs.
  * https://www.dartlang.org/docs/dart-up-and-running/ch02.html#operator_table
  */
@@ -119,10 +119,10 @@ Blockly.Rust.init = function(workspace) {
         Blockly.Variables.NAME_TYPE));
   }
 
-  // Declare all of the variables.
+  // TODO: Declare all of the variables.
   if (defvars.length) {
     Blockly.Rust.definitions_['variables'] =
-        'var ' + defvars.join(', ') + ';';
+        'let ' + defvars.join(', ') + ';';
   }
 };
 
@@ -166,7 +166,7 @@ Blockly.Rust.finish = function(code) {
     ''
   ].join('\n');
 
-  // Convert the definitions dictionary into a list.
+  // TODO: Convert the definitions dictionary into a list.
   var imports = [];
   var definitions = [];
   for (var name in Blockly.Rust.definitions_) {
@@ -313,60 +313,3 @@ Blockly.Rust.getAdjusted = function(block, atId, opt_delta, opt_negate,
   }
   return at;
 };
-
-/*
-Pins: 
-digital toggle pin ?
-digital read pin ?
-digital write pin ? to low/high
-
-Loops:
-forever
-on start
-
-Control:
-wait (seconds) ?
-
-
-    fn task1_handler(arg: Ptr) -> MynewtResult<()> {
-        //  Set Pin PC13 to output, init to high.
-        gpio::init_out(MCU_GPIO_PORTC!(13), 1) ? ;
-        loop {
-            //  Toggle the LED
-            gpio::toggle(MCU_GPIO_PORTC!(13)) ? ;
-
-            //  Wait one second
-            os::time_delay(OS_TICKS_PER_SEC) ? ;
-        }
-    }
-
-    ///  main() will be called at Mynewt startup. It replaces the C version of the main() function.
-    #[no_mangle]                 //  Don't mangle the name "main"
-    extern "C" fn main() -> ! {  //  Declare extern "C" because it will be called by Mynewt
-        //  Init Mynewt system.
-        unsafe { base::rust_sysinit()  };
-        unsafe { console_flush() };
-
-        //  Start the Network Task in the background.  The Network Task prepares the ESP8266 or nRF24L01 transceiver for
-        //  sending CoAP messages.  We connect the ESP8266 to the WiFi access point and register
-        //  the ESP8266/nRF24L01 driver as the network transport for CoAP.  Also perform WiFi Geolocation if it is enabled.
-        //  send_coap::start_network_task()
-        //    .expect("NET fail");
-
-        //  Starting polling the temperature sensor every 10 seconds in the background.  
-        //  After polling the sensor, call the listener function to send the sensor data to the CoAP server or Collector Node.
-        //  If this is the Collector Node, we shall wait for sensor data from the Sensor Nodes and transmit to the CoAP server.
-        //  listen_sensor::start_sensor_listener()
-        //    .expect("TMP fail");
-
-        //  Main event loop
-        loop {                            //  Loop forever...
-            unsafe {
-                os::os_eventq_run(            //  Process events...
-                    os::os_eventq_dflt_get()  //  From default event queue.
-                )
-            }
-        }
-        //  Never comes here.
-    }
-*/
