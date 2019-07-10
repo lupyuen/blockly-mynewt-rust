@@ -433,10 +433,11 @@ Code.init = function() {
 
   Code.loadBlocks('');
 
-  ////
-  var blocks = mynewt_blocks;
+  // Load the Rust Custom Blocks.
+  var blocks = mynewt_blocks;  // mynewt_blocks defined in mynewt_blocks.js
+  // For each Block...
   blocks.forEach(block => {
-
+    // Register the Block with Blockly.
     Blockly.Blocks[block.type] = {
       init: function() {
         this.jsonInit(block);
@@ -450,32 +451,7 @@ Code.init = function() {
         */
       }
     };    
-
   });
-
-  var mathChangeJson = {
-    "message0": "change %1 by %2",
-    "args0": [
-      {"type": "field_variable", "name": "VAR", "variable": "item", "variableTypes": [""]},
-      {"type": "input_value", "name": "DELTA", "check": "Number"}
-    ],
-    "previousStatement": null,
-    "nextStatement": null,
-    "colour": 230
-  };
-  
-  Blockly.Blocks['math_change'] = {
-    init: function() {
-      this.jsonInit(mathChangeJson);
-      // Assign 'this' to a variable for use in the tooltip closure below.
-      var thisBlock = this;
-      this.setTooltip(function() {
-        return 'Add a number to variable "%1".'.replace('%1',
-            thisBlock.getFieldValue('VAR'));
-      });
-    }
-  };
-  ////
 
   if ('BlocklyStorage' in window) {
     // Hook a save function onto unload.
