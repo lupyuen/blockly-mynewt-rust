@@ -1,3 +1,5 @@
+var mynewt_blocks =
+// BEGIN
 [{
   "type": "digital_toggle_pin",
   "message0": "digital toggle pin %1",
@@ -149,3 +151,5 @@
   "tooltip": "",
   "helpUrl": ""
 }]
+// END
+;

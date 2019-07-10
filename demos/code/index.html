@@ -13,8 +13,13 @@
   <script src="../../php_compressed.js"></script>
   <script src="../../lua_compressed.js"></script>
   <script src="../../dart_compressed.js"></script>
-  <!--  TODO: Package into rust_compressed.js  -->
+  <!--  Load Rust Code Generator  -->
   <script src="../../generators/rust.js"></script>
+  <!--  Load Mynewt Blocks  -->
+  <script src="../../generators/rust/mynewt_blocks.js"></script>
+  <!--  Load Mynewt Functions  -->
+  <script src="../../generators/rust/mynewt_functions.js"></script>
+  <!--  Load Rust Functions. TODO: Package into rust_compressed.js  -->
   <script src="../../generators/rust/colour.js"></script>
   <script src="../../generators/rust/lists.js"></script>
   <script src="../../generators/rust/logic.js"></script>
@@ -22,7 +27,7 @@
   <script src="../../generators/rust/procedures.js"></script>
   <script src="../../generators/rust/text.js"></script>
   <script src="../../generators/rust/variables_dynamic.js"></script>
-  <script src="../../generators/rust/variables.js"></script>
+  <script src="../../generators/rust/variables.js"></script>  
   <!--  TODO: End  -->
   <script src="code.js"></script>
 </head>
@@ -88,6 +93,14 @@
   <textarea id="content_xml" class="content" wrap="off"></textarea>
 
   <xml id="toolbox" style="display: none">
+    <!--  Begin: Pins Category -->
+    <category name="Pins" colour="330">
+        <block type="digital_read_pin"></block>
+        <block type="digital_write_pin"></block>
+        <block type="digital_toggle_pin"></block>
+    </category>
+    <!--  End  -->
+
     <category name="%{BKY_CATLOGIC}" colour="%{BKY_LOGIC_HUE}">
       <block type="controls_if"></block>
       <block type="logic_compare"></block>
@@ -98,6 +111,12 @@
       <block type="logic_ternary"></block>
     </category>
     <category name="%{BKY_CATLOOPS}" colour="%{BKY_LOOPS_HUE}">
+
+      <!--  Begin: Forever and On Start -->
+      <block type="forever"></block>
+      <block type="on_start"></block>
+      <!--  End -->
+
       <block type="controls_repeat_ext">
         <value name="TIMES">
           <shadow type="math_number">
@@ -393,6 +412,13 @@
         </value>
       </block>
     </category>
+
+    <!--  Begin: Control Category -->
+    <category name="Control" colour="160">
+        <block type="wait"></block>
+    </category>
+    <!--  End  -->
+
     <sep></sep>
     <category name="%{BKY_CATVARIABLES}" colour="%{BKY_VARIABLES_HUE}" custom="VARIABLE"></category>
     <category name="%{BKY_CATFUNCTIONS}" colour="%{BKY_PROCEDURES_HUE}" custom="PROCEDURE"></category>
