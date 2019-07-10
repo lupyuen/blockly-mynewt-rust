@@ -6,6 +6,8 @@ Try it here: https://lupyuen.github.io/blockly-mynewt-rust/demos/code/
 
 Watch the demo: https://youtu.be/5hWq5TDEpIg
 
+Read the article: [_Visual Programming with Embedded Rust? Yes we can with Apache Mynewt and Google Blockly!_](https://medium.com/@ly.lee/visual-programming-with-embedded-rust-yes-we-can-with-apache-mynewt-and-google-blockly-8b67ef7412d7)
+
 ![Create a Visual Embedded Rust program in a web browser and deploy it with Apache Mynewt to STM32 Blue Pill](https://github.com/lupyuen/blockly-mynewt-rust/raw/master/images/visual-rust.png "Create a Visual Embedded Rust program in a web browser and deploy it with Apache Mynewt to STM32 Blue Pill") <br>
 _Create a Visual Embedded Rust program in a web browser and deploy it with Apache Mynewt to STM32 Blue Pill_
 
