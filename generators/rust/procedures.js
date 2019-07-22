@@ -46,10 +46,8 @@ Blockly.Rust['procedures_defreturn'] = function(block) {
   }
   var returnValue = Blockly.Rust.valueToCode(block, 'RETURN',
       Blockly.Rust.ORDER_NONE) || '';
-  if (returnValue) {
-    returnValue = Blockly.Rust.INDENT + 'return ' + returnValue + ';\n';
-  }
   var returnType = returnValue ? 'dynamic' : 'void';
+  returnValue = Blockly.Rust.INDENT + 'Ok(' + (returnValue || '()') + ')\n';
   var args = [];
   for (var i = 0; i < block.arguments_.length; i++) {
     args[i] = Blockly.Rust.variableDB_.getName(block.arguments_[i],
