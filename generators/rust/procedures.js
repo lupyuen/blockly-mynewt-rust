@@ -55,8 +55,19 @@ Blockly.Rust['procedures_defreturn'] = function(block) {
     args[i] = Blockly.Rust.variableDB_.getName(block.arguments_[i],
         Blockly.Variables.NAME_TYPE);
   }
-  var code = returnType + ' ' + funcName + '(' + args.join(', ') + ') {\n' +
-      branch + returnValue + '}';
+  var code = [
+    'fn ', funcName,
+    '(', 
+      args.join(', '),
+    ') ',
+    '-> MynewtResult<', 
+    returnType == 'void' ? '()' : returnType, 
+    '> ',
+    '{\n',
+    branch,
+    returnValue,
+    '}'
+  ].join('');
   code = Blockly.Rust.scrub_(block, code);
   // Add % so as not to collide with helper functions in definitions list.
   Blockly.Rust.definitions_['%' + funcName] = code;
@@ -76,7 +87,7 @@ Blockly.Rust['procedures_callreturn'] = function(block) {
     args[i] = Blockly.Rust.valueToCode(block, 'ARG' + i,
         Blockly.Rust.ORDER_NONE) || 'null';
   }
-  var code = funcName + '(' + args.join(', ') + ')';
+  var code = funcName + '(' + args.join(', ') + ') ? ';
   return [code, Blockly.Rust.ORDER_UNARY_POSTFIX];
 };
 
@@ -89,7 +100,7 @@ Blockly.Rust['procedures_callnoreturn'] = function(block) {
     args[i] = Blockly.Rust.valueToCode(block, 'ARG' + i,
         Blockly.Rust.ORDER_NONE) || 'null';
   }
-  var code = 'fn ' + funcName + '(' + args.join(', ') + ');\n';
+  var code = funcName + '(' + args.join(', ') + ') ? ;\n';
   return code;
 };
 
