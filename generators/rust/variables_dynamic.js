@@ -30,6 +30,6 @@ goog.require('Blockly.Rust');
 goog.require('Blockly.Rust.variables');
 
 
-// Rust is dynamically typed.
+// TODO: For dynamic types
 Blockly.Rust['variables_get_dynamic'] = Blockly.Rust['variables_get'];
 Blockly.Rust['variables_set_dynamic'] = Blockly.Rust['variables_set'];
