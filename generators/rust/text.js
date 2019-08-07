@@ -124,8 +124,8 @@ Blockly.Rust['text_charAt'] = function(block) {
       code = functionName + '(' + text + ', ' + at + ')';
       return [code, Blockly.Rust.ORDER_UNARY_POSTFIX];
     case 'RANDOM':
-      Blockly.Rust.definitions_['import_dart_math'] =
-          'import \'dart:math\' as Math;';
+      Blockly.Rust.definitions_['use_dart_math'] =
+          'use \'dart:math\' as Math;';
       var functionName = Blockly.Rust.provideFunction_(
           'text_random_letter',
           ['String ' + Blockly.Rust.FUNCTION_NAME_PLACEHOLDER_ +
@@ -274,8 +274,8 @@ Blockly.Rust['text_print'] = function(block) {
 
 Blockly.Rust['text_prompt_ext'] = function(block) {
   // TODO: Prompt function.
-  Blockly.Rust.definitions_['import_dart_html'] =
-      'import \'dart:html\' as Html;';
+  Blockly.Rust.definitions_['use_dart_html'] =
+      'use \'dart:html\' as Html;';
   if (block.getField('TEXT')) {
     // Internal message.
     var msg = Blockly.Rust.quote_(block.getFieldValue('TEXT'));
@@ -287,8 +287,8 @@ Blockly.Rust['text_prompt_ext'] = function(block) {
   var code = 'Html.window.prompt(' + msg + ', \'\')';
   var toNumber = block.getFieldValue('TYPE') == 'NUMBER';
   if (toNumber) {
-    Blockly.Rust.definitions_['import_dart_math'] =
-        'import \'dart:math\' as Math;';
+    Blockly.Rust.definitions_['use_dart_math'] =
+        'use \'dart:math\' as Math;';
     code = 'Math.parseDouble(' + code + ')';
   }
   return [code, Blockly.Rust.ORDER_UNARY_POSTFIX];

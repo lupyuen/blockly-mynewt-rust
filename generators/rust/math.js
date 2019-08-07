@@ -67,8 +67,8 @@ Blockly.Rust['math_arithmetic'] = function(block) {
   var code;
   // Power in Rust requires a special case since it has no operator.
   if (!operator) {
-    Blockly.Rust.definitions_['import_dart_math'] =
-        'import \'dart:math\' as Math;';
+    Blockly.Rust.definitions_['use_dart_math'] =
+        'use \'dart:math\' as Math;';
     code = 'Math.pow(' + argument0 + ', ' + argument1 + ')';
     return [code, Blockly.Rust.ORDER_UNARY_POSTFIX];
   }
@@ -92,8 +92,8 @@ Blockly.Rust['math_single'] = function(block) {
     code = '-' + arg;
     return [code, Blockly.Rust.ORDER_UNARY_PREFIX];
   }
-  Blockly.Rust.definitions_['import_dart_math'] =
-      'import \'dart:math\' as Math;';
+  Blockly.Rust.definitions_['use_dart_math'] =
+      'use \'dart:math\' as Math;';
   if (operator == 'ABS' || operator.substring(0, 5) == 'ROUND') {
     arg = Blockly.Rust.valueToCode(block, 'NUM',
         Blockly.Rust.ORDER_UNARY_POSTFIX) || '0';
@@ -178,8 +178,8 @@ Blockly.Rust['math_constant'] = function(block) {
   };
   var constant = block.getFieldValue('CONSTANT');
   if (constant != 'INFINITY') {
-    Blockly.Rust.definitions_['import_dart_math'] =
-        'import \'dart:math\' as Math;';
+    Blockly.Rust.definitions_['use_dart_math'] =
+        'use \'dart:math\' as Math;';
   }
   return CONSTANTS[constant];
 };
@@ -196,8 +196,8 @@ Blockly.Rust['math_number_property'] = function(block) {
   var code;
   if (dropdown_property == 'PRIME') {
     // Prime is a special case as it is not a one-liner test.
-    Blockly.Rust.definitions_['import_dart_math'] =
-        'import \'dart:math\' as Math;';
+    Blockly.Rust.definitions_['use_dart_math'] =
+        'use \'dart:math\' as Math;';
     var functionName = Blockly.Rust.provideFunction_(
         'math_isPrime',
         ['bool ' + Blockly.Rust.FUNCTION_NAME_PLACEHOLDER_ + '(n) {',
@@ -284,8 +284,8 @@ Blockly.Rust['math_on_list'] = function(block) {
       code = functionName + '(' + list + ')';
       break;
     case 'MIN':
-      Blockly.Rust.definitions_['import_dart_math'] =
-          'import \'dart:math\' as Math;';
+      Blockly.Rust.definitions_['use_dart_math'] =
+          'use \'dart:math\' as Math;';
       var functionName = Blockly.Rust.provideFunction_(
           'math_min',
           ['num ' + Blockly.Rust.FUNCTION_NAME_PLACEHOLDER_ +
@@ -299,8 +299,8 @@ Blockly.Rust['math_on_list'] = function(block) {
       code = functionName + '(' + list + ')';
       break;
     case 'MAX':
-      Blockly.Rust.definitions_['import_dart_math'] =
-          'import \'dart:math\' as Math;';
+      Blockly.Rust.definitions_['use_dart_math'] =
+          'use \'dart:math\' as Math;';
       var functionName = Blockly.Rust.provideFunction_(
           'math_max',
           ['num ' + Blockly.Rust.FUNCTION_NAME_PLACEHOLDER_ +
@@ -353,8 +353,8 @@ Blockly.Rust['math_on_list'] = function(block) {
       code = functionName + '(' + list + ')';
       break;
     case 'MODE':
-      Blockly.Rust.definitions_['import_dart_math'] =
-          'import \'dart:math\' as Math;';
+      Blockly.Rust.definitions_['use_dart_math'] =
+          'use \'dart:math\' as Math;';
       // As a list of numbers can contain more than one mode,
       // the returned result is provided as an array.
       // Mode of [3, 'x', 'x', 1, 1, 2, '3'] -> ['x', 1].
@@ -392,8 +392,8 @@ Blockly.Rust['math_on_list'] = function(block) {
       code = functionName + '(' + list + ')';
       break;
     case 'STD_DEV':
-      Blockly.Rust.definitions_['import_dart_math'] =
-          'import \'dart:math\' as Math;';
+      Blockly.Rust.definitions_['use_dart_math'] =
+          'use \'dart:math\' as Math;';
       var functionName = Blockly.Rust.provideFunction_(
           'math_standard_deviation',
           ['num ' + Blockly.Rust.FUNCTION_NAME_PLACEHOLDER_ +
@@ -414,8 +414,8 @@ Blockly.Rust['math_on_list'] = function(block) {
       code = functionName + '(' + list + ')';
       break;
     case 'RANDOM':
-      Blockly.Rust.definitions_['import_dart_math'] =
-          'import \'dart:math\' as Math;';
+      Blockly.Rust.definitions_['use_dart_math'] =
+          'use \'dart:math\' as Math;';
       var functionName = Blockly.Rust.provideFunction_(
           'math_random_item',
           ['dynamic ' + Blockly.Rust.FUNCTION_NAME_PLACEHOLDER_ +
@@ -443,8 +443,8 @@ Blockly.Rust['math_modulo'] = function(block) {
 
 Blockly.Rust['math_constrain'] = function(block) {
   // Constrain a number between two limits.
-  Blockly.Rust.definitions_['import_dart_math'] =
-      'import \'dart:math\' as Math;';
+  Blockly.Rust.definitions_['use_dart_math'] =
+      'use \'dart:math\' as Math;';
   var argument0 = Blockly.Rust.valueToCode(block, 'VALUE',
       Blockly.Rust.ORDER_NONE) || '0';
   var argument1 = Blockly.Rust.valueToCode(block, 'LOW',
@@ -458,8 +458,8 @@ Blockly.Rust['math_constrain'] = function(block) {
 
 Blockly.Rust['math_random_int'] = function(block) {
   // Random integer between [X] and [Y].
-  Blockly.Rust.definitions_['import_dart_math'] =
-      'import \'dart:math\' as Math;';
+  Blockly.Rust.definitions_['use_dart_math'] =
+      'use \'dart:math\' as Math;';
   var argument0 = Blockly.Rust.valueToCode(block, 'FROM',
       Blockly.Rust.ORDER_NONE) || '0';
   var argument1 = Blockly.Rust.valueToCode(block, 'TO',
@@ -481,15 +481,15 @@ Blockly.Rust['math_random_int'] = function(block) {
 
 Blockly.Rust['math_random_float'] = function(block) {
   // Random fraction between 0 and 1.
-  Blockly.Rust.definitions_['import_dart_math'] =
-      'import \'dart:math\' as Math;';
+  Blockly.Rust.definitions_['use_dart_math'] =
+      'use \'dart:math\' as Math;';
   return ['new Math.Random().nextDouble()', Blockly.Rust.ORDER_UNARY_POSTFIX];
 };
 
 Blockly.Rust['math_atan2'] = function(block) {
   // Arctangent of point (X, Y) in degrees from -180 to 180.
-  Blockly.Rust.definitions_['import_dart_math'] =
-      'import \'dart:math\' as Math;';
+  Blockly.Rust.definitions_['use_dart_math'] =
+      'use \'dart:math\' as Math;';
   var argument0 = Blockly.Rust.valueToCode(block, 'X',
       Blockly.Rust.ORDER_NONE) || '0';
   var argument1 = Blockly.Rust.valueToCode(block, 'Y',

@@ -39,8 +39,8 @@ Blockly.Rust['colour_picker'] = function(block) {
 
 Blockly.Rust['colour_random'] = function(block) {
   // Generate a random colour.
-  Blockly.Rust.definitions_['import_dart_math'] =
-      'import \'dart:math\' as Math;';
+  Blockly.Rust.definitions_['use_dart_math'] =
+      'use \'dart:math\' as Math;';
   var functionName = Blockly.Rust.provideFunction_(
       'colour_random',
       ['String ' + Blockly.Rust.FUNCTION_NAME_PLACEHOLDER_ + '() {',
@@ -63,8 +63,8 @@ Blockly.Rust['colour_rgb'] = function(block) {
   var blue = Blockly.Rust.valueToCode(block, 'BLUE',
       Blockly.Rust.ORDER_NONE) || 0;
 
-  Blockly.Rust.definitions_['import_dart_math'] =
-      'import \'dart:math\' as Math;';
+  Blockly.Rust.definitions_['use_dart_math'] =
+      'use \'dart:math\' as Math;';
   var functionName = Blockly.Rust.provideFunction_(
       'colour_rgb',
       ['String ' + Blockly.Rust.FUNCTION_NAME_PLACEHOLDER_ +
@@ -96,8 +96,8 @@ Blockly.Rust['colour_blend'] = function(block) {
   var ratio = Blockly.Rust.valueToCode(block, 'RATIO',
       Blockly.Rust.ORDER_NONE) || 0.5;
 
-  Blockly.Rust.definitions_['import_dart_math'] =
-      'import \'dart:math\' as Math;';
+  Blockly.Rust.definitions_['use_dart_math'] =
+      'use \'dart:math\' as Math;';
   var functionName = Blockly.Rust.provideFunction_(
       'colour_blend',
       ['String ' + Blockly.Rust.FUNCTION_NAME_PLACEHOLDER_ +

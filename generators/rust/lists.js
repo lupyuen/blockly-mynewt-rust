@@ -110,8 +110,8 @@ Blockly.Rust['lists_getIndex'] = function(block) {
       !list.match(/^\w+$/)) {
     // `list` is an expression, so we may not evaluate it more than once.
     if (where == 'RANDOM') {
-      Blockly.Rust.definitions_['import_dart_math'] =
-          'import \'dart:math\' as Math;';
+      Blockly.Rust.definitions_['use_dart_math'] =
+          'use \'dart:math\' as Math;';
       // We can use multiple statements.
       var code = cacheList();
       var xVar = Blockly.Rust.variableDB_.getDistinctName(
@@ -209,8 +209,8 @@ Blockly.Rust['lists_getIndex'] = function(block) {
         }
         break;
       case 'RANDOM':
-        Blockly.Rust.definitions_['import_dart_math'] =
-            'import \'dart:math\' as Math;';
+        Blockly.Rust.definitions_['use_dart_math'] =
+            'use \'dart:math\' as Math;';
         if (mode == 'REMOVE') {
           // We can use multiple statements.
           var xVar = Blockly.Rust.variableDB_.getDistinctName(
@@ -307,8 +307,8 @@ Blockly.Rust['lists_setIndex'] = function(block) {
       }
       break;
     case 'RANDOM':
-      Blockly.Rust.definitions_['import_dart_math'] =
-          'import \'dart:math\' as Math;';
+      Blockly.Rust.definitions_['use_dart_math'] =
+          'use \'dart:math\' as Math;';
       var code = cacheList();
       var xVar = Blockly.Rust.variableDB_.getDistinctName(
           'tmp_x', Blockly.Variables.NAME_TYPE);
