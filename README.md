@@ -8,14 +8,19 @@ Watch the demo: https://youtu.be/5hWq5TDEpIg
 
 Read the article: [_Visual Programming with Embedded Rust? Yes we can with Apache Mynewt and Google Blockly!_](https://medium.com/@ly.lee/visual-programming-with-embedded-rust-yes-we-can-with-apache-mynewt-and-google-blockly-8b67ef7412d7)
 
-![Create a Visual Embedded Rust program in a web browser and deploy it with Apache Mynewt to STM32 Blue Pill](https://github.com/lupyuen/blockly-mynewt-rust/raw/master/images/visual-rust.png "Create a Visual Embedded Rust program in a web browser and deploy it with Apache Mynewt to STM32 Blue Pill") <br>
-_Create a Visual Embedded Rust program in a web browser and deploy it with Apache Mynewt to STM32 Blue Pill_
+## Rust Code Generator
 
-![Copy Dart code generator to Rust since the languages are similar](https://github.com/lupyuen/blockly-mynewt-rust/raw/master/images/dart-to-rust.png "Copy Dart code generator to Rust since the languages are similar") <br>
-_Copy Dart code generator to Rust since the languages are similar_
+The following have been added into the existing [`generators`](generators) folder to generate Rust code and to add blocks specific to Mynewt...
 
-![Create the Blocks for Embedded Rust / Mynewt](https://github.com/lupyuen/blockly-mynewt-rust/raw/master/images/create-blocks.png "Create the Blocks for Embedded Rust / Mynewt") <br>
-_Create the Blocks for Embedded Rust / Mynewt_
+[`generators/rust.js`](generators/rust.js): Main interface for Rust Code Generator
+
+[`generators/rust`](generators/rust): Rust Code Generator for various blocks
+
+## Demo for Rust Code Generator
+
+The Blockly demo at [`demos/code`](demos/code) has been customised to include the Rust Code Generator...
+
+[`demos/code/code.js`](demos/code/code.js): Customised to load the Rust Code Generator
 
 # Blockly [![Build Status]( https://travis-ci.org/google/blockly.svg?branch=master)](https://travis-ci.org/google/blockly)
 
