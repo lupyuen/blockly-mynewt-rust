@@ -20,13 +20,13 @@ The following have been added into the existing [`generators`](generators) folde
 
 The Blockly demo at [`demos/code`](demos/code) has been customised to include the Rust Code Generator...
 
+[`demos/code/code.js`](demos/code/code.js): Customised to load the Rust Code Generator
+
 ## Visual Studio Code Extension
 
 For easier code editing, this entire repository as been wrapped into the [visual-embedded-rust](https://github.com/lupyuen/visual-embedded-rust) Visual Studio Code Extension.
 
 This repository is installed in the `media/blockly-mynewt-rust` folder of the extension.
-
-[`demos/code/code.js`](demos/code/code.js): Customised to load the Rust Code Generator
 
 # Blockly [![Build Status]( https://travis-ci.org/google/blockly.svg?branch=master)](https://travis-ci.org/google/blockly)
 
