@@ -54,20 +54,27 @@ Blockly.Rust['procedures_defreturn'] = function(block) {
         Blockly.Variables.NAME_TYPE);
   }
   funcName = funcName.split('__').join('::');  //  TODO: Convert sensor__func to sensor::func
-  var code = [
-    'fn ', funcName,
-    '(', 
-      args.join(', '),
-    ') ',
-    '-> MynewtResult<', 
-    returnType == 'void' ? '()' : returnType, 
-    '> ',
-    '{\n',
-    branch,
-    returnValue,
-    '}'
-  ].join('');
-  console.log('code', code); ////
+  var code;
+  if (funcName.indexOf('::') >= 0) {
+    //  System function: Do nothing
+    code = '//  Import ' + funcName;
+  } else {
+    //  User-defined function: Define the function
+    code = [
+      'fn ', funcName,
+      '(', 
+        args.join(', '),
+      ') ',
+      '-> MynewtResult<', 
+      returnType == 'void' ? '()' : returnType, 
+      '> ',
+      '{\n',
+      branch,
+      returnValue,
+      '}'
+    ].join('');  
+  }
+  // console.log(['code', funcName, code]); ////
   code = Blockly.Rust.scrub_(block, code);
   // Add % so as not to collide with helper functions in definitions list.
   Blockly.Rust.definitions_['%' + funcName] = code;
