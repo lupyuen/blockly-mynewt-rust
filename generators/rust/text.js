@@ -38,7 +38,7 @@ Blockly.Rust['text'] = function(block) {
 };
 
 Blockly.Rust['text_join'] = function(block) {
-  // Create a string made up of any number of elements of any type.
+  // TODO: Create a string made up of any number of elements of any type.
   switch (block.itemCount_) {
     case 0:
       return ['\'\'', Blockly.Rust.ORDER_ATOMIC];
@@ -59,7 +59,7 @@ Blockly.Rust['text_join'] = function(block) {
 };
 
 Blockly.Rust['text_append'] = function(block) {
-  // Append to a variable in place.
+  // TODO: Append to a variable in place.
   var varName = Blockly.Rust.variableDB_.getName(block.getFieldValue('VAR'),
       Blockly.Variables.NAME_TYPE);
   var value = Blockly.Rust.valueToCode(block, 'TEXT',
@@ -68,21 +68,21 @@ Blockly.Rust['text_append'] = function(block) {
 };
 
 Blockly.Rust['text_length'] = function(block) {
-  // String or array length.
+  // TODO: String or array length.
   var text = Blockly.Rust.valueToCode(block, 'VALUE',
       Blockly.Rust.ORDER_UNARY_POSTFIX) || '\'\'';
-  return [text + '.length', Blockly.Rust.ORDER_UNARY_POSTFIX];
+  return [text + '.length()', Blockly.Rust.ORDER_UNARY_POSTFIX];
 };
 
 Blockly.Rust['text_isEmpty'] = function(block) {
-  // Is the string null or array empty?
+  // TODO: Is the string null or array empty?
   var text = Blockly.Rust.valueToCode(block, 'VALUE',
       Blockly.Rust.ORDER_UNARY_POSTFIX) || '\'\'';
   return [text + '.isEmpty', Blockly.Rust.ORDER_UNARY_POSTFIX];
 };
 
 Blockly.Rust['text_indexOf'] = function(block) {
-  // Search the text for a substring.
+  // TODO: Search the text for a substring.
   var operator = block.getFieldValue('END') == 'FIRST' ?
       'indexOf' : 'lastIndexOf';
   var substring = Blockly.Rust.valueToCode(block, 'FIND',
@@ -97,7 +97,7 @@ Blockly.Rust['text_indexOf'] = function(block) {
 };
 
 Blockly.Rust['text_charAt'] = function(block) {
-  // Get letter at index.
+  // TODO: Get letter at index.
   // Note: Until January 2013 this block did not have the WHERE input.
   var where = block.getFieldValue('WHERE') || 'FROM_START';
   var text = Blockly.Rust.valueToCode(block, 'VALUE',
@@ -140,7 +140,7 @@ Blockly.Rust['text_charAt'] = function(block) {
 };
 
 Blockly.Rust['text_getSubstring'] = function(block) {
-  // Get substring.
+  // TODO: Get substring.
   var text = Blockly.Rust.valueToCode(block, 'STRING',
       Blockly.Rust.ORDER_UNARY_POSTFIX) || '\'\'';
   var where1 = block.getFieldValue('WHERE1');
@@ -215,7 +215,7 @@ Blockly.Rust['text_getSubstring'] = function(block) {
 };
 
 Blockly.Rust['text_changeCase'] = function(block) {
-  // Change capitalization.
+  // TODO: Change capitalization.
   var OPERATORS = {
     'UPPERCASE': '.toUpperCase()',
     'LOWERCASE': '.toLowerCase()',
@@ -253,7 +253,7 @@ Blockly.Rust['text_changeCase'] = function(block) {
 };
 
 Blockly.Rust['text_trim'] = function(block) {
-  // Trim spaces.
+  // TODO: Trim spaces.
   var OPERATORS = {
     'LEFT': '.replaceFirst(new RegExp(r\'^\\s+\'), \'\')',
     'RIGHT': '.replaceFirst(new RegExp(r\'\\s+$\'), \'\')',
@@ -266,14 +266,14 @@ Blockly.Rust['text_trim'] = function(block) {
 };
 
 Blockly.Rust['text_print'] = function(block) {
-  // Print statement.
+  // TODO: Print statement.
   var msg = Blockly.Rust.valueToCode(block, 'TEXT',
       Blockly.Rust.ORDER_NONE) || '\'\'';
   return 'print(' + msg + ');\n';
 };
 
 Blockly.Rust['text_prompt_ext'] = function(block) {
-  // Prompt function.
+  // TODO: Prompt function.
   Blockly.Rust.definitions_['import_dart_html'] =
       'import \'dart:html\' as Html;';
   if (block.getField('TEXT')) {
@@ -297,6 +297,7 @@ Blockly.Rust['text_prompt_ext'] = function(block) {
 Blockly.Rust['text_prompt'] = Blockly.Rust['text_prompt_ext'];
 
 Blockly.Rust['text_count'] = function(block) {
+  // TODO
   var text = Blockly.Rust.valueToCode(block, 'TEXT',
       Blockly.Rust.ORDER_UNARY_POSTFIX) || '\'\'';
   var sub = Blockly.Rust.valueToCode(block, 'SUB',
@@ -325,6 +326,7 @@ Blockly.Rust['text_count'] = function(block) {
 };
 
 Blockly.Rust['text_replace'] = function(block) {
+  // TODO
   var text = Blockly.Rust.valueToCode(block, 'TEXT',
       Blockly.Rust.ORDER_UNARY_POSTFIX) || '\'\'';
   var from = Blockly.Rust.valueToCode(block, 'FROM',
@@ -336,9 +338,7 @@ Blockly.Rust['text_replace'] = function(block) {
 };
 
 Blockly.Rust['text_reverse'] = function(block) {
-  // There isn't a sensible way to do this in Rust. See:
-  // http://stackoverflow.com/a/21613700/3529104
-  // Implementing something is possibly better than not implementing anything?
+  // TODO
   var text = Blockly.Rust.valueToCode(block, 'TEXT',
       Blockly.Rust.ORDER_UNARY_POSTFIX) || '\'\'';
   var code = 'new String.fromCharCodes(' + text + '.runes.toList().reversed)';

@@ -568,6 +568,7 @@ Code.discard = function() {
   }
 };
 
+// Doesn't work for VSCode. Must load in extension.ts.
 // Load the Code demo's language strings.
 document.write('<script src="msg/' + Code.LANG + '.js"></script>\n');
 // Load Blockly's language strings.
