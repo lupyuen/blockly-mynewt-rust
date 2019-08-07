@@ -24,7 +24,7 @@ The Blockly demo at [`demos/code`](demos/code) has been customised to include th
 
 ## Visual Studio Code Extension
 
-For easier code editing, this entire repository as been wrapped into the [visual-embedded-rust](https://github.com/lupyuen/visual-embedded-rust) Visual Studio Code Extension.
+For easier code editing, this entire repository as been wrapped into the [`visual-embedded-rust`](https://github.com/lupyuen/visual-embedded-rust) Visual Studio Code Extension.
 
 This repository is installed in the `media/blockly-mynewt-rust` folder of the extension.
 
