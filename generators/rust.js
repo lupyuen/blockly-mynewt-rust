@@ -137,52 +137,75 @@ Blockly.Rust.finish = function(code) {
     //code = Blockly.Rust.prefixLines(code, Blockly.Rust.INDENT);
   }
   code = [
-    code,
-    '',
-    '///  main() will be called at Mynewt startup. It replaces the C version of the `main()` function.',
-    '#[no_mangle]                 //  Don\'t mangle the name "main"',
-    'extern "C" fn main() -> ! {  //  Declare `extern "C"` because it will be called by Mynewt',
-    '    //  Initialise Mynewt OS.',
-    '    mynewt::sysinit();',
-    '',
-    '    //  Initialise the app.',
-    '    on_start()',
-    '        .expect("on_start fail");',
-    '',
-    '    //  Start the `forever` task.',
-    '    start_task()',
-    '        .expect("forever fail");',
-    '',
-    '    //  Mynewt event loop',
-    '    loop {                         //  Loop forever...',
-    '        os::eventq_run(            //  Process events...',
-    '            os::eventq_dflt_get()  //  From default event queue',
-    '                .expect("get fail")',
-    '        ).expect("run fail")',
-    '    }',
-    '    //  Never comes here',
-    '}',
-    '',
-    '///  This function is called on panic, like an assertion failure. We display the filename and line number and pause in the debugger. From https://os.phil-opp.com/freestanding-rust-binary/',
-    '#[panic_handler]',
-    'fn panic(info: &PanicInfo) -> ! {',
-    '    //  Display the filename and line number to the Semihosting Console.',
-    '    console::print("panic ");',
-    '    if let Some(location) = info.location() {',
-    '        let file = location.file();',
-    '        let line = location.line();',
-    '        console::print("at ");        console::buffer(&file);',
-    '        console::print(" line 0x");   console::printhex(line as u8);  //  TODO: Print in decimal not hex. Allow more than 255 lines.',
-    '        console::print("\\n");         console::flush();',
-    '    } else {',
-    '        console::print("no loc\\n");   console::flush();',
-    '    }',
-    '    //  Pause in the debugger.',
-    '    bkpt();',
-    '    //  Loop forever so that device won\'t restart.',
-    '    loop {}',
-    '}',
-    ''
+//  Insert header
+`
+#![no_std]                       //  Don't link with standard Rust library, which is not compatible with embedded systems
+#![feature(trace_macros)]        //  Allow macro tracing: \`trace_macros!(true)\`
+#![feature(concat_idents)]       //  Allow \`concat_idents!()\` macro used in \`coap!()\` macro
+#![feature(const_transmute)]     //  Allow \`transmute\` for initialising Mynewt structs
+#![feature(proc_macro_hygiene)]  //  Allow Procedural Macros like \`run!()\`
+#![feature(custom_attribute)]    //  Allow Custom Attributes like \`#[safe_wrap]\`
+
+extern crate cortex_m;                  //  Declare the external library \`cortex_m\`
+extern crate mynewt;                    //  Declare the Mynewt library
+extern crate macros as mynewt_macros;   //  Declare the Mynewt Procedural Macros library
+
+use core::panic::PanicInfo; //  Import \`PanicInfo\` type which is used by \`panic()\` below
+use cortex_m::asm::bkpt;    //  Import cortex_m assembly function to inject breakpoint
+use mynewt::{
+    kernel::os,             //  Import Mynewt OS API
+    sys::console,           //  Import Mynewt Console API
+    libs::sensor_network,   //  Import Mynewt Sensor Network Library
+};
+`,
+//  Insert generated Rust code
+code,
+//  Insert trailer
+`
+///  main() will be called at Mynewt startup. It replaces the C version of the \`main()\` function.
+#[no_mangle]                 //  Don't mangle the name "main"
+extern "C" fn main() -> ! {  //  Declare \`extern "C"\` because it will be called by Mynewt
+    //  Initialise Mynewt OS.
+    mynewt::sysinit();
+
+    //  Initialise the app.
+    on_start()
+        .expect("on_start fail");
+
+    //  Start the \`forever\` task.
+    start_task()
+        .expect("forever fail");
+
+    //  Mynewt event loop
+    loop {                         //  Loop forever...
+        os::eventq_run(            //  Process events...
+            os::eventq_dflt_get()  //  From default event queue
+                .expect("get fail")
+        ).expect("run fail")
+    }
+    //  Never comes here
+}
+
+///  This function is called on panic, like an assertion failure. We display the filename and line number and pause in the debugger. From https://os.phil-opp.com/freestanding-rust-binary/
+#[panic_handler]
+fn panic(info: &PanicInfo) -> ! {
+    //  Display the filename and line number to the Semihosting Console.
+    console::print("panic ");
+    if let Some(location) = info.location() {
+        let file = location.file();
+        let line = location.line();
+        console::print("at ");        console::buffer(&file);
+        console::print(" line 0x");   console::printhex(line as u8);  //  TODO: Print in decimal not hex. Allow more than 255 lines.
+        console::print("\\n");         console::flush();
+    } else {
+        console::print("no loc\\n");   console::flush();
+    }
+    //  Pause in the debugger.
+    bkpt();
+    //  Loop forever so that device won't restart.
+    loop {}
+}
+`
   ].join('\n');
 
   // TODO: Convert the definitions dictionary into a list.
