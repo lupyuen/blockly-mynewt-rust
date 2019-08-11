@@ -1,6 +1,19 @@
 /// Code Generator Functions for Custom Blocks in mynewt_blocks.js.
 /// Initially exported by Block Exporter from mynewt_library.xml.
 
+Blockly.Rust['field'] = function(block) {
+  //  Generate a CoAP message field: `name: value`
+  var text_name = block.getFieldValue('NAME');
+  var value_name = Blockly.Rust.valueToCode(block, 'name', Blockly.JavaScript.ORDER_ATOMIC);
+  var code = [
+    text_name,
+    ': ',
+    value_name,
+  ].join('');
+  // TODO: Change ORDER_NONE to the correct strength.
+  return [code, Blockly.Rust.ORDER_NONE];
+};
+
 Blockly.Rust['on_start'] = function(block) {
   var statements_stmts = Blockly.Rust.statementToCode(block, 'STMTS');
   var code = statements_stmts;

@@ -152,6 +152,29 @@ var mynewt_blocks =
   "colour": 330,
   "tooltip": "",
   "helpUrl": ""
+},
+{
+  "type": "field",
+  "message0": "field %1 %2 value %3",
+  "args0": [
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "field_input",
+      "name": "NAME",
+      "text": "name"
+    },
+    {
+      "type": "input_value",
+      "name": "name"
+    }
+  ],
+  "inputsInline": true,
+  "output": null,
+  "colour": 120,
+  "tooltip": "",
+  "helpUrl": ""
 }]
 // End Block Exporter
 ;

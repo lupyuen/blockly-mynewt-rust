@@ -43,7 +43,7 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
     "output": "String",
     "style": "text_blocks",  //  TODO
     "helpUrl": "%{BKY_TEXT_JOIN_HELPURL}",
-    "tooltip": "Create a CoAP payload",
+    "tooltip": "Create the payload for a CoAP message",
     "mutator": "coap_mutator"
   },
   {
@@ -57,12 +57,12 @@ Blockly.defineBlocksWithJsonArray([  // BEGIN JSON EXTRACT
       "name": "STACK"
     }],
     "style": "text_blocks",  //  TODO
-    "tooltip": "CoAP container",
+    "tooltip": "CoAP payload",
     "enableContextMenu": false
   },
   {
     "type": "coap_item",
-    "message0": "coap item",
+    "message0": "item",
     "previousStatement": null,
     "nextStatement": null,
     "style": "text_blocks",  //  TODO
