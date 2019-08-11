@@ -1,8 +1,31 @@
 /// Code Generator Functions for Custom Blocks in mynewt_blocks.js.
 /// Initially exported by Block Exporter from mynewt_library.xml.
 
+
+Blockly.Rust['coap'] = function(block) {
+  //  Generate CoAP message payload:
+  //  coap!( @json {        
+  //    "device": &device_id,
+  //    sensor_data,
+  //  })
+  var elements = new Array(block.itemCount_);
+  for (var i = 0; i < block.itemCount_; i++) {
+    elements[i] = Blockly.Rust.valueToCode(block, 'ADD' + i,
+            Blockly.Rust.ORDER_NONE) || '\'\'';
+  }
+  var code = [
+    'coap!( @json {',
+    //  Insert the indented elements.
+    Blockly.Rust.prefixLines(
+      elements.join(',\n'), 
+      Blockly.Rust.INDENT),
+    '})',
+  ].join('\n');
+  return [code, Blockly.Rust.ORDER_UNARY_POSTFIX];
+};
+
 Blockly.Rust['field'] = function(block) {
-  //  Generate a CoAP message field: `name: value`
+  //  Generate a field for CoAP message payload: `name: value`
   var text_name = block.getFieldValue('NAME');
   var value_name = Blockly.Rust.valueToCode(block, 'name', Blockly.JavaScript.ORDER_ATOMIC);
   var code = [
