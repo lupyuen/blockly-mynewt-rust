@@ -1,4 +1,4 @@
-<xml xmlns="http://www.w3.org/1999/xhtml"><block type="factory_base" id="AnS3yim{c;zJ9((T|%)1" deletable="false" movable="false" x="10" y="10">
+<xml xmlns="https://developers.google.com/blockly/xml"><block xmlns="http://www.w3.org/1999/xhtml" type="factory_base" id="AnS3yim{c;zJ9((T|%)1" deletable="false" movable="false" x="10" y="10">
     <mutation connections="BOTH"></mutation>
     <field name="NAME">digital_toggle_pin</field>
     <field name="INLINE">INT</field>
@@ -53,7 +53,7 @@
         <field name="HUE">330</field>
       </block>
     </value>
-  </block><block type="factory_base" id="Hn(M(JppMq}tKLmI.Cl@" deletable="false" movable="false" x="10" y="10">
+  </block><block xmlns="http://www.w3.org/1999/xhtml" type="factory_base" id="Hn(M(JppMq}tKLmI.Cl@" deletable="false" movable="false" x="10" y="10">
     <mutation connections="NONE"></mutation>
     <field name="NAME">forever</field>
     <field name="INLINE">AUTO</field>
@@ -94,7 +94,7 @@
         <field name="HUE">120</field>
       </block>
     </value>
-  </block><block type="factory_base" id="Un40,T[Bqn6mbhLH5tdX" deletable="false" movable="false" x="10" y="10">
+  </block><block xmlns="http://www.w3.org/1999/xhtml" type="factory_base" id="Un40,T[Bqn6mbhLH5tdX" deletable="false" movable="false" x="10" y="10">
     <mutation connections="BOTH"></mutation>
     <field name="NAME">wait</field>
     <field name="INLINE">AUTO</field>
@@ -151,7 +151,7 @@
         <field name="HUE">160</field>
       </block>
     </value>
-  </block><block type="factory_base" id=".o^GRN.r)q637Fv%Exb7" deletable="false" movable="false" x="10" y="10">
+  </block><block xmlns="http://www.w3.org/1999/xhtml" type="factory_base" id=".o^GRN.r)q637Fv%Exb7" deletable="false" movable="false" x="10" y="10">
     <mutation connections="NONE"></mutation>
     <field name="NAME">on_start</field>
     <field name="INLINE">AUTO</field>
@@ -191,7 +191,7 @@
         <field name="HUE">120</field>
       </block>
     </value>
-  </block><block type="factory_base" id="}^%FPvF0ojz2a@bZ^T2F" deletable="false" movable="false" x="10" y="10">
+  </block><block xmlns="http://www.w3.org/1999/xhtml" type="factory_base" id="}^%FPvF0ojz2a@bZ^T2F" deletable="false" movable="false" x="10" y="10">
     <mutation connections="LEFT"></mutation>
     <field name="NAME">digital_read_pin</field>
     <field name="INLINE">AUTO</field>
@@ -238,7 +238,7 @@
         <field name="HUE">330</field>
       </block>
     </value>
-  </block><block type="factory_base" id="z6(s0e*Y:J+S8%0+D1[z" deletable="false" movable="false" x="10" y="10">
+  </block><block xmlns="http://www.w3.org/1999/xhtml" type="factory_base" id="z6(s0e*Y:J+S8%0+D1[z" deletable="false" movable="false" x="10" y="10">
     <mutation connections="BOTH"></mutation>
     <field name="NAME">digital_write_pin</field>
     <field name="INLINE">AUTO</field>
@@ -306,6 +306,60 @@
       <block type="colour_hue" id="2s2Meq#.`S}E@Ve@e)]N">
         <mutation colour="#a55b80"></mutation>
         <field name="HUE">330</field>
+      </block>
+    </value>
+  </block><block type="factory_base" id="DIc;=UKB-~q/+SpEvsyl" deletable="false" movable="false" x="10" y="10">
+    <mutation connections="LEFT"/>
+    <field name="NAME">field</field>
+    <field name="INLINE">INT</field>
+    <field name="CONNECTIONS">LEFT</field>
+    <statement name="INPUTS">
+      <block type="input_dummy" id="9@cp3xl(XRn(;xejobtm">
+        <field name="ALIGN">LEFT</field>
+        <statement name="FIELDS">
+          <block type="field_static" id="{Eu1WE5o,Ye}N[iHzrt7">
+            <field name="TEXT">field</field>
+          </block>
+        </statement>
+        <next>
+          <block type="input_value" id="V9uA9o~|_]-{#L},%yDY">
+            <field name="INPUTNAME">name</field>
+            <field name="ALIGN">LEFT</field>
+            <statement name="FIELDS">
+              <block type="field_input" id="C5V3(:(_lt1u$Y1C+C/l">
+                <field name="TEXT">name</field>
+                <field name="FIELDNAME">NAME</field>
+                <next>
+                  <block type="field_static" id="@8PQoW.SXP-0s8u3v;6Z">
+                    <field name="TEXT">value</field>
+                  </block>
+                </next>
+              </block>
+            </statement>
+            <value name="TYPE">
+              <shadow type="type_null" id="U-qN12YQR5ZGyu]Hin[t"/>
+            </value>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <value name="TOOLTIP">
+      <block type="text" id="}g0P@O`0,sYxi2dik*u=" deletable="false" movable="false">
+        <field name="TEXT"/>
+      </block>
+    </value>
+    <value name="HELPURL">
+      <block type="text" id="1P~,ugi8{u~MHr5zq_Cn" deletable="false" movable="false">
+        <field name="TEXT"/>
+      </block>
+    </value>
+    <value name="OUTPUTTYPE">
+      <shadow type="type_null" id="3c(RcDe9j;UY~zKr4z]h"/>
+    </value>
+    <value name="COLOUR">
+      <block type="colour_hue" id="hu6ww]O+6d`eK.^P=Z)A">
+        <mutation colour="#5ba55b"/>
+        <field name="HUE">120</field>
       </block>
     </value>
   </block></xml>
