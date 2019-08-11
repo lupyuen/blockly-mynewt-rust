@@ -50,8 +50,9 @@ Blockly.Rust['procedures_defreturn'] = function(block) {
   returnValue = Blockly.Rust.INDENT + 'Ok(' + (returnValue || '()') + ')\n';
   var args = [];
   for (var i = 0; i < block.arguments_.length; i++) {
+    //  Assemble the args and give them placeholder types: `arg1: _`
     args[i] = Blockly.Rust.variableDB_.getName(block.arguments_[i],
-        Blockly.Variables.NAME_TYPE);
+        Blockly.Variables.NAME_TYPE) + ': _';
   }
   funcName = funcName.split('__').join('::');  //  TODO: Convert sensor__func to sensor::func
   var code;
@@ -61,6 +62,8 @@ Blockly.Rust['procedures_defreturn'] = function(block) {
   } else {
     //  User-defined function: Define the function
     code = [
+      //  Set the `infer_type` attribute so that the `infer_type` macro will infer the placeholder types.
+      '#[mynewt_macros::infer_type(attr)]\n',
       'fn ', funcName,
       '(', 
         args.join(', '),
