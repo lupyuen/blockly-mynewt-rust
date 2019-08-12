@@ -42,5 +42,13 @@ Blockly.Rust['variables_set'] = function(block) {
       Blockly.Rust.ORDER_ASSIGNMENT) || '0';
   var varName = Blockly.Rust.variableDB_.getName(block.getFieldValue('VAR'),
       Blockly.Variables.NAME_TYPE);
+  //  For strings, change "s" to strn!("s").
+  if (argument0.split('"').length === 3) {
+    argument0 = [
+      'strn!( ',
+      argument0,
+      ' )'
+    ].join('');
+  }
   return 'let ' + varName + ' = ' + argument0 + ';\n';
 };

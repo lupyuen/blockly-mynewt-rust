@@ -119,10 +119,10 @@ Blockly.Rust.init = function(workspace) {
         Blockly.Variables.NAME_TYPE));
   }
 
-  // TODO: Declare all of the variables. Allow global static variables instead of `let x = ...`
+  // Declare all of the variables.
   if (defvars.length) {
     Blockly.Rust.definitions_['variables'] =
-        '//  let ' + defvars.join(', ') + ';';
+        '//  Globals: ' + defvars.join(', ') + ';';
   }
 };
 
@@ -149,7 +149,12 @@ Blockly.Rust.finish = function(code) {
   delete Blockly.Rust.functionNames_;
   Blockly.Rust.variableDB_.reset();
   var allDefs = imports.join('\n') + '\n\n' + definitions.join('\n\n');
-  return rustHeader + allDefs.replace(/\n\n+/g, '\n\n').replace(/\n*$/, '\n\n\n') + code + rustTrailer;
+  return [
+    rustHeader,
+    code,
+    rustTrailer,
+    allDefs.replace(/\n\n+/g, '\n\n').replace(/\n*$/, '\n\n\n'),
+  ].join('');
 };
 
 /**

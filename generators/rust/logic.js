@@ -112,7 +112,7 @@ Blockly.Rust['logic_boolean'] = function(block) {
 
 Blockly.Rust['logic_null'] = function(block) {
   // Null data type.
-  return ['null', Blockly.Rust.ORDER_ATOMIC];
+  return ['null_mut()', Blockly.Rust.ORDER_ATOMIC];
 };
 
 Blockly.Rust['logic_ternary'] = function(block) {

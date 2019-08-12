@@ -48,13 +48,13 @@ Blockly.Rust['procedures_defreturn'] = function(block) {
       Blockly.Rust.ORDER_NONE) || '';
   var returnType = returnValue ? 'dynamic' : 'void';
   returnValue = Blockly.Rust.INDENT + 'Ok(' + (returnValue || '()') + ')\n';
+  funcName = funcName.split('__').join('::');  //  TODO: Convert sensor__func to sensor::func
   var args = [];
   for (var i = 0; i < block.arguments_.length; i++) {
     //  Assemble the args and give them placeholder types: `arg1: _`
     args[i] = Blockly.Rust.variableDB_.getName(block.arguments_[i],
         Blockly.Variables.NAME_TYPE) + ': _';
   }
-  funcName = funcName.split('__').join('::');  //  TODO: Convert sensor__func to sensor::func
   var code;
   if (funcName.indexOf('::') >= 0) {
     //  System function: Do nothing
@@ -91,13 +91,20 @@ Blockly.Rust['procedures_defnoreturn'] = Blockly.Rust['procedures_defreturn'];
 Blockly.Rust['procedures_callreturn'] = function(block) {
   // Call a procedure with a return value.
   var funcName = Blockly.Rust.variableDB_.getName(block.getFieldValue('NAME'),
-      Blockly.Procedures.NAME_TYPE);
+    Blockly.Procedures.NAME_TYPE);
+  funcName = funcName.split('__').join('::');  //  TODO: Convert sensor__func to sensor::func
   var args = [];
   for (var i = 0; i < block.arguments_.length; i++) {
     args[i] = Blockly.Rust.valueToCode(block, 'ARG' + i,
-        Blockly.Rust.ORDER_NONE) || 'null';
+      Blockly.Rust.ORDER_NONE) || 'null';
+    //  If function is `sensor::new_sensor_listener`, convert the second arg from string to function name, e.g.
+    //  sensor::new_sensor_listener(sensor_type, "handle_sensor_data") becomes
+    //  sensor::new_sensor_listener(sensor_type, handle_sensor_data) 
+    //  TODO: Need a better solution.
+    if (funcName === 'sensor::new_sensor_listener' && i === 1) {
+      args[i] = args[i].split('"').join('');
+    }
   }
-  funcName = funcName.split('__').join('::');  //  TODO: Convert sensor__func to sensor::func
   var code = funcName + '(' + args.join(', ') + ') ? ';
   return [code, Blockly.Rust.ORDER_UNARY_POSTFIX];
 };
@@ -106,12 +113,12 @@ Blockly.Rust['procedures_callnoreturn'] = function(block) {
   // Call a procedure with no return value.
   var funcName = Blockly.Rust.variableDB_.getName(block.getFieldValue('NAME'),
       Blockly.Procedures.NAME_TYPE);
+  funcName = funcName.split('__').join('::');  //  TODO: Convert sensor__func to sensor::func
   var args = [];
   for (var i = 0; i < block.arguments_.length; i++) {
     args[i] = Blockly.Rust.valueToCode(block, 'ARG' + i,
         Blockly.Rust.ORDER_NONE) || 'null';
   }
-  funcName = funcName.split('__').join('::');  //  TODO: Convert sensor__func to sensor::func
   var code = funcName + '(' + args.join(', ') + ') ? ;\n';
   return code;
 };
