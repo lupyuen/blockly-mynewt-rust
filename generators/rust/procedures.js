@@ -90,7 +90,7 @@ Blockly.Rust['procedures_defreturn'] = function(block) {
 Blockly.Rust['procedures_defnoreturn'] = Blockly.Rust['procedures_defreturn'];
 
 Blockly.Rust['procedures_callreturn'] = function(block) {
-  // Call a procedure with a return value.
+  //  Call a procedure with a return value.
   var funcName = Blockly.Rust.variableDB_.getName(block.getFieldValue('NAME'),
     Blockly.Procedures.NAME_TYPE);
   funcName = funcName.split('__').join('::');  //  TODO: Convert sensor__func to sensor::func
@@ -106,7 +106,14 @@ Blockly.Rust['procedures_callreturn'] = function(block) {
       args[i] = args[i].split('"').join('');
     }
   }
+  //  Generate the function call.
   var code = funcName + '(' + args.join(', ') + ') ? ';
+
+  //  If function is `sensor_network::get_device_id`, return a reference: `&sensor_network::get_device_id`
+  //  TODO: `get_device_id` should return a reference
+  if (funcName === 'sensor_network::get_device_id') {
+    code = '&' + code;
+  }
   return [code, Blockly.Rust.ORDER_UNARY_POSTFIX];
 };
 

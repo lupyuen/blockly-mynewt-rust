@@ -370,5 +370,6 @@ fn panic(info: &PanicInfo) -> ! {
     loop {}
 }
 
-const DEFAULT_URI: Strn = init_strn!("");
+/// Use default COAP_URI from syscfg.yml
+const DEFAULT_URI: &Strn = &init_strn!("");
 `;
