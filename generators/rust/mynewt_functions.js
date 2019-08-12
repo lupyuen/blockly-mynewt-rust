@@ -29,7 +29,7 @@ Blockly.Rust['field'] = function(block) {
   var text_name = block.getFieldValue('NAME');
   var value_name = Blockly.Rust.valueToCode(block, 'name', Blockly.JavaScript.ORDER_ATOMIC);
   var code = [
-    text_name,
+    '"', text_name, '"',
     ': ',
     value_name,
   ].join('');
