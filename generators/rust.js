@@ -132,15 +132,19 @@ Blockly.Rust.init = function(workspace) {
  * @return {string} Completed code.
  */
 Blockly.Rust.finish = function(code) {
-  // TODO: Convert the definitions dictionary into a list.
-  var imports = [];
+  // var imports = [];
   var definitions = [];
+  var globals = [];
   for (var name in Blockly.Rust.definitions_) {
     //  Each definition is either `use x` for import or `let x` for global variables.
     var def = Blockly.Rust.definitions_[name];
     if (def.match(/^use\s/)) {
-      imports.push(def);
+      // imports.push(def);
+    } else if (def.match(/^\/\/  Globals/)) {
+      //  Put globals at the end.
+      globals.push(def);
     } else {
+      //  Other function definitions like `fn start_sensor_listener...`
       definitions.push(def);
     }
   }
@@ -148,13 +152,16 @@ Blockly.Rust.finish = function(code) {
   delete Blockly.Rust.definitions_;
   delete Blockly.Rust.functionNames_;
   Blockly.Rust.variableDB_.reset();
-  var allDefs = imports.join('\n') + '\n\n' + definitions.join('\n\n');
+  // var allDefs = imports.join('\n') + '\n\n' + definitions.join('\n\n');
+  // allDefs.replace(/\n\n+/g, '\n\n').replace(/\n*$/, '\n\n\n'),
   return [
     rustHeader,
-    code,
-    rustTrailer,
-    allDefs.replace(/\n\n+/g, '\n\n').replace(/\n*$/, '\n\n\n'),
-  ].join('');
+    code,                      //  on_start()
+    definitions.join('\n\n'),  //  Custom Functions
+    rustTrailer,               //  main()
+    globals.join('\n'),        //  Globals
+    '',
+  ].join('\n');
 };
 
 /**

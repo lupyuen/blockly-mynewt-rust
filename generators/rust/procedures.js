@@ -58,7 +58,8 @@ Blockly.Rust['procedures_defreturn'] = function(block) {
   var code;
   if (funcName.indexOf('::') >= 0) {
     //  System function: Do nothing
-    code = '//  Import ' + funcName;
+    //  Previously: code = '//  Import ' + funcName;
+    return null;
   } else {
     //  User-defined function: Define the function
     code = [
