@@ -323,7 +323,7 @@ use mynewt::{
     libs::sensor_network,   //  Import Mynewt Sensor Network Library
     Strn, coap, d,          //  Import Mynewt macros    
 };
-use mynewt_macros::{ init_strn, strn };  //  Import Mynewt procedural macros
+use mynewt_macros::{ infer_type, init_strn, strn };  //  Import Mynewt procedural macros
 `;
 
 //  Trailer for the source file

@@ -64,7 +64,7 @@ Blockly.Rust['procedures_defreturn'] = function(block) {
     //  User-defined function: Define the function
     code = [
       //  Set the `infer_type` attribute so that the `infer_type` macro will infer the placeholder types.
-      '#[mynewt_macros::infer_type(attr)]  //  Infer the missing types\n',
+      '#[infer_type]  //  Infer the missing types\n',
       'fn ', funcName,
       '(', 
         args.join(', '),
