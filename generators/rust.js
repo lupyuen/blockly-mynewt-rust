@@ -316,14 +316,12 @@ use mynewt::{
     encoding::coap_context::*,  //  Import Mynewt Encoding API
     hw::sensor::{        
         self,               //  Import Mynewt Sensor API functions
-        sensor_ptr,         //  Import Mynewt Sensor API types
-        sensor_arg, sensor_data_ptr, sensor_listener,
-        sensor_temp_raw_data, sensor_type_t,
+        sensor_type_t,      //  Import Mynewt Sensor API types
         SensorValue, SensorValueType,
         SENSOR_TYPE_AMBIENT_TEMPERATURE_RAW,
     },
-    libs::sensor_network,      //  Import Mynewt Sensor Network Library
-    Strn, fill_zero, coap, d,  //  Import Mynewt macros    
+    libs::sensor_network,   //  Import Mynewt Sensor Network Library
+    Strn, coap, d,          //  Import Mynewt macros    
 };
 use mynewt_macros::{ init_strn, strn };  //  Import Mynewt procedural macros
 `;
@@ -333,10 +331,10 @@ var rustTrailer = `
 /// main() will be called at Mynewt startup. It replaces the C version of the \`main()\` function.
 #[no_mangle]                 //  Don't mangle the name "main"
 extern "C" fn main() -> ! {  //  Declare \`extern "C"\` because it will be called by Mynewt
-    //  Initialise Mynewt OS.
+    //  Initialise Mynewt OS
     mynewt::sysinit();
 
-    //  Initialise the app.
+    //  Initialise the app
     on_start()
         .expect("on_start fail");
 
@@ -353,7 +351,7 @@ extern "C" fn main() -> ! {  //  Declare \`extern "C"\` because it will be calle
 /// This function is called on panic, like an assertion failure. We display the filename and line number and pause in the debugger. From https://os.phil-opp.com/freestanding-rust-binary/
 #[panic_handler]
 fn panic(info: &PanicInfo) -> ! {
-    //  Display the filename and line number in the Semihosting Console.
+    //  Display the filename and line number in the Semihosting Console
     console::print("panic ");
     if let Some(location) = info.location() {
         let file = location.file();
@@ -364,9 +362,9 @@ fn panic(info: &PanicInfo) -> ! {
     } else {
         console::print("no loc\\n");  console::flush();
     }
-    //  Pause in the debugger.
+    //  Pause in the debugger
     bkpt();
-    //  Loop forever so that device won't restart.
+    //  Loop forever so that device won't restart
     loop {}
 }
 

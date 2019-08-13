@@ -98,11 +98,11 @@ Blockly.Rust['procedures_callreturn'] = function(block) {
   for (var i = 0; i < block.arguments_.length; i++) {
     args[i] = Blockly.Rust.valueToCode(block, 'ARG' + i,
       Blockly.Rust.ORDER_NONE) || 'null';
-    //  If function is `sensor::new_sensor_listener`, convert the second arg from string to function name, e.g.
-    //  sensor::new_sensor_listener(sensor_type, "handle_sensor_data") becomes
-    //  sensor::new_sensor_listener(sensor_type, handle_sensor_data) 
+    //  If function is `sensor::new_sensor_listener`, convert the third arg from string to function name, e.g.
+    //  sensor::new_sensor_listener(sensor_key, sensor_type, "handle_sensor_data") becomes
+    //  sensor::new_sensor_listener(sensor_key, sensor_type, handle_sensor_data) 
     //  TODO: Need a better solution.
-    if (funcName === 'sensor::new_sensor_listener' && i === 1) {
+    if (funcName === 'sensor::new_sensor_listener' && i === 2) {
       args[i] = args[i].split('"').join('');
     }
   }
