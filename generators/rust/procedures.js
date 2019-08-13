@@ -73,6 +73,7 @@ Blockly.Rust['procedures_defreturn'] = function(block) {
       returnType == 'void' ? '()' : returnType, 
       '> ',
       '{\n',
+      Blockly.Rust.INDENT, 'console::print("', funcName, '\\n");\n',
       branch,
       returnValue,
       '}'

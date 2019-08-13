@@ -41,15 +41,16 @@ Blockly.Rust['on_start'] = function(block) {
   var statements_stmts = Blockly.Rust.statementToCode(block, 'STMTS');
   var code = statements_stmts;
   if (code) {
-    code = Blockly.Rust.prefixLines(code, Blockly.Rust.INDENT);
+    //  code = Blockly.Rust.prefixLines(code, Blockly.Rust.INDENT);
   }
   //  TODO: Allow multiple `on_start` blocks.
   code = [
     '/// Will be run upon startup to initialise the app',
     'fn on_start() -> MynewtResult<()> {',
+    Blockly.Rust.INDENT + 'console::print("on_start\\n");',
     code,
-    '    //  Return success to `main()`.',
-    '    Ok(())',
+    Blockly.Rust.INDENT + '// Return success to `main()` function',
+    Blockly.Rust.INDENT + 'Ok(())',
     '}',
     ''
   ].join('\n');
@@ -68,7 +69,7 @@ Blockly.Rust['forever'] = function(block) {
   code = [
     '/// Will be run as Background Task that never terminates',
     'fn task_func(arg: Ptr) -> MynewtResult<()> {',
-    '    //  Loop forever',
+    '    // Loop forever',
     '    loop {',
     code,
     '    }',
@@ -88,7 +89,7 @@ Blockly.Rust['forever'] = function(block) {
     '        out!( TASK_STACK ),         //  Stack space for the task',
     '        TASK_STACK_SIZE as u16      //  Size of the stack (in 4-byte units)',
     '    ) ? ;                           //  `?` means check for error',
-    '    //  Return success to `main()`.',
+    '    // Return success to `main()` function',
     '    Ok(())',
     '}',
     ''
