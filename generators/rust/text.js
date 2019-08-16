@@ -266,10 +266,19 @@ Blockly.Rust['text_trim'] = function(block) {
 };
 
 Blockly.Rust['text_print'] = function(block) {
-  // TODO: Print statement.
+  // Display the text string.
+  // For string literals: console::print("abc");
+  // For Strn variables: console::print_strn(device_id);
   var msg = Blockly.Rust.valueToCode(block, 'TEXT',
       Blockly.Rust.ORDER_NONE) || '\'\'';
-  return 'print(' + msg + ');\n';
+  // For string literals: console::print("abc");
+  if (msg[0] === '"') { 
+    // Change `\\n` to `\n`
+    msg = msg.split('\\\\n').join('\\n');
+    return 'console::print(' + msg + ');\n'; 
+  }
+  // For Strn variables: console::print_strn(device_id);
+  return 'console::print_strn(' + msg + ');\n';
 };
 
 Blockly.Rust['text_prompt_ext'] = function(block) {
