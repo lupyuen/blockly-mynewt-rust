@@ -362,4 +362,142 @@
         <field name="HUE">120</field>
       </block>
     </value>
+  </block><block type="factory_base" id="2=UK0+0F}aWN@TQGuM:O" deletable="false" movable="false" x="10" y="10">
+    <mutation connections="LEFT"/>
+    <field name="NAME">label</field>
+    <field name="INLINE">INT</field>
+    <field name="CONNECTIONS">LEFT</field>
+    <statement name="INPUTS">
+      <block type="input_dummy" id="^g7P^1D9VmxPX+y+Dfr*">
+        <field name="ALIGN">LEFT</field>
+        <statement name="FIELDS">
+          <block type="field_static" id="Uj~m3wL)[B~P[cf}a8wz">
+            <field name="TEXT">label</field>
+          </block>
+        </statement>
+        <next>
+          <block type="input_dummy" id="2^Eoqyp-2n6t4HsbFmfg">
+            <field name="ALIGN">LEFT</field>
+            <statement name="FIELDS">
+              <block type="field_input" id="(+}(,4]x;y_x0^@EfzX{">
+                <field name="TEXT">name</field>
+                <field name="FIELDNAME">NAME</field>
+              </block>
+            </statement>
+            <next>
+              <block type="input_dummy" id="$5Rc|dO,luGxyCV7aBDe">
+                <field name="ALIGN">LEFT</field>
+                <statement name="FIELDS">
+                  <block type="field_static" id="cNRXtJp23IQEXNKOO=XP">
+                    <field name="TEXT">padding</field>
+                  </block>
+                </statement>
+                <next>
+                  <block type="input_dummy" id="h8zb:V)LoKOGNLtaa@pq">
+                    <field name="ALIGN">LEFT</field>
+                    <statement name="FIELDS">
+                      <block type="field_number" id="n)f-qXgP){BEF(~^v*yK">
+                        <field name="VALUE">0</field>
+                        <field name="FIELDNAME">PADDING</field>
+                        <field name="MIN">0</field>
+                        <field name="MAX">240</field>
+                        <field name="PRECISION">0</field>
+                      </block>
+                    </statement>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <value name="TOOLTIP">
+      <block type="text" id="DNpiK:N!tB*[#Ngfkv8?" deletable="false" movable="false">
+        <field name="TEXT"/>
+      </block>
+    </value>
+    <value name="HELPURL">
+      <block type="text" id="5FOkhe6a6ZdW`iUY=@=o" deletable="false" movable="false">
+        <field name="TEXT"/>
+      </block>
+    </value>
+    <value name="OUTPUTTYPE">
+      <shadow type="type_null" id="4kgVU^H5(Rc(?{V6w=q7"/>
+    </value>
+    <value name="COLOUR">
+      <block type="colour_hue" id="dSQK_l}77J+`C}sOs~NC">
+        <mutation colour="#5ba55b"/>
+        <field name="HUE">120</field>
+      </block>
+    </value>
+  </block><block type="factory_base" id="E]kJEoj6ght2IUG_J*rt" deletable="false" movable="false" x="10" y="10">
+    <mutation connections="LEFT"/>
+    <field name="NAME">button</field>
+    <field name="INLINE">INT</field>
+    <field name="CONNECTIONS">LEFT</field>
+    <statement name="INPUTS">
+      <block type="input_dummy" id="h^zR$zJ(P}!aQ8BJ|H;O">
+        <field name="ALIGN">LEFT</field>
+        <statement name="FIELDS">
+          <block type="field_static" id="bp2z~/d$)a;QtdCIxky/">
+            <field name="TEXT">button</field>
+          </block>
+        </statement>
+        <next>
+          <block type="input_dummy" id=":o|EH=cp7Vnu:|haF)5E">
+            <field name="ALIGN">LEFT</field>
+            <statement name="FIELDS">
+              <block type="field_input" id="HP5d/f^LZF@;AI?)zNnL">
+                <field name="TEXT">name</field>
+                <field name="FIELDNAME">NAME</field>
+              </block>
+            </statement>
+            <next>
+              <block type="input_dummy" id="Q%NWl?,9dX8x`@{$;?Bz">
+                <field name="ALIGN">LEFT</field>
+                <statement name="FIELDS">
+                  <block type="field_static" id="7LYRaP)50kV%~O:N4zjO">
+                    <field name="TEXT">padding</field>
+                  </block>
+                </statement>
+                <next>
+                  <block type="input_dummy" id="LSYr~d%3z^wNX{p~jG%{">
+                    <field name="ALIGN">LEFT</field>
+                    <statement name="FIELDS">
+                      <block type="field_number" id="m)-,6TV8{*XQI#nbsI2b">
+                        <field name="VALUE">0</field>
+                        <field name="FIELDNAME">PADDING</field>
+                        <field name="MIN">0</field>
+                        <field name="MAX">240</field>
+                        <field name="PRECISION">0</field>
+                      </block>
+                    </statement>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <value name="TOOLTIP">
+      <block type="text" id="rZdii}5#4:Ok0a52u}H6" deletable="false" movable="false">
+        <field name="TEXT"/>
+      </block>
+    </value>
+    <value name="HELPURL">
+      <block type="text" id="D29R3r~z9)[pu)-34V16" deletable="false" movable="false">
+        <field name="TEXT"/>
+      </block>
+    </value>
+    <value name="OUTPUTTYPE">
+      <shadow type="type_null" id="AKW1lIIX]vK%+;aky+;{"/>
+    </value>
+    <value name="COLOUR">
+      <block type="colour_hue" id="~dq_r.k_(ufkD_ps!u/7">
+        <mutation colour="#5ba55b"/>
+        <field name="HUE">120</field>
+      </block>
+    </value>
   </block></xml>
