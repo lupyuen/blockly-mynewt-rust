@@ -96,6 +96,13 @@
   <textarea id="content_xml" class="content" wrap="off"></textarea>
 
   <xml id="toolbox" style="display: none">
+    <!--  Begin: UI Category -->
+    <category name="UI" colour="160">
+      <block type="app"></block>
+      <block type="label"></block>
+      <block type="button"></block>
+    </category>
+  
     <!--  Begin: Pins Category -->
     <category name="Pins" colour="330">
         <block type="digital_read_pin"></block>
@@ -416,11 +423,12 @@
       </block>
     </category>
 
-    <!--  Begin: Control Category -->
-    <category name="Control" colour="160">
-        <block type="wait"></block>
+    <!--  Begin: CoAP Category -->
+    <category name="CoAP" colour="160">
+      <block type="coap"></block>
+      <block type="field"></block>
+      <block type="wait"></block>
     </category>
-    <!--  End  -->
 
     <sep></sep>
     <category name="%{BKY_CATVARIABLES}" colour="%{BKY_VARIABLES_HUE}" custom="VARIABLE"></category>

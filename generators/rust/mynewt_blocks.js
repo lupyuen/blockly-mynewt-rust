@@ -175,6 +175,70 @@ var mynewt_blocks =
   "colour": 120,
   "tooltip": "",
   "helpUrl": ""
+},
+{
+  "type": "label",
+  "message0": "label %1 %2 %3 padding %4 %5",
+  "args0": [
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "field_input",
+      "name": "NAME",
+      "text": "name"
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "field_number",
+      "name": "PADDING",
+      "value": 0,
+      "min": 0,
+      "max": 240
+    }
+  ],
+  "inputsInline": true,
+  "output": null,
+  "colour": 120,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "button",
+  "message0": "button %1 %2 %3 padding %4 %5",
+  "args0": [
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "field_input",
+      "name": "NAME",
+      "text": "name"
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "field_number",
+      "name": "PADDING",
+      "value": 0,
+      "min": 0,
+      "max": 240
+    }
+  ],
+  "inputsInline": true,
+  "output": null,
+  "colour": 120,
+  "tooltip": "",
+  "helpUrl": ""
 }]
 // End Block Exporter
 ;
