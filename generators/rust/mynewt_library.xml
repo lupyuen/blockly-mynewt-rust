@@ -500,4 +500,106 @@
         <field name="HUE">120</field>
       </block>
     </value>
+  </block><block type="factory_base" id="_MekLeS!.g/9u{yl])eV" deletable="false" movable="false" x="10" y="10">
+    <mutation connections="NONE"/>
+    <field name="NAME">on_button_press</field>
+    <field name="INLINE">INT</field>
+    <field name="CONNECTIONS">NONE</field>
+    <statement name="INPUTS">
+      <block type="input_dummy" id="B-QL5}{G=J?(WTV3z8g^">
+        <field name="ALIGN">LEFT</field>
+        <statement name="FIELDS">
+          <block type="field_static" id="9%nHR4oEuqyZYbFKLt]?">
+            <field name="TEXT">on button</field>
+            <next>
+              <block type="field_input" id="Hj%c*O.H0esu7Z!t9T!{">
+                <field name="TEXT">name</field>
+                <field name="FIELDNAME">NAME</field>
+                <next>
+                  <block type="field_static" id="E:v+.6wG!)*8%-yM;;}9">
+                    <field name="TEXT">press</field>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <next>
+          <block type="input_statement" id="/P|sY39ro;oXs[9wUSMj">
+            <field name="INPUTNAME">NAME</field>
+            <field name="ALIGN">LEFT</field>
+            <value name="TYPE">
+              <shadow type="type_null" id="S;scz-+m-Al]#5wODJg|"/>
+            </value>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <value name="TOOLTIP">
+      <block type="text" id="oJTJM]4ed*67k,4D:BhR" deletable="false" movable="false">
+        <field name="TEXT"/>
+      </block>
+    </value>
+    <value name="HELPURL">
+      <block type="text" id="z(hh$.DnC]]a5de2nqz$" deletable="false" movable="false">
+        <field name="TEXT"/>
+      </block>
+    </value>
+    <value name="COLOUR">
+      <block type="colour_hue" id=",/$IWw#Iv(T+frz`3bTS">
+        <mutation colour="#5ba55b"/>
+        <field name="HUE">120</field>
+      </block>
+    </value>
+  </block><block type="factory_base" id="Ii7[,gzmwU49lgSCVI,X" deletable="false" movable="false" x="10" y="10">
+    <mutation connections="NONE"/>
+    <field name="NAME">on_label_show</field>
+    <field name="INLINE">INT</field>
+    <field name="CONNECTIONS">NONE</field>
+    <statement name="INPUTS">
+      <block type="input_dummy" id="(e*D!,1S{U8T5=TS.e!)">
+        <field name="ALIGN">LEFT</field>
+        <statement name="FIELDS">
+          <block type="field_static" id="5#}A!Q+1=DJ)R~53f/7I">
+            <field name="TEXT">on label</field>
+            <next>
+              <block type="field_input" id="E1fQ}?AtKk2$_!x;UV1/">
+                <field name="TEXT">name</field>
+                <field name="FIELDNAME">NAME</field>
+                <next>
+                  <block type="field_static" id="*z$ixgkl!X^pTeZ7`9$o">
+                    <field name="TEXT">show</field>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <next>
+          <block type="input_statement" id="j3w,hI#crI~9^p8.B4V-">
+            <field name="INPUTNAME">NAME</field>
+            <field name="ALIGN">LEFT</field>
+            <value name="TYPE">
+              <shadow type="type_null" id="IMPhYD@auKr{[y#zvgBl"/>
+            </value>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <value name="TOOLTIP">
+      <block type="text" id="PZRY?h;3wulJR:|(:+:;" deletable="false" movable="false">
+        <field name="TEXT"/>
+      </block>
+    </value>
+    <value name="HELPURL">
+      <block type="text" id=";z6!E4MF5Qoem!qm)b.2" deletable="false" movable="false">
+        <field name="TEXT"/>
+      </block>
+    </value>
+    <value name="COLOUR">
+      <block type="colour_hue" id="/~%OapB9kbv}9XTXHJMy">
+        <mutation colour="#5ba55b"/>
+        <field name="HUE">120</field>
+      </block>
+    </value>
   </block></xml>
