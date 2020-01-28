@@ -105,6 +105,46 @@ Blockly.Rust['on_start'] = function(block) {
   return code;
 };
 
+Blockly.Rust['on_label_show'] = function(block) {
+  var statements_stmts = Blockly.Rust.statementToCode(block, 'STMTS');
+  var code = statements_stmts;
+  if (code) {
+    //  code = Blockly.Rust.prefixLines(code, Blockly.Rust.INDENT);
+  }
+  //  TODO: Allow multiple `on_start` blocks.
+  code = [
+    '/// Will be run upon startup to initialise the app',
+    'fn on_start() -> MynewtResult<()> {',
+    Blockly.Rust.INDENT + 'console::print("on_start\\n");',
+    code,
+    Blockly.Rust.INDENT + '// Return success to `main()` function',
+    Blockly.Rust.INDENT + 'Ok(())',
+    '}',
+    ''
+  ].join('\n');
+  return code;
+};
+
+Blockly.Rust['on_button_press'] = function(block) {
+  var statements_stmts = Blockly.Rust.statementToCode(block, 'STMTS');
+  var code = statements_stmts;
+  if (code) {
+    //  code = Blockly.Rust.prefixLines(code, Blockly.Rust.INDENT);
+  }
+  //  TODO: Allow multiple `on_start` blocks.
+  code = [
+    '/// Will be run upon startup to initialise the app',
+    'fn on_start() -> MynewtResult<()> {',
+    Blockly.Rust.INDENT + 'console::print("on_start\\n");',
+    code,
+    Blockly.Rust.INDENT + '// Return success to `main()` function',
+    Blockly.Rust.INDENT + 'Ok(())',
+    '}',
+    ''
+  ].join('\n');
+  return code;
+};
+
 Blockly.Rust['forever'] = function(block) {
   var statements_stmts = Blockly.Rust.statementToCode(block, 'STMTS');
   // Indent every line twice.

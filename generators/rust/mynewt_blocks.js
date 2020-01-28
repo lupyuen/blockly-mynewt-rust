@@ -239,6 +239,50 @@ var mynewt_blocks =
   "colour": 120,
   "tooltip": "",
   "helpUrl": ""
+},
+{
+  "type": "on_label_show",
+  "message0": "on label %1 show %2 %3",
+  "args0": [
+    {
+      "type": "field_input",
+      "name": "NAME",
+      "text": "name"
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_statement",
+      "name": "NAME"
+    }
+  ],
+  "inputsInline": true,
+  "colour": 120,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "on_button_press",
+  "message0": "on button %1 press %2 %3",
+  "args0": [
+    {
+      "type": "field_input",
+      "name": "NAME",
+      "text": "name"
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_statement",
+      "name": "NAME"
+    }
+  ],
+  "inputsInline": true,
+  "colour": 120,
+  "tooltip": "",
+  "helpUrl": ""
 }]
 // End Block Exporter
 ;
