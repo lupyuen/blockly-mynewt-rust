@@ -32,7 +32,7 @@ goog.provide('Blockly.Widgets');
 
 goog.require('Blockly.Blocks');
 goog.require('Blockly.constants');
-goog.require('Blockly.Widgets.BlockChange');
+goog.require('Blockly.Events.BlockChange');
 goog.require('Blockly.Field');
 goog.require('Blockly.Names');
 goog.require('Blockly.Workspace');
@@ -295,7 +295,7 @@ Blockly.Widgets.mutateCallers = function(defBlock) {
       // undo action since it is deterministically tied to the widget's
       // definition mutation.
       Blockly.Widgets.recordUndo = false;
-      Blockly.Widgets.fire(new Blockly.Widgets.BlockChange(
+      Blockly.Widgets.fire(new Blockly.Events.BlockChange(
           caller, 'mutation', null, oldMutation, newMutation));
       Blockly.Widgets.recordUndo = oldRecordUndo;
     }

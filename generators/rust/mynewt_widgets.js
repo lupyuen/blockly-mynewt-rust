@@ -50,7 +50,8 @@ Blockly.Blocks['widgets_defnoreturn'] = {
         Blockly.Msg['WIDGETS_DEFNORETURN_COMMENT']) {
       this.setCommentText(Blockly.Msg['WIDGETS_DEFNORETURN_COMMENT']);
     }
-    this.setStyle('widget_blocks');
+    //// TODO: this.setStyle('widget_blocks');
+    this.setStyle('procedure_blocks'); //// TODO
     this.setTooltip(Blockly.Msg['WIDGETS_DEFNORETURN_TOOLTIP']);
     this.setHelpUrl(Blockly.Msg['WIDGETS_DEFNORETURN_HELPURL']);
     this.arguments_ = [];
@@ -412,7 +413,8 @@ Blockly.Blocks['widgets_defreturn'] = {
         Blockly.Msg['WIDGETS_DEFRETURN_COMMENT']) {
       this.setCommentText(Blockly.Msg['WIDGETS_DEFRETURN_COMMENT']);
     }
-    this.setStyle('widget_blocks');
+    //// TODO: this.setStyle('widget_blocks');
+    this.setStyle('procedure_blocks'); //// TODO
     this.setTooltip(Blockly.Msg['WIDGETS_DEFRETURN_TOOLTIP']);
     this.setHelpUrl(Blockly.Msg['WIDGETS_DEFRETURN_HELPURL']);
     this.arguments_ = [];
@@ -458,7 +460,8 @@ Blockly.Blocks['widgets_mutatorcontainer'] = {
     this.appendDummyInput('STATEMENT_INPUT')
         .appendField(Blockly.Msg['WIDGETS_ALLOW_STATEMENTS'])
         .appendField(new Blockly.FieldCheckbox('TRUE'), 'STATEMENTS');
-    this.setStyle('widget_blocks');
+    //// TODO: this.setStyle('widget_blocks');
+    this.setStyle('procedure_blocks'); //// TODO
     this.setTooltip(Blockly.Msg['WIDGETS_MUTATORCONTAINER_TOOLTIP']);
     this.contextMenu = false;
   },
@@ -548,7 +551,8 @@ Blockly.Blocks['widgets_mutatorarg'] = {
         .appendField(field, 'NAME');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setStyle('widget_blocks');
+    //// TODO: this.setStyle('widget_blocks');
+    this.setStyle('procedure_blocks'); //// TODO
     this.setTooltip(Blockly.Msg['WIDGETS_MUTATORARG_TOOLTIP']);
     this.contextMenu = false;
 
@@ -632,7 +636,8 @@ Blockly.Blocks['widgets_callnoreturn'] = {
         .appendField(this.id, 'NAME');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setStyle('widget_blocks');
+    //// TODO: this.setStyle('widget_blocks');
+    this.setStyle('procedure_blocks'); //// TODO
     // Tooltip is set in renameProcedure.
     this.setHelpUrl(Blockly.Msg['WIDGETS_CALLNORETURN_HELPURL']);
     this.arguments_ = [];
@@ -979,7 +984,8 @@ Blockly.Blocks['widgets_callreturn'] = {
     this.appendDummyInput('TOPROW')
         .appendField('', 'NAME');
     this.setOutput(true);
-    this.setStyle('widget_blocks');
+    //// TODO: this.setStyle('widget_blocks');
+    this.setStyle('procedure_blocks'); //// TODO
     // Tooltip is set in domToMutation.
     this.setHelpUrl(Blockly.Msg['WIDGETS_CALLRETURN_HELPURL']);
     this.arguments_ = [];
@@ -1016,7 +1022,8 @@ Blockly.Blocks['widgets_ifreturn'] = {
     this.setInputsInline(true);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setStyle('widget_blocks');
+    //// TODO: this.setStyle('widget_blocks');
+    this.setStyle('procedure_blocks'); //// TODO
     this.setTooltip(Blockly.Msg['WIDGETS_IFRETURN_TOOLTIP']);
     this.setHelpUrl(Blockly.Msg['WIDGETS_IFRETURN_HELPURL']);
     this.hasReturnValue_ = true;
