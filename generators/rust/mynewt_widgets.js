@@ -96,11 +96,11 @@ Blockly.Blocks['widgets_defnoreturn'] = {
     }
     // The params field is deterministic based on the mutation,
     // no need to fire a change widget.
-    Blockly.Widgets.disable();
+    Blockly.Events.disable();
     try {
       this.setFieldValue(paramString, 'PARAMS');
     } finally {
-      Blockly.Widgets.enable();
+      Blockly.Events.enable();
     }
   },
   /**
