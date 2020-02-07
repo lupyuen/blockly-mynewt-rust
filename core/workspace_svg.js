@@ -48,6 +48,8 @@ goog.require('Blockly.WorkspaceCommentSvg.render');
 goog.require('Blockly.WorkspaceDragSurfaceSvg');
 goog.require('Blockly.Xml');
 goog.require('Blockly.ZoomControls');
+////// TODO
+//////
 
 goog.require('goog.dom');
 goog.require('goog.math.Coordinate');
@@ -120,6 +122,13 @@ Blockly.WorkspaceSvg = function(options,
     this.registerToolboxCategoryCallback(Blockly.PROCEDURE_CATEGORY_NAME,
         Blockly.Procedures.flyoutCategory);
   }
+  ////// TODO
+  console.log('Blockly.Events.flyoutCategory', Blockly.Events.flyoutCategory);
+  if (Blockly.Events && Blockly.Events.flyoutCategory) {
+    this.registerToolboxCategoryCallback(Blockly.EVENT_CATEGORY_NAME,
+        Blockly.Events.flyoutCategory);
+  }
+  //////
 };
 goog.inherits(Blockly.WorkspaceSvg, Blockly.Workspace);
 

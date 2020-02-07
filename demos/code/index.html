@@ -6,7 +6,7 @@
   <title>Blockly Demo:</title>
   <link rel="stylesheet" href="style.css">
   <script src="/storage.js"></script>
-  <script src="../../blockly_compressed.js"></script>
+  <script src="../../blockly_uncompressed.js"></script>
   <script src="../../blocks_compressed.js"></script>
   <script src="../../javascript_compressed.js"></script>
   <script src="../../python_compressed.js"></script>
@@ -21,6 +21,8 @@
   <script src="../../generators/rust/mynewt_functions.js"></script>
   <script src="../../generators/rust/mynewt_coap.js"></script>
   <script src="../../generators/rust/mynewt_app.js"></script>
+  <script src="../../generators/rust/mynewt_events.js"></script>
+  <script src="../../generators/rust/mynewt_events_category.js"></script>
   <!--  Load Rust Functions. TODO: Package into rust_compressed.js  -->
   <script src="../../generators/rust/colour.js"></script>
   <script src="../../generators/rust/lists.js"></script>
@@ -104,6 +106,11 @@
       <block type="button"></block>
       <block type="on_button_press"></block>
     </category>
+    <!--  End  -->
+
+    <!--  Begin: Events Category -->
+    <category name="Events" colour="%{BKY_PROCEDURES_HUE}" custom="EVENT"></category>
+    <!--  End  -->
   
     <!--  Begin: Pins Category -->
     <category name="Pins" colour="330">
