@@ -36,6 +36,8 @@ Blockly.Blocks['widgets_defnoreturn'] = {
    * @this Blockly.Block
    */
   init: function() {
+    Blockly.Msg['WIDGETS_DEFNORETURN_TOOLTIP'] = 'WIDGETS_DEFNORETURN_TOOLTIP'; ////
+    Blockly.Msg['WIDGETS_DEFNORETURN_HELPURL'] = 'WIDGETS_DEFNORETURN_HELPURL'; ////
     var nameField = new Blockly.FieldTextInput('',
         Blockly.Procedures.rename);
     nameField.setSpellcheck(false);
@@ -396,6 +398,8 @@ Blockly.Blocks['widgets_defreturn'] = {
    * @this Blockly.Block
    */
   init: function() {
+    Blockly.Msg['WIDGETS_DEFRETURN_TOOLTIP'] = 'WIDGETS_DEFRETURN_TOOLTIP'; ////
+    Blockly.Msg['WIDGETS_DEFRETURN_HELPURL'] = 'WIDGETS_DEFRETURN_HELPURL'; ////
     var nameField = new Blockly.FieldTextInput('',
         Blockly.Procedures.rename);
     nameField.setSpellcheck(false);
@@ -454,6 +458,7 @@ Blockly.Blocks['widgets_mutatorcontainer'] = {
    * @this Blockly.Block
    */
   init: function() {
+    Blockly.Msg['WIDGETS_MUTATORCONTAINER_TOOLTIP'] = 'WIDGETS_MUTATORCONTAINER_TOOLTIP'; ////
     this.appendDummyInput()
         .appendField(Blockly.Msg['WIDGETS_MUTATORCONTAINER_TITLE']);
     this.appendStatementInput('STACK');
@@ -536,6 +541,7 @@ Blockly.Blocks['widgets_mutatorarg'] = {
    * @this Blockly.Block
    */
   init: function() {
+    Blockly.Msg['WIDGETS_MUTATORARG_TOOLTIP'] = 'WIDGETS_MUTATORARG_TOOLTIP'; ////
     var field = new Blockly.FieldTextInput('x', this.validator_);
     // Hack: override showEditor to do just a little bit more work.
     // We don't have a good place to hook into the start of a text edit.
@@ -632,6 +638,7 @@ Blockly.Blocks['widgets_callnoreturn'] = {
    * @this Blockly.Block
    */
   init: function() {
+    Blockly.Msg['WIDGETS_CALLNORETURN_HELPURL'] = 'WIDGETS_CALLNORETURN_HELPURL'; ////
     this.appendDummyInput('TOPROW')
         .appendField(this.id, 'NAME');
     this.setPreviousStatement(true);
@@ -664,6 +671,8 @@ Blockly.Blocks['widgets_callnoreturn'] = {
    * @this Blockly.Block
    */
   renameProcedure: function(oldName, newName) {
+    Blockly.Msg['WIDGETS_CALLRETURN_TOOLTIP'] = 'WIDGETS_CALLRETURN_TOOLTIP'; ////
+    Blockly.Msg['WIDGETS_CALLNORETURN_TOOLTIP'] = 'WIDGETS_CALLNORETURN_TOOLTIP'; ////
     if (Blockly.Names.equals(oldName, this.getProcedureCall())) {
       this.setFieldValue(newName, 'NAME');
       var baseMsg = this.outputConnection ?
@@ -981,6 +990,7 @@ Blockly.Blocks['widgets_callreturn'] = {
    * @this Blockly.Block
    */
   init: function() {
+    Blockly.Msg['WIDGETS_CALLRETURN_HELPURL'] = 'WIDGETS_CALLRETURN_HELPURL'; ////
     this.appendDummyInput('TOPROW')
         .appendField('', 'NAME');
     this.setOutput(true);
@@ -1014,6 +1024,8 @@ Blockly.Blocks['widgets_ifreturn'] = {
    * @this Blockly.Block
    */
   init: function() {
+    Blockly.Msg['WIDGETS_IFRETURN_TOOLTIP'] = 'WIDGETS_IFRETURN_TOOLTIP'; ////
+    Blockly.Msg['WIDGETS_IFRETURN_HELPURL'] = 'WIDGETS_IFRETURN_HELPURL'; ////
     this.appendValueInput('CONDITION')
         .setCheck('Boolean')
         .appendField(Blockly.Msg['CONTROLS_IF_MSG_IF']);
