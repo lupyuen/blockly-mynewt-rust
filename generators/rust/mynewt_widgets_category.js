@@ -19,20 +19,20 @@
  */
 
 /**
- * @fileoverview Utility functions for handling events.
+ * @fileoverview Utility functions for handling widgets.
  * @author luppy@appkaki.com (Lee Lup Yuen)
  */
 'use strict';
 
 /**
- * @name Blockly.Events
+ * @name Blockly.Widgets
  * @namespace
  */
-goog.provide('Blockly.Events');
+goog.provide('Blockly.Widgets');
 
 goog.require('Blockly.Blocks');
 goog.require('Blockly.constants');
-goog.require('Blockly.Events.BlockChange');
+goog.require('Blockly.Widgets.BlockChange');
 goog.require('Blockly.Field');
 goog.require('Blockly.Names');
 goog.require('Blockly.Workspace');
@@ -41,39 +41,39 @@ goog.require('Blockly.Xml.utils');
 
 
 /**
- * Constant to separate event names from variables and generated functions
+ * Constant to separate widget names from variables and generated functions
  * when running generators.
- * @deprecated Use Blockly.EVENT_CATEGORY_NAME
+ * @deprecated Use Blockly.WIDGET_CATEGORY_NAME
  */
-Blockly.Events.NAME_TYPE = Blockly.EVENT_CATEGORY_NAME;
+Blockly.Widgets.NAME_TYPE = Blockly.WIDGET_CATEGORY_NAME;
 
 /**
- * Find all user-created event definitions in a workspace.
+ * Find all user-created widget definitions in a workspace.
  * @param {!Blockly.Workspace} root Root workspace.
  * @return {!Array.<!Array.<!Array>>} Pair of arrays, the
- *     first contains events without return variables, the second with.
- *     Each event is defined by a three-element list of name, parameter
+ *     first contains widgets without return variables, the second with.
+ *     Each widget is defined by a three-element list of name, parameter
  *     list, and return value boolean.
  */
-Blockly.Events.allEvents = function(root) {
+Blockly.Widgets.allWidgets = function(root) {
   var blocks = root.getAllBlocks(false);
-  var eventsReturn = [];
-  var eventsNoReturn = [];
+  var widgetsReturn = [];
+  var widgetsNoReturn = [];
   for (var i = 0; i < blocks.length; i++) {
-    if (blocks[i].getEventDef) {
-      var tuple = blocks[i].getEventDef();
+    if (blocks[i].getWidgetDef) {
+      var tuple = blocks[i].getWidgetDef();
       if (tuple) {
         if (tuple[2]) {
-          eventsReturn.push(tuple);
+          widgetsReturn.push(tuple);
         } else {
-          eventsNoReturn.push(tuple);
+          widgetsNoReturn.push(tuple);
         }
       }
     }
   }
-  eventsNoReturn.sort(Blockly.Events.procTupleComparator_);
-  eventsReturn.sort(Blockly.Events.procTupleComparator_);
-  return [eventsNoReturn, eventsReturn];
+  widgetsNoReturn.sort(Blockly.Widgets.procTupleComparator_);
+  widgetsReturn.sort(Blockly.Widgets.procTupleComparator_);
+  return [widgetsNoReturn, widgetsReturn];
 };
 
 /**
@@ -84,23 +84,23 @@ Blockly.Events.allEvents = function(root) {
  * @return {number} -1, 0, or 1 to signify greater than, equality, or less than.
  * @private
  */
-Blockly.Events.procTupleComparator_ = function(ta, tb) {
+Blockly.Widgets.procTupleComparator_ = function(ta, tb) {
   return ta[0].toLowerCase().localeCompare(tb[0].toLowerCase());
 };
 
 /**
- * Ensure two identically-named events don't exist.
- * @param {string} name Proposed event name.
+ * Ensure two identically-named widgets don't exist.
+ * @param {string} name Proposed widget name.
  * @param {!Blockly.Block} block Block to disambiguate.
  * @return {string} Non-colliding name.
  */
-Blockly.Events.findLegalName = function(name, block) {
+Blockly.Widgets.findLegalName = function(name, block) {
   if (block.isInFlyout) {
-    // Flyouts can have multiple events called 'do something'.
+    // Flyouts can have multiple widgets called 'do something'.
     return name;
   }
-  while (!Blockly.Events.isLegalName_(name, block.workspace, block)) {
-    // Collision with another event.
+  while (!Blockly.Widgets.isLegalName_(name, block.workspace, block)) {
+    // Collision with another widget.
     var r = name.match(/^(.*?)(\d+)$/);
     if (!r) {
       name += '2';
@@ -112,8 +112,8 @@ Blockly.Events.findLegalName = function(name, block) {
 };
 
 /**
- * Does this event have a legal name?  Illegal names include names of
- * events already defined.
+ * Does this widget have a legal name?  Illegal names include names of
+ * widgets already defined.
  * @param {string} name The questionable name.
  * @param {!Blockly.Workspace} workspace The workspace to scan for collisions.
  * @param {Blockly.Block=} opt_exclude Optional block to exclude from
@@ -121,27 +121,27 @@ Blockly.Events.findLegalName = function(name, block) {
  * @return {boolean} True if the name is legal.
  * @private
  */
-Blockly.Events.isLegalName_ = function(name, workspace, opt_exclude) {
-  return !Blockly.Events.isNameUsed(name, workspace, opt_exclude);
+Blockly.Widgets.isLegalName_ = function(name, workspace, opt_exclude) {
+  return !Blockly.Widgets.isNameUsed(name, workspace, opt_exclude);
 };
 
 /**
- * Return if the given name is already a event name.
+ * Return if the given name is already a widget name.
  * @param {string} name The questionable name.
  * @param {!Blockly.Workspace} workspace The workspace to scan for collisions.
  * @param {Blockly.Block=} opt_exclude Optional block to exclude from
  *     comparisons (one doesn't want to collide with oneself).
  * @return {boolean} True if the name is used, otherwise return false.
  */
-Blockly.Events.isNameUsed = function(name, workspace, opt_exclude) {
+Blockly.Widgets.isNameUsed = function(name, workspace, opt_exclude) {
   var blocks = workspace.getAllBlocks(false);
   // Iterate through every block and check the name.
   for (var i = 0; i < blocks.length; i++) {
     if (blocks[i] == opt_exclude) {
       continue;
     }
-    if (blocks[i].getEventDef) {
-      var procName = blocks[i].getEventDef();
+    if (blocks[i].getWidgetDef) {
+      var procName = blocks[i].getWidgetDef();
       if (Blockly.Names.equals(procName[0], name)) {
         return true;
       }
@@ -151,24 +151,24 @@ Blockly.Events.isNameUsed = function(name, workspace, opt_exclude) {
 };
 
 /**
- * Rename a event.  Called by the editable field.
+ * Rename a widget.  Called by the editable field.
  * @param {string} name The proposed new name.
  * @return {string} The accepted name.
  * @this {Blockly.Field}
  */
-Blockly.Events.rename = function(name) {
+Blockly.Widgets.rename = function(name) {
   // Strip leading and trailing whitespace.  Beyond this, all names are legal.
   name = name.replace(/^[\s\xa0]+|[\s\xa0]+$/g, '');
 
-  // Ensure two identically-named events don't exist.
-  var legalName = Blockly.Events.findLegalName(name, this.sourceBlock_);
+  // Ensure two identically-named widgets don't exist.
+  var legalName = Blockly.Widgets.findLegalName(name, this.sourceBlock_);
   var oldName = this.text_;
   if (oldName != name && oldName != legalName) {
     // Rename any callers.
     var blocks = this.sourceBlock_.workspace.getAllBlocks(false);
     for (var i = 0; i < blocks.length; i++) {
-      if (blocks[i].renameEvent) {
-        blocks[i].renameEvent(oldName, legalName);
+      if (blocks[i].renameWidget) {
+        blocks[i].renameWidget(oldName, legalName);
       }
     }
   }
@@ -176,44 +176,44 @@ Blockly.Events.rename = function(name) {
 };
 
 /**
- * Construct the blocks required by the flyout for the event category.
- * @param {!Blockly.Workspace} workspace The workspace containing events.
+ * Construct the blocks required by the flyout for the widget category.
+ * @param {!Blockly.Workspace} workspace The workspace containing widgets.
  * @return {!Array.<!Element>} Array of XML block elements.
  */
-Blockly.Events.flyoutCategory = function(workspace) {
+Blockly.Widgets.flyoutCategory = function(workspace) {
   var xmlList = [];
-  if (Blockly.Blocks['events_defnoreturn']) {
-    // <block type="events_defnoreturn" gap="16">
+  if (Blockly.Blocks['widgets_defnoreturn']) {
+    // <block type="widgets_defnoreturn" gap="16">
     //     <field name="NAME">do something</field>
     // </block>
     var block = Blockly.Xml.utils.createElement('block');
-    block.setAttribute('type', 'events_defnoreturn');
+    block.setAttribute('type', 'widgets_defnoreturn');
     block.setAttribute('gap', 16);
     var nameField = Blockly.Xml.utils.createElement('field');
     nameField.setAttribute('name', 'NAME');
     nameField.appendChild(Blockly.Xml.utils.createTextNode(
-        Blockly.Msg['EVENTS_DEFNORETURN_EVENT']));
+        Blockly.Msg['WIDGETS_DEFNORETURN_WIDGET']));
     block.appendChild(nameField);
     xmlList.push(block);
   }
-  if (Blockly.Blocks['events_defreturn']) {
-    // <block type="events_defreturn" gap="16">
+  if (Blockly.Blocks['widgets_defreturn']) {
+    // <block type="widgets_defreturn" gap="16">
     //     <field name="NAME">do something</field>
     // </block>
     var block = Blockly.Xml.utils.createElement('block');
-    block.setAttribute('type', 'events_defreturn');
+    block.setAttribute('type', 'widgets_defreturn');
     block.setAttribute('gap', 16);
     var nameField = Blockly.Xml.utils.createElement('field');
     nameField.setAttribute('name', 'NAME');
     nameField.appendChild(Blockly.Xml.utils.createTextNode(
-        Blockly.Msg['EVENTS_DEFRETURN_EVENT']));
+        Blockly.Msg['WIDGETS_DEFRETURN_WIDGET']));
     block.appendChild(nameField);
     xmlList.push(block);
   }
-  if (Blockly.Blocks['events_ifreturn']) {
-    // <block type="events_ifreturn" gap="16"></block>
+  if (Blockly.Blocks['widgets_ifreturn']) {
+    // <block type="widgets_ifreturn" gap="16"></block>
     var block = Blockly.Xml.utils.createElement('block');
-    block.setAttribute('type', 'events_ifreturn');
+    block.setAttribute('type', 'widgets_ifreturn');
     block.setAttribute('gap', 16);
     xmlList.push(block);
   }
@@ -222,11 +222,11 @@ Blockly.Events.flyoutCategory = function(workspace) {
     xmlList[xmlList.length - 1].setAttribute('gap', 24);
   }
 
-  function populateEvents(eventList, templateName) {
-    for (var i = 0; i < eventList.length; i++) {
-      var name = eventList[i][0];
-      var args = eventList[i][1];
-      // <block type="events_callnoreturn" gap="16">
+  function populateWidgets(widgetList, templateName) {
+    for (var i = 0; i < widgetList.length; i++) {
+      var name = widgetList[i][0];
+      var args = widgetList[i][1];
+      // <block type="widgets_callnoreturn" gap="16">
       //   <mutation name="do something">
       //     <arg name="x"></arg>
       //   </mutation>
@@ -246,26 +246,26 @@ Blockly.Events.flyoutCategory = function(workspace) {
     }
   }
 
-  var tuple = Blockly.Events.allEvents(workspace);
-  populateEvents(tuple[0], 'events_callnoreturn');
-  populateEvents(tuple[1], 'events_callreturn');
+  var tuple = Blockly.Widgets.allWidgets(workspace);
+  populateWidgets(tuple[0], 'widgets_callnoreturn');
+  populateWidgets(tuple[1], 'widgets_callreturn');
   return xmlList;
 };
 
 /**
- * Find all the callers of a named event.
- * @param {string} name Name of event.
+ * Find all the callers of a named widget.
+ * @param {string} name Name of widget.
  * @param {!Blockly.Workspace} workspace The workspace to find callers in.
  * @return {!Array.<!Blockly.Block>} Array of caller blocks.
  */
-Blockly.Events.getCallers = function(name, workspace) {
+Blockly.Widgets.getCallers = function(name, workspace) {
   var callers = [];
   var blocks = workspace.getAllBlocks(false);
   // Iterate through every block and check the name.
   for (var i = 0; i < blocks.length; i++) {
-    if (blocks[i].getEventCall) {
-      var procName = blocks[i].getEventCall();
-      // Event name may be null if the block is only half-built.
+    if (blocks[i].getWidgetCall) {
+      var procName = blocks[i].getWidgetCall();
+      // Widget name may be null if the block is only half-built.
       if (procName && Blockly.Names.equals(procName, name)) {
         callers.push(blocks[i]);
       }
@@ -275,15 +275,15 @@ Blockly.Events.getCallers = function(name, workspace) {
 };
 
 /**
- * When a event definition changes its parameters, find and edit all its
+ * When a widget definition changes its parameters, find and edit all its
  * callers.
- * @param {!Blockly.Block} defBlock Event definition block.
+ * @param {!Blockly.Block} defBlock Widget definition block.
  */
-Blockly.Events.mutateCallers = function(defBlock) {
-  var oldRecordUndo = Blockly.Events.recordUndo;
-  var name = defBlock.getEventDef()[0];
+Blockly.Widgets.mutateCallers = function(defBlock) {
+  var oldRecordUndo = Blockly.Widgets.recordUndo;
+  var name = defBlock.getWidgetDef()[0];
   var xmlElement = defBlock.mutationToDom(true);
-  var callers = Blockly.Events.getCallers(name, defBlock.workspace);
+  var callers = Blockly.Widgets.getCallers(name, defBlock.workspace);
   for (var i = 0, caller; caller = callers[i]; i++) {
     var oldMutationDom = caller.mutationToDom();
     var oldMutation = oldMutationDom && Blockly.Xml.domToText(oldMutationDom);
@@ -292,28 +292,28 @@ Blockly.Events.mutateCallers = function(defBlock) {
     var newMutation = newMutationDom && Blockly.Xml.domToText(newMutationDom);
     if (oldMutation != newMutation) {
       // Fire a mutation on every caller block.  But don't record this as an
-      // undo action since it is deterministically tied to the event's
+      // undo action since it is deterministically tied to the widget's
       // definition mutation.
-      Blockly.Events.recordUndo = false;
-      Blockly.Events.fire(new Blockly.Events.BlockChange(
+      Blockly.Widgets.recordUndo = false;
+      Blockly.Widgets.fire(new Blockly.Widgets.BlockChange(
           caller, 'mutation', null, oldMutation, newMutation));
-      Blockly.Events.recordUndo = oldRecordUndo;
+      Blockly.Widgets.recordUndo = oldRecordUndo;
     }
   }
 };
 
 /**
- * Find the definition block for the named event.
- * @param {string} name Name of event.
+ * Find the definition block for the named widget.
+ * @param {string} name Name of widget.
  * @param {!Blockly.Workspace} workspace The workspace to search.
- * @return {Blockly.Block} The event definition block, or null not found.
+ * @return {Blockly.Block} The widget definition block, or null not found.
  */
-Blockly.Events.getDefinition = function(name, workspace) {
-  // Assume that a event definition is a top block.
+Blockly.Widgets.getDefinition = function(name, workspace) {
+  // Assume that a widget definition is a top block.
   var blocks = workspace.getTopBlocks(false);
   for (var i = 0; i < blocks.length; i++) {
-    if (blocks[i].getEventDef) {
-      var tuple = blocks[i].getEventDef();
+    if (blocks[i].getWidgetDef) {
+      var tuple = blocks[i].getWidgetDef();
       if (tuple && Blockly.Names.equals(tuple[0], name)) {
         return blocks[i];
       }

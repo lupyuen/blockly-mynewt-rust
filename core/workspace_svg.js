@@ -123,10 +123,10 @@ Blockly.WorkspaceSvg = function(options,
         Blockly.Procedures.flyoutCategory);
   }
   ////// TODO
-  console.log('Blockly.Events.flyoutCategory', Blockly.Events.flyoutCategory);
-  if (Blockly.Events && Blockly.Events.flyoutCategory) {
-    this.registerToolboxCategoryCallback(Blockly.EVENT_CATEGORY_NAME,
-        Blockly.Events.flyoutCategory);
+  console.log('Blockly.Widgets.flyoutCategory', Blockly.Widgets.flyoutCategory);
+  if (Blockly.Widgets && Blockly.Widgets.flyoutCategory) {
+    this.registerToolboxCategoryCallback(Blockly.WIDGET_CATEGORY_NAME,
+        Blockly.Widgets.flyoutCategory);
   }
   //////
 };

@@ -19,20 +19,20 @@
  */
 
 /**
- * @fileoverview Event blocks for Blockly.
+ * @fileoverview Widget blocks for Blockly.
  * @author luppy@appkaki.com (Lee Lup Yuen)
  */
 'use strict';
 
-goog.provide('Blockly.Blocks.events');
+goog.provide('Blockly.Blocks.widgets');
 
 goog.require('Blockly.Blocks');
 goog.require('Blockly');
 
 
-Blockly.Blocks['events_defnoreturn'] = {
+Blockly.Blocks['widgets_defnoreturn'] = {
   /**
-   * Block for defining a event with no return value.
+   * Block for defining a widget with no return value.
    * @this Blockly.Block
    */
   init: function() {
@@ -40,19 +40,19 @@ Blockly.Blocks['events_defnoreturn'] = {
         Blockly.Procedures.rename);
     nameField.setSpellcheck(false);
     this.appendDummyInput()
-        .appendField(Blockly.Msg['EVENTS_DEFNORETURN_TITLE'])
+        .appendField(Blockly.Msg['WIDGETS_DEFNORETURN_TITLE'])
         .appendField(nameField, 'NAME')
         .appendField('', 'PARAMS');
-    this.setMutator(new Blockly.Mutator(['events_mutatorarg']));
+    this.setMutator(new Blockly.Mutator(['widgets_mutatorarg']));
     if ((this.workspace.options.comments ||
          (this.workspace.options.parentWorkspace &&
           this.workspace.options.parentWorkspace.options.comments)) &&
-        Blockly.Msg['EVENTS_DEFNORETURN_COMMENT']) {
-      this.setCommentText(Blockly.Msg['EVENTS_DEFNORETURN_COMMENT']);
+        Blockly.Msg['WIDGETS_DEFNORETURN_COMMENT']) {
+      this.setCommentText(Blockly.Msg['WIDGETS_DEFNORETURN_COMMENT']);
     }
-    this.setStyle('event_blocks');
-    this.setTooltip(Blockly.Msg['EVENTS_DEFNORETURN_TOOLTIP']);
-    this.setHelpUrl(Blockly.Msg['EVENTS_DEFNORETURN_HELPURL']);
+    this.setStyle('widget_blocks');
+    this.setTooltip(Blockly.Msg['WIDGETS_DEFNORETURN_TOOLTIP']);
+    this.setHelpUrl(Blockly.Msg['WIDGETS_DEFNORETURN_HELPURL']);
     this.arguments_ = [];
     this.argumentVarModels_ = [];
     this.setStatements_(true);
@@ -69,7 +69,7 @@ Blockly.Blocks['events_defnoreturn'] = {
     }
     if (hasStatements) {
       this.appendStatementInput('STACK')
-          .appendField(Blockly.Msg['EVENTS_DEFNORETURN_DO']);
+          .appendField(Blockly.Msg['WIDGETS_DEFNORETURN_DO']);
       if (this.getInput('RETURN')) {
         this.moveInputBefore('STACK', 'RETURN');
       }
@@ -79,7 +79,7 @@ Blockly.Blocks['events_defnoreturn'] = {
     this.hasStatements_ = hasStatements;
   },
   /**
-   * Update the display of parameters for this event definition block.
+   * Update the display of parameters for this widget definition block.
    * @private
    * @this Blockly.Block
    */
@@ -88,16 +88,16 @@ Blockly.Blocks['events_defnoreturn'] = {
     // Merge the arguments into a human-readable list.
     var paramString = '';
     if (this.arguments_.length) {
-      paramString = Blockly.Msg['EVENTS_BEFORE_PARAMS'] +
+      paramString = Blockly.Msg['WIDGETS_BEFORE_PARAMS'] +
           ' ' + this.arguments_.join(', ');
     }
     // The params field is deterministic based on the mutation,
-    // no need to fire a change event.
-    Blockly.Events.disable();
+    // no need to fire a change widget.
+    Blockly.Widgets.disable();
     try {
       this.setFieldValue(paramString, 'PARAMS');
     } finally {
-      Blockly.Events.enable();
+      Blockly.Widgets.enable();
     }
   },
   /**
@@ -164,7 +164,7 @@ Blockly.Blocks['events_defnoreturn'] = {
    * @this Blockly.Block
    */
   decompose: function(workspace) {
-    var containerBlock = workspace.newBlock('events_mutatorcontainer');
+    var containerBlock = workspace.newBlock('widgets_mutatorcontainer');
     containerBlock.initSvg();
 
     // Check/uncheck the allow statement box.
@@ -178,7 +178,7 @@ Blockly.Blocks['events_defnoreturn'] = {
     // Parameter list.
     var connection = containerBlock.getInput('STACK').connection;
     for (var i = 0; i < this.arguments_.length; i++) {
-      var paramBlock = workspace.newBlock('events_mutatorarg');
+      var paramBlock = workspace.newBlock('widgets_mutatorarg');
       paramBlock.initSvg();
       paramBlock.setFieldValue(this.arguments_[i], 'NAME');
       // Store the old location.
@@ -186,7 +186,7 @@ Blockly.Blocks['events_defnoreturn'] = {
       connection.connect(paramBlock.previousConnection);
       connection = paramBlock.nextConnection;
     }
-    // Initialize event's callers with blank IDs.
+    // Initialize widget's callers with blank IDs.
     Blockly.Procedures.mutateCallers(this);
     return containerBlock;
   },
@@ -243,9 +243,9 @@ Blockly.Blocks['events_defnoreturn'] = {
     }
   },
   /**
-   * Return the signature of this event definition.
+   * Return the signature of this widget definition.
    * @return {!Array} Tuple containing three elements:
-   *     - the name of the defined event,
+   *     - the name of the defined widget,
    *     - a list of all its arguments,
    *     - that it DOES NOT have a return value.
    * @this Blockly.Block
@@ -336,7 +336,7 @@ Blockly.Blocks['events_defnoreturn'] = {
     if (this.mutator.isVisible()) {
       var blocks = this.mutator.workspace_.getAllBlocks(false);
       for (var i = 0, block; block = blocks[i]; i++) {
-        if (block.type == 'events_mutatorarg' &&
+        if (block.type == 'widgets_mutatorarg' &&
             Blockly.Names.equals(oldName, block.getFieldValue('NAME'))) {
           block.setFieldValue(newName, 'NAME');
         }
@@ -355,7 +355,7 @@ Blockly.Blocks['events_defnoreturn'] = {
     // Add option to create caller.
     var option = {enabled: true};
     var name = this.getFieldValue('NAME');
-    option.text = Blockly.Msg['EVENTS_CREATE_DO'].replace('%1', name);
+    option.text = Blockly.Msg['WIDGETS_CREATE_DO'].replace('%1', name);
     var xmlMutation = document.createElement('mutation');
     xmlMutation.setAttribute('name', name);
     for (var i = 0; i < this.arguments_.length; i++) {
@@ -386,12 +386,12 @@ Blockly.Blocks['events_defnoreturn'] = {
       }
     }
   },
-  callType_: 'events_callnoreturn'
+  callType_: 'widgets_callnoreturn'
 };
 
-Blockly.Blocks['events_defreturn'] = {
+Blockly.Blocks['widgets_defreturn'] = {
   /**
-   * Block for defining a event with a return value.
+   * Block for defining a widget with a return value.
    * @this Blockly.Block
    */
   init: function() {
@@ -399,37 +399,37 @@ Blockly.Blocks['events_defreturn'] = {
         Blockly.Procedures.rename);
     nameField.setSpellcheck(false);
     this.appendDummyInput()
-        .appendField(Blockly.Msg['EVENTS_DEFRETURN_TITLE'])
+        .appendField(Blockly.Msg['WIDGETS_DEFRETURN_TITLE'])
         .appendField(nameField, 'NAME')
         .appendField('', 'PARAMS');
     this.appendValueInput('RETURN')
         .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField(Blockly.Msg['EVENTS_DEFRETURN_RETURN']);
-    this.setMutator(new Blockly.Mutator(['events_mutatorarg']));
+        .appendField(Blockly.Msg['WIDGETS_DEFRETURN_RETURN']);
+    this.setMutator(new Blockly.Mutator(['widgets_mutatorarg']));
     if ((this.workspace.options.comments ||
          (this.workspace.options.parentWorkspace &&
           this.workspace.options.parentWorkspace.options.comments)) &&
-        Blockly.Msg['EVENTS_DEFRETURN_COMMENT']) {
-      this.setCommentText(Blockly.Msg['EVENTS_DEFRETURN_COMMENT']);
+        Blockly.Msg['WIDGETS_DEFRETURN_COMMENT']) {
+      this.setCommentText(Blockly.Msg['WIDGETS_DEFRETURN_COMMENT']);
     }
-    this.setStyle('event_blocks');
-    this.setTooltip(Blockly.Msg['EVENTS_DEFRETURN_TOOLTIP']);
-    this.setHelpUrl(Blockly.Msg['EVENTS_DEFRETURN_HELPURL']);
+    this.setStyle('widget_blocks');
+    this.setTooltip(Blockly.Msg['WIDGETS_DEFRETURN_TOOLTIP']);
+    this.setHelpUrl(Blockly.Msg['WIDGETS_DEFRETURN_HELPURL']);
     this.arguments_ = [];
     this.argumentVarModels_ = [];
     this.setStatements_(true);
     this.statementConnection_ = null;
   },
-  setStatements_: Blockly.Blocks['events_defnoreturn'].setStatements_,
-  updateParams_: Blockly.Blocks['events_defnoreturn'].updateParams_,
-  mutationToDom: Blockly.Blocks['events_defnoreturn'].mutationToDom,
-  domToMutation: Blockly.Blocks['events_defnoreturn'].domToMutation,
-  decompose: Blockly.Blocks['events_defnoreturn'].decompose,
-  compose: Blockly.Blocks['events_defnoreturn'].compose,
+  setStatements_: Blockly.Blocks['widgets_defnoreturn'].setStatements_,
+  updateParams_: Blockly.Blocks['widgets_defnoreturn'].updateParams_,
+  mutationToDom: Blockly.Blocks['widgets_defnoreturn'].mutationToDom,
+  domToMutation: Blockly.Blocks['widgets_defnoreturn'].domToMutation,
+  decompose: Blockly.Blocks['widgets_defnoreturn'].decompose,
+  compose: Blockly.Blocks['widgets_defnoreturn'].compose,
   /**
-   * Return the signature of this event definition.
+   * Return the signature of this widget definition.
    * @return {!Array} Tuple containing three elements:
-   *     - the name of the defined event,
+   *     - the name of the defined widget,
    *     - a list of all its arguments,
    *     - that it DOES have a return value.
    * @this Blockly.Block
@@ -437,45 +437,45 @@ Blockly.Blocks['events_defreturn'] = {
   getProcedureDef: function() {
     return [this.getFieldValue('NAME'), this.arguments_, true];
   },
-  getVars: Blockly.Blocks['events_defnoreturn'].getVars,
-  getVarModels: Blockly.Blocks['events_defnoreturn'].getVarModels,
-  renameVarById: Blockly.Blocks['events_defnoreturn'].renameVarById,
-  updateVarName: Blockly.Blocks['events_defnoreturn'].updateVarName,
-  displayRenamedVar_: Blockly.Blocks['events_defnoreturn'].displayRenamedVar_,
-  customContextMenu: Blockly.Blocks['events_defnoreturn'].customContextMenu,
-  callType_: 'events_callreturn'
+  getVars: Blockly.Blocks['widgets_defnoreturn'].getVars,
+  getVarModels: Blockly.Blocks['widgets_defnoreturn'].getVarModels,
+  renameVarById: Blockly.Blocks['widgets_defnoreturn'].renameVarById,
+  updateVarName: Blockly.Blocks['widgets_defnoreturn'].updateVarName,
+  displayRenamedVar_: Blockly.Blocks['widgets_defnoreturn'].displayRenamedVar_,
+  customContextMenu: Blockly.Blocks['widgets_defnoreturn'].customContextMenu,
+  callType_: 'widgets_callreturn'
 };
 
-Blockly.Blocks['events_mutatorcontainer'] = {
+Blockly.Blocks['widgets_mutatorcontainer'] = {
   /**
-   * Mutator block for event container.
+   * Mutator block for widget container.
    * @this Blockly.Block
    */
   init: function() {
     this.appendDummyInput()
-        .appendField(Blockly.Msg['EVENTS_MUTATORCONTAINER_TITLE']);
+        .appendField(Blockly.Msg['WIDGETS_MUTATORCONTAINER_TITLE']);
     this.appendStatementInput('STACK');
     this.appendDummyInput('STATEMENT_INPUT')
-        .appendField(Blockly.Msg['EVENTS_ALLOW_STATEMENTS'])
+        .appendField(Blockly.Msg['WIDGETS_ALLOW_STATEMENTS'])
         .appendField(new Blockly.FieldCheckbox('TRUE'), 'STATEMENTS');
-    this.setStyle('event_blocks');
-    this.setTooltip(Blockly.Msg['EVENTS_MUTATORCONTAINER_TOOLTIP']);
+    this.setStyle('widget_blocks');
+    this.setTooltip(Blockly.Msg['WIDGETS_MUTATORCONTAINER_TOOLTIP']);
     this.contextMenu = false;
   },
   /**
    * This will create & delete variables and in dialogs workspace to ensure
    * that when a new block is dragged out it will have a unique parameter name.
-   * @param {!Blockly.Events.Abstract} event Change event.
+   * @param {!Blockly.Widgets.Abstract} widget Change widget.
    * @this Blockly.Block
    */
-  onchange: function(event) {
+  onchange: function(widget) {
     if (!this.workspace || this.workspace.isFlyout ||
-        (event.type != Blockly.Events.BLOCK_DELETE && event.type != Blockly.Events.BLOCK_CREATE)) {
+        (widget.type != Blockly.Widgets.BLOCK_DELETE && widget.type != Blockly.Widgets.BLOCK_CREATE)) {
       return;
     }
     var blocks = this.workspace.getAllBlocks();
     var allVariables = this.workspace.getAllVariables();
-    if (event.type == Blockly.Events.BLOCK_DELETE) {
+    if (widget.type == Blockly.Widgets.BLOCK_DELETE) {
       var variableNamesToKeep = [];
       for (var i = 0; i < blocks.length; i += 1) {
         if (blocks[i].getFieldValue('NAME')) {
@@ -490,11 +490,11 @@ Blockly.Blocks['events_mutatorcontainer'] = {
       return;
     }
       
-    if (event.type != Blockly.Events.BLOCK_CREATE) {
+    if (widget.type != Blockly.Widgets.BLOCK_CREATE) {
       return;
     }
 
-    var block = this.workspace.getBlockById(event.blockId);
+    var block = this.workspace.getBlockById(widget.blockId);
     // This is to handle the one none variable block
     // Happens when all the blocks are regenerated
     if (!block.getField('NAME')) {
@@ -527,9 +527,9 @@ Blockly.Blocks['events_mutatorcontainer'] = {
 };
 
 
-Blockly.Blocks['events_mutatorarg'] = {
+Blockly.Blocks['widgets_mutatorarg'] = {
   /**
-   * Mutator block for event argument.
+   * Mutator block for widget argument.
    * @this Blockly.Block
    */
   init: function() {
@@ -544,12 +544,12 @@ Blockly.Blocks['events_mutatorarg'] = {
     field.showEditor_ = newShowEditorFn;
 
     this.appendDummyInput()
-        .appendField(Blockly.Msg['EVENTS_MUTATORARG_TITLE'])
+        .appendField(Blockly.Msg['WIDGETS_MUTATORARG_TITLE'])
         .appendField(field, 'NAME');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setStyle('event_blocks');
-    this.setTooltip(Blockly.Msg['EVENTS_MUTATORARG_TOOLTIP']);
+    this.setStyle('widget_blocks');
+    this.setTooltip(Blockly.Msg['WIDGETS_MUTATORARG_TOOLTIP']);
     this.contextMenu = false;
 
     // Create the default variable when we drag the block in from the flyout.
@@ -562,7 +562,7 @@ Blockly.Blocks['events_mutatorarg'] = {
   },
 
   /**
-   * Obtain a valid name for the event argument. Create a variable if
+   * Obtain a valid name for the widget argument. Create a variable if
    * necessary.
    * Merge runs of whitespace.  Strip leading and trailing whitespace.
    * Beyond this, all names are legal.
@@ -577,7 +577,7 @@ Blockly.Blocks['events_mutatorarg'] = {
     if (!varName) {
       return null;
     }
-    // Prevents duplicate parameter names in functions
+    // Prwidgets duplicate parameter names in functions
     var blocks = this.sourceBlock_.workspace.getAllBlocks();
     for (var i = 0; i < blocks.length; i += 1) {
       if (blocks[i].id == this.sourceBlock_.id) {
@@ -622,9 +622,9 @@ Blockly.Blocks['events_mutatorarg'] = {
   }
 };
 
-Blockly.Blocks['events_callnoreturn'] = {
+Blockly.Blocks['widgets_callnoreturn'] = {
   /**
-   * Block for calling a event with no return value.
+   * Block for calling a widget with no return value.
    * @this Blockly.Block
    */
   init: function() {
@@ -632,9 +632,9 @@ Blockly.Blocks['events_callnoreturn'] = {
         .appendField(this.id, 'NAME');
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setStyle('event_blocks');
+    this.setStyle('widget_blocks');
     // Tooltip is set in renameProcedure.
-    this.setHelpUrl(Blockly.Msg['EVENTS_CALLNORETURN_HELPURL']);
+    this.setHelpUrl(Blockly.Msg['WIDGETS_CALLNORETURN_HELPURL']);
     this.arguments_ = [];
     this.argumentVarModels_ = [];
     this.quarkConnections_ = {};
@@ -643,7 +643,7 @@ Blockly.Blocks['events_callnoreturn'] = {
   },
 
   /**
-   * Returns the name of the event this block calls.
+   * Returns the name of the widget this block calls.
    * @return {string} Procedure name.
    * @this Blockly.Block
    */
@@ -652,23 +652,23 @@ Blockly.Blocks['events_callnoreturn'] = {
     return /** @type {string} */ (this.getFieldValue('NAME'));
   },
   /**
-   * Notification that a event is renaming.
-   * If the name matches this block's event, rename it.
-   * @param {string} oldName Previous name of event.
-   * @param {string} newName Renamed event.
+   * Notification that a widget is renaming.
+   * If the name matches this block's widget, rename it.
+   * @param {string} oldName Previous name of widget.
+   * @param {string} newName Renamed widget.
    * @this Blockly.Block
    */
   renameProcedure: function(oldName, newName) {
     if (Blockly.Names.equals(oldName, this.getProcedureCall())) {
       this.setFieldValue(newName, 'NAME');
       var baseMsg = this.outputConnection ?
-          Blockly.Msg['EVENTS_CALLRETURN_TOOLTIP'] :
-          Blockly.Msg['EVENTS_CALLNORETURN_TOOLTIP'];
+          Blockly.Msg['WIDGETS_CALLRETURN_TOOLTIP'] :
+          Blockly.Msg['WIDGETS_CALLNORETURN_TOOLTIP'];
       this.setTooltip(baseMsg.replace('%1', newName));
     }
   },
   /**
-   * Notification that the event's parameters have changed.
+   * Notification that the widget's parameters have changed.
    * @param {!Array.<string>} paramNames New param names, e.g. ['x', 'y', 'z'].
    * @param {!Array.<string>} paramIds IDs of params (consistent for each
    *     parameter through the life of a mutator, regardless of param renaming),
@@ -773,12 +773,12 @@ Blockly.Blocks['events_callnoreturn'] = {
       if (field) {
         // Ensure argument name is up to date.
         // The argument name field is deterministic based on the mutation,
-        // no need to fire a change event.
-        Blockly.Events.disable();
+        // no need to fire a change widget.
+        Blockly.Widgets.disable();
         try {
           field.setValue(this.arguments_[i]);
         } finally {
-          Blockly.Events.enable();
+          Blockly.Widgets.enable();
         }
       } else {
         // Add new input.
@@ -799,7 +799,7 @@ Blockly.Blocks['events_callnoreturn'] = {
     if (topRow) {
       if (this.arguments_.length) {
         if (!this.getField('WITH')) {
-          topRow.appendField(Blockly.Msg['EVENTS_CALL_BEFORE_PARAMS'], 'WITH');
+          topRow.appendField(Blockly.Msg['WIDGETS_CALL_BEFORE_PARAMS'], 'WITH');
           topRow.init();
         }
       } else {
@@ -851,23 +851,23 @@ Blockly.Blocks['events_callnoreturn'] = {
     return this.argumentVarModels_;
   },
   /**
-   * Procedure calls cannot exist without the corresponding event
-   * definition.  Enforce this link whenever an event is fired.
-   * @param {!Blockly.Events.Abstract} event Change event.
+   * Procedure calls cannot exist without the corresponding widget
+   * definition.  Enforce this link whenever an widget is fired.
+   * @param {!Blockly.Widgets.Abstract} widget Change widget.
    * @this Blockly.Block
    */
-  onchange: function(event) {
+  onchange: function(widget) {
     if (!this.workspace || this.workspace.isFlyout) {
       // Block is deleted or is in a flyout.
       return;
     }
-    if (!event.recordUndo) {
-      // Events not generated by user. Skip handling.
+    if (!widget.recordUndo) {
+      // Widgets not generated by user. Skip handling.
       return;
     }
-    if (event.type == Blockly.Events.BLOCK_CREATE &&
-        event.ids.indexOf(this.id) != -1) {
-      // Look for the case where a event call was created (usually through
+    if (widget.type == Blockly.Widgets.BLOCK_CREATE &&
+        widget.ids.indexOf(this.id) != -1) {
+      // Look for the case where a widget call was created (usually through
       // paste) and there is no matching definition.  In this case, create
       // an empty definition block with the correct signature.
       var name = this.getProcedureCall();
@@ -878,11 +878,11 @@ Blockly.Blocks['events_callnoreturn'] = {
         def = null;
       }
       if (!def) {
-        Blockly.Events.setGroup(event.group);
+        Blockly.Widgets.setGroup(widget.group);
         /**
          * Create matching definition block.
          * <xml>
-         *   <block type="events_defreturn" x="10" y="20">
+         *   <block type="widgets_defreturn" x="10" y="20">
          *     <mutation name="test">
          *       <arg name="x"></arg>
          *     </mutation>
@@ -906,39 +906,39 @@ Blockly.Blocks['events_callnoreturn'] = {
         block.appendChild(field);
         xml.appendChild(block);
         Blockly.Xml.domToWorkspace(xml, this.workspace);
-        Blockly.Events.setGroup(false);
+        Blockly.Widgets.setGroup(false);
       }
-    } else if (event.type == Blockly.Events.BLOCK_DELETE) {
-      // Look for the case where a event definition has been deleted,
-      // leaving this block (a event call) orphaned.  In this case, delete
+    } else if (widget.type == Blockly.Widgets.BLOCK_DELETE) {
+      // Look for the case where a widget definition has been deleted,
+      // leaving this block (a widget call) orphaned.  In this case, delete
       // the orphan.
       var name = this.getProcedureCall();
       var def = Blockly.Procedures.getDefinition(name, this.workspace);
       if (!def) {
-        Blockly.Events.setGroup(event.group);
+        Blockly.Widgets.setGroup(widget.group);
         this.dispose(true, false);
-        Blockly.Events.setGroup(false);
+        Blockly.Widgets.setGroup(false);
       }
-    } else if (event.type == Blockly.Events.CHANGE && event.element == 'disabled') {
+    } else if (widget.type == Blockly.Widgets.CHANGE && widget.element == 'disabled') {
       var name = this.getProcedureCall();
       var def = Blockly.Procedures.getDefinition(name, this.workspace);
-      if (def && def.id == event.blockId) {
+      if (def && def.id == widget.blockId) {
         // in most cases the old group should be ''
-        var oldGroup = Blockly.Events.getGroup();
+        var oldGroup = Blockly.Widgets.getGroup();
         if (oldGroup) {
           // This should only be possible programatically and may indicate a problem
-          // with event grouping. If you see this message please investigate. If the
-          // use ends up being valid we may need to reorder events in the undo stack.
+          // with widget grouping. If you see this message please investigate. If the
+          // use ends up being valid we may need to reorder widgets in the undo stack.
           console.log('Saw an existing group while responding to a definition change');
         }
-        Blockly.Events.setGroup(event.group);
-        if (event.newValue) {
+        Blockly.Widgets.setGroup(widget.group);
+        if (widget.newValue) {
           this.previousDisabledState_ = this.disabled;
           this.setDisabled(true);
         } else {
           this.setDisabled(this.previousDisabledState_);
         }
-        Blockly.Events.setGroup(oldGroup);
+        Blockly.Widgets.setGroup(oldGroup);
       }
     }
   },
@@ -955,7 +955,7 @@ Blockly.Blocks['events_callnoreturn'] = {
     }
 
     var option = {enabled: true};
-    option.text = Blockly.Msg['EVENTS_HIGHLIGHT_DEF'];
+    option.text = Blockly.Msg['WIDGETS_HIGHLIGHT_DEF'];
     var name = this.getProcedureCall();
     var workspace = this.workspace;
     option.callback = function() {
@@ -967,44 +967,44 @@ Blockly.Blocks['events_callnoreturn'] = {
     };
     options.push(option);
   },
-  defType_: 'events_defnoreturn'
+  defType_: 'widgets_defnoreturn'
 };
 
-Blockly.Blocks['events_callreturn'] = {
+Blockly.Blocks['widgets_callreturn'] = {
   /**
-   * Block for calling a event with a return value.
+   * Block for calling a widget with a return value.
    * @this Blockly.Block
    */
   init: function() {
     this.appendDummyInput('TOPROW')
         .appendField('', 'NAME');
     this.setOutput(true);
-    this.setStyle('event_blocks');
+    this.setStyle('widget_blocks');
     // Tooltip is set in domToMutation.
-    this.setHelpUrl(Blockly.Msg['EVENTS_CALLRETURN_HELPURL']);
+    this.setHelpUrl(Blockly.Msg['WIDGETS_CALLRETURN_HELPURL']);
     this.arguments_ = [];
     this.quarkConnections_ = {};
     this.quarkIds_ = null;
     this.previousDisabledState_ = false;
   },
 
-  getProcedureCall: Blockly.Blocks['events_callnoreturn'].getProcedureCall,
-  renameProcedure: Blockly.Blocks['events_callnoreturn'].renameProcedure,
+  getProcedureCall: Blockly.Blocks['widgets_callnoreturn'].getProcedureCall,
+  renameProcedure: Blockly.Blocks['widgets_callnoreturn'].renameProcedure,
   setProcedureParameters_:
-      Blockly.Blocks['events_callnoreturn'].setProcedureParameters_,
-  updateShape_: Blockly.Blocks['events_callnoreturn'].updateShape_,
-  mutationToDom: Blockly.Blocks['events_callnoreturn'].mutationToDom,
-  domToMutation: Blockly.Blocks['events_callnoreturn'].domToMutation,
-  getVarModels: Blockly.Blocks['events_callnoreturn'].getVarModels,
-  onchange: Blockly.Blocks['events_callnoreturn'].onchange,
+      Blockly.Blocks['widgets_callnoreturn'].setProcedureParameters_,
+  updateShape_: Blockly.Blocks['widgets_callnoreturn'].updateShape_,
+  mutationToDom: Blockly.Blocks['widgets_callnoreturn'].mutationToDom,
+  domToMutation: Blockly.Blocks['widgets_callnoreturn'].domToMutation,
+  getVarModels: Blockly.Blocks['widgets_callnoreturn'].getVarModels,
+  onchange: Blockly.Blocks['widgets_callnoreturn'].onchange,
   customContextMenu:
-      Blockly.Blocks['events_callnoreturn'].customContextMenu,
-  defType_: 'events_defreturn'
+      Blockly.Blocks['widgets_callnoreturn'].customContextMenu,
+  defType_: 'widgets_defreturn'
 };
 
-Blockly.Blocks['events_ifreturn'] = {
+Blockly.Blocks['widgets_ifreturn'] = {
   /**
-   * Block for conditionally returning a value from a event.
+   * Block for conditionally returning a value from a widget.
    * @this Blockly.Block
    */
   init: function() {
@@ -1012,13 +1012,13 @@ Blockly.Blocks['events_ifreturn'] = {
         .setCheck('Boolean')
         .appendField(Blockly.Msg['CONTROLS_IF_MSG_IF']);
     this.appendValueInput('VALUE')
-        .appendField(Blockly.Msg['EVENTS_DEFRETURN_RETURN']);
+        .appendField(Blockly.Msg['WIDGETS_DEFRETURN_RETURN']);
     this.setInputsInline(true);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setStyle('event_blocks');
-    this.setTooltip(Blockly.Msg['EVENTS_IFRETURN_TOOLTIP']);
-    this.setHelpUrl(Blockly.Msg['EVENTS_IFRETURN_HELPURL']);
+    this.setStyle('widget_blocks');
+    this.setTooltip(Blockly.Msg['WIDGETS_IFRETURN_TOOLTIP']);
+    this.setHelpUrl(Blockly.Msg['WIDGETS_IFRETURN_HELPURL']);
     this.hasReturnValue_ = true;
   },
   /**
@@ -1042,13 +1042,13 @@ Blockly.Blocks['events_ifreturn'] = {
     if (!this.hasReturnValue_) {
       this.removeInput('VALUE');
       this.appendDummyInput('VALUE')
-          .appendField(Blockly.Msg['EVENTS_DEFRETURN_RETURN']);
+          .appendField(Blockly.Msg['WIDGETS_DEFRETURN_RETURN']);
     }
   },
   /**
    * Called whenever anything on the workspace changes.
    * Add warning if this flow block is not nested inside a loop.
-   * @param {!Blockly.Events.Abstract} e Change event.
+   * @param {!Blockly.Widgets.Abstract} e Change widget.
    * @this Blockly.Block
    */
   onchange: function(/* e */) {
@@ -1056,7 +1056,7 @@ Blockly.Blocks['events_ifreturn'] = {
       return;  // Don't change state at the start of a drag.
     }
     var legal = false;
-    // Is the block nested in a event?
+    // Is the block nested in a widget?
     var block = this;
     do {
       if (this.FUNCTION_TYPES.indexOf(block.type) != -1) {
@@ -1067,16 +1067,16 @@ Blockly.Blocks['events_ifreturn'] = {
     } while (block);
     if (legal) {
       // If needed, toggle whether this block has a return value.
-      if (block.type == 'events_defnoreturn' && this.hasReturnValue_) {
+      if (block.type == 'widgets_defnoreturn' && this.hasReturnValue_) {
         this.removeInput('VALUE');
         this.appendDummyInput('VALUE')
-            .appendField(Blockly.Msg['EVENTS_DEFRETURN_RETURN']);
+            .appendField(Blockly.Msg['WIDGETS_DEFRETURN_RETURN']);
         this.hasReturnValue_ = false;
-      } else if (block.type == 'events_defreturn' &&
+      } else if (block.type == 'widgets_defreturn' &&
                  !this.hasReturnValue_) {
         this.removeInput('VALUE');
         this.appendValueInput('VALUE')
-            .appendField(Blockly.Msg['EVENTS_DEFRETURN_RETURN']);
+            .appendField(Blockly.Msg['WIDGETS_DEFRETURN_RETURN']);
         this.hasReturnValue_ = true;
       }
       this.setWarningText(null);
@@ -1084,7 +1084,7 @@ Blockly.Blocks['events_ifreturn'] = {
         this.setDisabled(false);
       }
     } else {
-      this.setWarningText(Blockly.Msg['EVENTS_IFRETURN_WARNING']);
+      this.setWarningText(Blockly.Msg['WIDGETS_IFRETURN_WARNING']);
       if (!this.isInFlyout && !this.getInheritedDisabled()) {
         this.setDisabled(true);
       }
@@ -1093,7 +1093,7 @@ Blockly.Blocks['events_ifreturn'] = {
   /**
    * List of block types that are functions and thus do not need warnings.
    * To add a new function type add this to your code:
-   * Blockly.Blocks['events_ifreturn'].FUNCTION_TYPES.push('custom_func');
+   * Blockly.Blocks['widgets_ifreturn'].FUNCTION_TYPES.push('custom_func');
    */
-  FUNCTION_TYPES: ['events_defnoreturn', 'events_defreturn']
+  FUNCTION_TYPES: ['widgets_defnoreturn', 'widgets_defreturn']
 };
