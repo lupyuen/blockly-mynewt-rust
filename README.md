@@ -6,7 +6,13 @@ Try it here: https://lupyuen.github.io/blockly-mynewt-rust/demos/code/
 
 Watch the demo: https://youtu.be/5hWq5TDEpIg
 
-Read the article: [_Visual Programming with Embedded Rust? Yes we can with Apache Mynewt and Google Blockly!_](https://medium.com/@ly.lee/visual-programming-with-embedded-rust-yes-we-can-with-apache-mynewt-and-google-blockly-8b67ef7412d7)
+Read the articles: 
+
+1.  [_Visual Embedded Rust Programming with Visual Studio Code_](https://medium.com/@ly.lee/visual-embedded-rust-programming-with-visual-studio-code-1bc1262e398c?sk=222de63e45993aacd0db5a2e4b1f33c7)
+
+2.  [_Advanced Topics for Visual Embedded Rust Programming_](https://medium.com/@ly.lee/advanced-topics-for-visual-embedded-rust-programming-ebf1627fe397?sk=01f0ae0e1b82efa9fd6b8e5616c736af)
+
+3.  [_Visual Programming with Embedded Rust? Yes we can with Apache Mynewt and Google Blockly!_](https://medium.com/@ly.lee/visual-programming-with-embedded-rust-yes-we-can-with-apache-mynewt-and-google-blockly-8b67ef7412d7)
 
 ## Rust Code Generator
 
