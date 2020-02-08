@@ -43,7 +43,9 @@ Blockly.Blocks['widgets_defnoreturn'] = {
     nameField.setSpellcheck(false);
     this.appendDummyInput()
         .appendField(Blockly.Msg['WIDGETS_DEFNORETURN_TITLE'])
+        .appendField('on button') //// TODO
         .appendField(nameField, 'NAME')
+        .appendField('press') //// TODO
         .appendField('', 'PARAMS');
     this.setMutator(new Blockly.Mutator(['widgets_mutatorarg']));
     if ((this.workspace.options.comments ||
@@ -405,7 +407,9 @@ Blockly.Blocks['widgets_defreturn'] = {
     nameField.setSpellcheck(false);
     this.appendDummyInput()
         .appendField(Blockly.Msg['WIDGETS_DEFRETURN_TITLE'])
+        .appendField('on label') //// TODO
         .appendField(nameField, 'NAME')
+        .appendField('show') //// TODO
         .appendField('', 'PARAMS');
     this.appendValueInput('RETURN')
         .setAlign(Blockly.ALIGN_RIGHT)
