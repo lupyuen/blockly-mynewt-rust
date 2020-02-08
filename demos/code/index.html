@@ -22,7 +22,8 @@
   <!--  Load Mynewt Functions  -->
   <script src="../../generators/rust/mynewt_functions.js"></script>
   <script src="../../generators/rust/mynewt_coap.js"></script>
-  <script src="../../generators/rust/mynewt_app.js"></script>
+  <script src="../../generators/rust/app_blocks.js"></script>
+  <script src="../../generators/rust/app_code.js"></script>
   <script src="../../generators/rust/widgets_code.js"></script>
   <script src="../../generators/rust/widgets_blocks.js"></script>
   <script src="../../generators/rust/widgets_category.js"></script>
@@ -106,14 +107,12 @@
     <category name="UI" colour="160">
       <block type="app"></block>
       <block type="label"></block>
-      <block type="on_label_show"></block>
       <block type="button"></block>
-      <block type="on_button_press"></block>
     </category>
     <!--  End  -->
 
-    <!--  Begin: Widgets Category -->
-    <category name="Widgets" colour="%{BKY_PROCEDURES_HUE}" custom="WIDGET"></category>
+    <!--  Begin: Events Category -->
+    <category name="Events" colour="%{BKY_PROCEDURES_HUE}" custom="WIDGET"></category>
     <!--  End  -->
   
     <!--  Begin: Pins Category -->
