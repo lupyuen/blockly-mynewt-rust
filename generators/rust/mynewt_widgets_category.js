@@ -280,7 +280,7 @@ Blockly.Widgets.getCallers = function(name, workspace) {
  * @param {!Blockly.Block} defBlock Widget definition block.
  */
 Blockly.Widgets.mutateCallers = function(defBlock) {
-  var oldRecordUndo = Blockly.Widgets.recordUndo;
+  var oldRecordUndo = Blockly.Events.recordUndo;
   var name = defBlock.getWidgetDef()[0];
   var xmlElement = defBlock.mutationToDom(true);
   var callers = Blockly.Widgets.getCallers(name, defBlock.workspace);
@@ -294,10 +294,10 @@ Blockly.Widgets.mutateCallers = function(defBlock) {
       // Fire a mutation on every caller block.  But don't record this as an
       // undo action since it is deterministically tied to the widget's
       // definition mutation.
-      Blockly.Widgets.recordUndo = false;
-      Blockly.Widgets.fire(new Blockly.Events.BlockChange(
+      Blockly.Events.recordUndo = false;
+      Blockly.Events.fire(new Blockly.Events.BlockChange(
           caller, 'mutation', null, oldMutation, newMutation));
-      Blockly.Widgets.recordUndo = oldRecordUndo;
+      Blockly.Events.recordUndo = oldRecordUndo;
     }
   }
 };
