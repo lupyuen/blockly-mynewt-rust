@@ -37,7 +37,7 @@ Blockly.Blocks['widgets_defnoreturn'] = {
    */
   init: function() {
     Blockly.Msg['WIDGETS_DEFNORETURN_TOOLTIP'] = 'WIDGETS_DEFNORETURN_TOOLTIP'; ////
-    Blockly.Msg['WIDGETS_DEFNORETURN_HELPURL'] = 'WIDGETS_DEFNORETURN_HELPURL'; ////
+    Blockly.Msg['WIDGETS_DEFNORETURN_HELPURL'] = 'https://WIDGETS_DEFNORETURN_HELPURL.com'; ////
     var nameField = new Blockly.FieldTextInput('',
         Blockly.Procedures.rename);
     nameField.setSpellcheck(false);
@@ -399,7 +399,7 @@ Blockly.Blocks['widgets_defreturn'] = {
    */
   init: function() {
     Blockly.Msg['WIDGETS_DEFRETURN_TOOLTIP'] = 'WIDGETS_DEFRETURN_TOOLTIP'; ////
-    Blockly.Msg['WIDGETS_DEFRETURN_HELPURL'] = 'WIDGETS_DEFRETURN_HELPURL'; ////
+    Blockly.Msg['WIDGETS_DEFRETURN_HELPURL'] = 'https://WIDGETS_DEFRETURN_HELPURL'; ////
     var nameField = new Blockly.FieldTextInput('',
         Blockly.Procedures.rename);
     nameField.setSpellcheck(false);
@@ -638,7 +638,7 @@ Blockly.Blocks['widgets_callnoreturn'] = {
    * @this Blockly.Block
    */
   init: function() {
-    Blockly.Msg['WIDGETS_CALLNORETURN_HELPURL'] = 'WIDGETS_CALLNORETURN_HELPURL'; ////
+    Blockly.Msg['WIDGETS_CALLNORETURN_HELPURL'] = 'https://WIDGETS_CALLNORETURN_HELPURL'; ////
     this.appendDummyInput('TOPROW')
         .appendField(this.id, 'NAME');
     this.setPreviousStatement(true);
@@ -990,7 +990,7 @@ Blockly.Blocks['widgets_callreturn'] = {
    * @this Blockly.Block
    */
   init: function() {
-    Blockly.Msg['WIDGETS_CALLRETURN_HELPURL'] = 'WIDGETS_CALLRETURN_HELPURL'; ////
+    Blockly.Msg['WIDGETS_CALLRETURN_HELPURL'] = 'https://WIDGETS_CALLRETURN_HELPURL'; ////
     this.appendDummyInput('TOPROW')
         .appendField('', 'NAME');
     this.setOutput(true);
@@ -1025,7 +1025,7 @@ Blockly.Blocks['widgets_ifreturn'] = {
    */
   init: function() {
     Blockly.Msg['WIDGETS_IFRETURN_TOOLTIP'] = 'WIDGETS_IFRETURN_TOOLTIP'; ////
-    Blockly.Msg['WIDGETS_IFRETURN_HELPURL'] = 'WIDGETS_IFRETURN_HELPURL'; ////
+    Blockly.Msg['WIDGETS_IFRETURN_HELPURL'] = 'https://WIDGETS_IFRETURN_HELPURL'; ////
     this.appendValueInput('CONDITION')
         .setCheck('Boolean')
         .appendField(Blockly.Msg['CONTROLS_IF_MSG_IF']);
