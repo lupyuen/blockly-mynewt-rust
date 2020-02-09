@@ -124,16 +124,25 @@ Blockly.Rust.init = function(workspace) {
 
   // Declare all of the variables.
   if (defvars.length) {
+    console.debug(defvars); ////
     Blockly.Rust.definitions_['variables'] = [
       '/// Application State',
       '#[derive(Clone, Data, Default)]',
-      'struct State {',
-      '/// Counter value in our Application State',
-      'count: u32,',
+      Blockly.Rust.prefixLines([
+        'struct State {',
+        Blockly.Rust.prefixLines(
+          defvars.map(
+            function(varName) {
+              return varName + ': _;';
+            }
+          ).join(',\n'), 
+          Blockly.Rust.INDENT),
+        '}',
+      ].join('\n'), 
+      Blockly.Rust.INDENT),
       '}',
+      ''
     ].join('\n');
-    defvars.forEach(function(varName) {
-    });
     //  '//  Globals: ' + defvars.join(', ') + ';';
   }
 };
