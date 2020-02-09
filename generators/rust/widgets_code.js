@@ -50,9 +50,19 @@ Blockly.Rust['widgets_defreturn'] = function(block) {
       Blockly.Rust.ORDER_NONE) || '';
   var returnType = returnValue ? 'dynamic' : 'void';
 
-  //  Get the event name
+  //  Get the event name, event description and return type
   var eventName = returnValue ? 'show' : 'press';  //  TODO
-  if (eventName == 'show') { returnType = 'ArgValue'; }  //  TODO
+  var desc = '';
+  switch(eventName) {  //  TODO
+    case 'show':
+      returnType = 'ArgValue';
+      desc = '///  Callback function that will be called to create the formatted text for the label ' + widgetName;
+      break;
+    case 'press':
+      returnType = 'void';
+      desc = '///  Callback function that will be called when the button ' + widgetName + ' is pressed';
+      break;
+  }
   returnValue = Blockly.Rust.INDENT + 'Ok(' + (returnValue || '()') + ')\n';
 
   //  Get the function name
@@ -73,6 +83,7 @@ Blockly.Rust['widgets_defreturn'] = function(block) {
   } else {
     //  User-defined function: Define the function
     code = [
+      desc + '\n',
       //  Set the `infer_type` attribute so that the `infer_type` macro will infer the placeholder types.
       '#[infer_type]  //  Infer the missing types\n',
       'fn ', funcName,

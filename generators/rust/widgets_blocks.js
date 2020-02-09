@@ -58,7 +58,7 @@ Blockly.Blocks['widgets_defnoreturn'] = {
     this.setStyle('procedure_blocks'); //// TODO
     this.setTooltip(Blockly.Msg['WIDGETS_DEFNORETURN_TOOLTIP']);
     this.setHelpUrl(Blockly.Msg['WIDGETS_DEFNORETURN_HELPURL']);
-    this.arguments_ = [];
+    this.arguments_ = ['ctx', 'state', 'env']; //// TODO
     this.argumentVarModels_ = [];
     this.setStatements_(true);
     this.statementConnection_ = null;
@@ -425,7 +425,7 @@ Blockly.Blocks['widgets_defreturn'] = {
     this.setStyle('procedure_blocks'); //// TODO
     this.setTooltip(Blockly.Msg['WIDGETS_DEFRETURN_TOOLTIP']);
     this.setHelpUrl(Blockly.Msg['WIDGETS_DEFRETURN_HELPURL']);
-    this.arguments_ = [];
+    this.arguments_ = ['state', 'env']; //// TODO
     this.argumentVarModels_ = [];
     this.setStatements_(true);
     this.statementConnection_ = null;

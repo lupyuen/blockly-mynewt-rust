@@ -8,15 +8,18 @@ Blockly.Rust['on_start'] = function(block) {
   }
   //  TODO: Allow multiple `on_start` blocks.
   code = [
-    '/// Will be run upon startup to initialise the app',
-    'fn on_start() -> MynewtResult<()> {',
+    '/// Will be run upon startup to launch the app',
+    'pub fn on_start() -> MynewtResult<()> {',
     Blockly.Rust.prefixLines([
       'console::print("on_start\\n");',
-      code,
       '//  Build a new window',
       'let main_window = WindowDesc::new(ui_builder);',
       '//  Create application state',
       'let state = State::default();',
+    ].join('\n'), 
+    Blockly.Rust.INDENT),
+    code,
+    Blockly.Rust.prefixLines([
       '//  Launch the window with the application state',
       'AppLauncher::with_window(main_window)',
       Blockly.Rust.INDENT + '.use_simple_logger()',
@@ -75,7 +78,7 @@ Blockly.Rust['label'] = function(block) {
     '//  Create a line of text',
     'let ' + text_name + '_text = LocalizedString::new("hello-counter")',  //  TODO
     Blockly.Rust.INDENT + '.with_arg("count", on_' + text_name + '_show);  //  Call `on_' + text_name + '_show` to get label text',
-    '//  Create a label widget to display the text',
+    '//  Create a label widget ' + text_name,
     'let ' + text_name + ' = Label::new(' + text_name + '_text);',
   ].join('\n');
 
@@ -103,7 +106,7 @@ Blockly.Rust['button'] = function(block) {
 
   //  Create the Widget
   Blockly.Rust.widgets_[text_name] = [
-    '//  Create a button widget labelled "increment"',  //  TODO
+    '//  Create a button widget ' + text_name,  //  TODO
     'let ' + text_name + ' = Button::new("increment", on_' + text_name + '_press);  //  Call `on_' + text_name + '_press` when pressed',  //  TODO
   ].join('\n');
 
