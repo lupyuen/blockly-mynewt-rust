@@ -1,5 +1,37 @@
 /// Code Generator Functions for App Blocks
 
+Blockly.Rust['on_start'] = function(block) {
+  var statements_stmts = Blockly.Rust.statementToCode(block, 'STMTS');
+  var code = statements_stmts;
+  if (code) {
+    //  code = Blockly.Rust.prefixLines(code, Blockly.Rust.INDENT);
+  }
+  //  TODO: Allow multiple `on_start` blocks.
+  code = [
+    '/// Will be run upon startup to initialise the app',
+    'fn on_start() -> MynewtResult<()> {',
+    Blockly.Rust.prefixLines([
+      'console::print("on_start\\n");',
+      code,
+      '//  Build a new window',
+      'let main_window = WindowDesc::new(ui_builder);',
+      '//  Create application state',
+      'let state = State::default();',
+      '//  Launch the window with the application state',
+      'AppLauncher::with_window(main_window)',
+      Blockly.Rust.INDENT + '.use_simple_logger()',
+      Blockly.Rust.INDENT + '.launch(state)',
+      Blockly.Rust.INDENT + '.expect("launch failed");',
+      '//  Return success to `main()` function',
+      'Ok(())',
+    ].join('\n'), 
+    Blockly.Rust.INDENT),
+    '}',
+    ''
+  ].join('\n');
+  return code;
+};
+
 Blockly.Rust['app'] = function(block) {
   //  Generate App Widget with ui_builder() function
   Blockly.Rust.widgets_ = {};
