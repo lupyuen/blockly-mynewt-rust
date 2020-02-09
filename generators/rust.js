@@ -128,6 +128,7 @@ Blockly.Rust.init = function(workspace) {
     Blockly.Rust.definitions_['variables'] = [
       '/// Application State',
       '#[derive(Clone, Data, Default)]',
+      '#[infer_type]  //  Infer the missing types',
       'struct State {',
       Blockly.Rust.prefixLines(
         defvars.map(
