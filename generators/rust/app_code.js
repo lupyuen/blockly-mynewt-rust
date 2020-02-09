@@ -74,7 +74,7 @@ Blockly.Rust['label'] = function(block) {
   Blockly.Rust.widgets_[text_name] = [
     '//  Create a line of text',
     'let ' + text_name + '_text = LocalizedString::new("hello-counter")',  //  TODO
-    Blockly.Rust.INDENT + '.with_arg("count", on_' + text_name + '_show);  //  Call on_' + text_name + '_show to get label text',
+    Blockly.Rust.INDENT + '.with_arg("count", on_' + text_name + '_show);  //  Call `on_' + text_name + '_show` to get label text',
     '//  Create a label widget to display the text',
     'let ' + text_name + ' = Label::new(' + text_name + '_text);',
   ].join('\n');
@@ -104,7 +104,7 @@ Blockly.Rust['button'] = function(block) {
   //  Create the Widget
   Blockly.Rust.widgets_[text_name] = [
     '//  Create a button widget labelled "increment"',  //  TODO
-    'let ' + text_name + ' = Button::new("increment", on_' + text_name + '_press);  //  Call on_' + text_name + '_press when pressed',  //  TODO
+    'let ' + text_name + ' = Button::new("increment", on_' + text_name + '_press);  //  Call `on_' + text_name + '_press` when pressed',  //  TODO
   ].join('\n');
 
   //  Add the Widget

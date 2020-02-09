@@ -31,9 +31,7 @@ goog.require('Blockly.Rust');
 Blockly.Rust['widgets_defreturn'] = function(block) {
   // Define a Widget event with a return value.
   var widgetName = Blockly.Rust.variableDB_.getName(block.getFieldValue('NAME'),
-  Blockly.Procedures.NAME_TYPE);  //  e.g. my_label
-  var eventName = 'show';  //  TODO
-  var funcName = ['on', widgetName, eventName].join('_');  //  e.g. on_my_label_show
+    Blockly.Procedures.NAME_TYPE);  //  e.g. my_label
 
   var branch = Blockly.Rust.statementToCode(block, 'STACK');
   if (Blockly.Rust.STATEMENT_PREFIX) {
@@ -46,11 +44,21 @@ Blockly.Rust['widgets_defreturn'] = function(block) {
     branch = Blockly.Rust.INFINITE_LOOP_TRAP.replace(/%1/g,
         '\'' + block.id + '\'') + branch;
   }
+
+  //  Get the return value and return type
   var returnValue = Blockly.Rust.valueToCode(block, 'RETURN',
       Blockly.Rust.ORDER_NONE) || '';
   var returnType = returnValue ? 'dynamic' : 'void';
+
+  //  Get the event name
+  var eventName = returnValue ? 'show' : 'press';  //  TODO
+  if (eventName == 'show') { returnType = 'ArgValue'; }  //  TODO
   returnValue = Blockly.Rust.INDENT + 'Ok(' + (returnValue || '()') + ')\n';
+
+  //  Get the function name
+  var funcName = ['on', widgetName, eventName].join('_');  //  e.g. on_my_label_show
   funcName = funcName.split('__').join('::');  //  TODO: Convert sensor__func to sensor::func
+
   var args = [];
   for (var i = 0; i < block.arguments_.length; i++) {
     //  Assemble the args and give them placeholder types: `arg1: _`
@@ -81,7 +89,7 @@ Blockly.Rust['widgets_defreturn'] = function(block) {
       '}'
     ].join('');  
   }
-  // console.log(['code', funcName, code]); ////
+  console.log(['code', funcName, code]); ////
   code = Blockly.Rust.scrub_(block, code);
   // Add % so as not to collide with helper functions in definitions list.
   Blockly.Rust.definitions_['%' + funcName] = code;
