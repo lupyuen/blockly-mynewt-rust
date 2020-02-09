@@ -124,7 +124,6 @@ Blockly.Rust.init = function(workspace) {
 
   // Declare all of the variables.
   if (defvars.length) {
-    console.debug(defvars); ////
     Blockly.Rust.definitions_['variables'] = [
       '/// Application State',
       '#[derive(Clone, Data, Default)]',

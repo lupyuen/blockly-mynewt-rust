@@ -29,7 +29,6 @@ goog.provide('Blockly.Blocks.widgets');
 goog.require('Blockly.Blocks');
 goog.require('Blockly');
 
-
 Blockly.Blocks['widgets_defnoreturn'] = {
   /**
    * Block for defining a widget with no return value.
@@ -37,7 +36,7 @@ Blockly.Blocks['widgets_defnoreturn'] = {
    */
   init: function() {
     Blockly.Msg['WIDGETS_DEFNORETURN_TOOLTIP'] = 'WIDGETS_DEFNORETURN_TOOLTIP'; ////
-    Blockly.Msg['WIDGETS_DEFNORETURN_HELPURL'] = 'https://WIDGETS_DEFNORETURN_HELPURL.com'; ////
+    Blockly.Msg['WIDGETS_DEFNORETURN_HELPURL'] = 'WIDGETS_DEFNORETURN_HELPURL'; ////
     var nameField = new Blockly.FieldTextInput('',
         Blockly.Procedures.rename);
     nameField.setSpellcheck(false);
@@ -69,6 +68,7 @@ Blockly.Blocks['widgets_defnoreturn'] = {
    * @this Blockly.Block
    */
   setStatements_: function(hasStatements) {
+    Blockly.Msg['WIDGETS_DEFNORETURN_DO'] = ''; ////
     if (this.hasStatements_ === hasStatements) {
       return;
     }
@@ -89,7 +89,7 @@ Blockly.Blocks['widgets_defnoreturn'] = {
    * @this Blockly.Block
    */
   updateParams_: function() {
-
+    Blockly.Msg['WIDGETS_BEFORE_PARAMS'] = 'WIDGETS_BEFORE_PARAMS'; ////
     // Merge the arguments into a human-readable list.
     var paramString = '';
     if (this.arguments_.length) {
@@ -354,6 +354,7 @@ Blockly.Blocks['widgets_defnoreturn'] = {
    * @this Blockly.Block
    */
   customContextMenu: function(options) {
+    Blockly.Msg['WIDGETS_CREATE_DO'] = 'WIDGETS_CREATE_DO';  ////
     if (this.isInFlyout){
       return;
     }
@@ -400,8 +401,11 @@ Blockly.Blocks['widgets_defreturn'] = {
    * @this Blockly.Block
    */
   init: function() {
+    Blockly.Msg['WIDGETS_DEFRETURN_TITLE'] = ''; ////
+    Blockly.Msg['WIDGETS_DEFRETURN_RETURN'] = 'return'; ////
+    Blockly.Msg['WIDGETS_DEFRETURN_COMMENT'] = 'WIDGETS_DEFRETURN_COMMENT'; ////
     Blockly.Msg['WIDGETS_DEFRETURN_TOOLTIP'] = 'WIDGETS_DEFRETURN_TOOLTIP'; ////
-    Blockly.Msg['WIDGETS_DEFRETURN_HELPURL'] = 'https://WIDGETS_DEFRETURN_HELPURL'; ////
+    Blockly.Msg['WIDGETS_DEFRETURN_HELPURL'] = 'WIDGETS_DEFRETURN_HELPURL'; ////
     var nameField = new Blockly.FieldTextInput('',
         Blockly.Procedures.rename);
     nameField.setSpellcheck(false);
@@ -462,6 +466,8 @@ Blockly.Blocks['widgets_mutatorcontainer'] = {
    * @this Blockly.Block
    */
   init: function() {
+    Blockly.Msg['WIDGETS_MUTATORCONTAINER_TITLE'] = 'WIDGETS_MUTATORCONTAINER_TITLE'; ////
+    Blockly.Msg['WIDGETS_ALLOW_STATEMENTS'] = 'WIDGETS_ALLOW_STATEMENTS'; ////
     Blockly.Msg['WIDGETS_MUTATORCONTAINER_TOOLTIP'] = 'WIDGETS_MUTATORCONTAINER_TOOLTIP'; ////
     this.appendDummyInput()
         .appendField(Blockly.Msg['WIDGETS_MUTATORCONTAINER_TITLE']);
@@ -545,6 +551,7 @@ Blockly.Blocks['widgets_mutatorarg'] = {
    * @this Blockly.Block
    */
   init: function() {
+    Blockly.Msg['WIDGETS_MUTATORARG_TITLE'] = 'WIDGETS_MUTATORARG_TITLE'; ////
     Blockly.Msg['WIDGETS_MUTATORARG_TOOLTIP'] = 'WIDGETS_MUTATORARG_TOOLTIP'; ////
     var field = new Blockly.FieldTextInput('x', this.validator_);
     // Hack: override showEditor to do just a little bit more work.
@@ -786,6 +793,7 @@ Blockly.Blocks['widgets_callnoreturn'] = {
    * @this Blockly.Block
    */
   updateShape_: function() {
+    Blockly.Msg['WIDGETS_CALL_BEFORE_PARAMS'] = 'WIDGETS_CALL_BEFORE_PARAMS';
     for (var i = 0; i < this.arguments_.length; i++) {
       var field = this.getField('ARGNAME' + i);
       if (field) {
@@ -966,6 +974,7 @@ Blockly.Blocks['widgets_callnoreturn'] = {
    * @this Blockly.Block
    */
   customContextMenu: function(options) {
+    Blockly.Msg['WIDGETS_HIGHLIGHT_DEF'] = 'WIDGETS_HIGHLIGHT_DEF'; ////
     if (!this.workspace.isMovable()) {
       // If we center on the block and the workspace isn't movable we could
       // loose blocks at the edges of the workspace.
@@ -1028,8 +1037,9 @@ Blockly.Blocks['widgets_ifreturn'] = {
    * @this Blockly.Block
    */
   init: function() {
+    Blockly.Msg['WIDGETS_DEFRETURN_RETURN'] = 'return'; ////
     Blockly.Msg['WIDGETS_IFRETURN_TOOLTIP'] = 'WIDGETS_IFRETURN_TOOLTIP'; ////
-    Blockly.Msg['WIDGETS_IFRETURN_HELPURL'] = 'https://WIDGETS_IFRETURN_HELPURL'; ////
+    Blockly.Msg['WIDGETS_IFRETURN_HELPURL'] = 'WIDGETS_IFRETURN_HELPURL'; ////
     this.appendValueInput('CONDITION')
         .setCheck('Boolean')
         .appendField(Blockly.Msg['CONTROLS_IF_MSG_IF']);
@@ -1060,6 +1070,7 @@ Blockly.Blocks['widgets_ifreturn'] = {
    * @this Blockly.Block
    */
   domToMutation: function(xmlElement) {
+    Blockly.Msg['WIDGETS_DEFRETURN_RETURN'] = 'return'; ////
     var value = xmlElement.getAttribute('value');
     this.hasReturnValue_ = (value == 1);
     if (!this.hasReturnValue_) {
@@ -1075,6 +1086,8 @@ Blockly.Blocks['widgets_ifreturn'] = {
    * @this Blockly.Block
    */
   onchange: function(/* e */) {
+    Blockly.Msg['WIDGETS_DEFRETURN_RETURN'] = 'return'; ////
+    Blockly.Msg['WIDGETS_IFRETURN_WARNING'] = 'WIDGETS_IFRETURN_WARNING'; ////
     if (!this.workspace.isDragging || this.workspace.isDragging()) {
       return;  // Don't change state at the start of a drag.
     }
