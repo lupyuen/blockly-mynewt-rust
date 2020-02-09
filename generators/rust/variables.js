@@ -33,6 +33,7 @@ Blockly.Rust['variables_get'] = function(block) {
   // Variable getter.
   var code = Blockly.Rust.variableDB_.getName(block.getFieldValue('VAR'),
       Blockly.Variables.NAME_TYPE);
+  code = 'state.' + code;  //  TODO
   return [code, Blockly.Rust.ORDER_ATOMIC];
 };
 
@@ -50,5 +51,6 @@ Blockly.Rust['variables_set'] = function(block) {
       ' )'
     ].join('');
   }
-  return 'let ' + varName + ' = ' + argument0 + ';\n';
+  //  return 'let ' + varName + ' = ' + argument0 + ';\n';
+  return 'state.' + varName + ' = ' + argument0 + ';\n';  //  TODO
 };

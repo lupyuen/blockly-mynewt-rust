@@ -128,18 +128,14 @@ Blockly.Rust.init = function(workspace) {
     Blockly.Rust.definitions_['variables'] = [
       '/// Application State',
       '#[derive(Clone, Data, Default)]',
-      Blockly.Rust.prefixLines([
-        'struct State {',
-        Blockly.Rust.prefixLines(
-          defvars.map(
-            function(varName) {
-              return varName + ': _;';
-            }
-          ).join(',\n'), 
-          Blockly.Rust.INDENT),
-        '}',
-      ].join('\n'), 
-      Blockly.Rust.INDENT),
+      'struct State {',
+      Blockly.Rust.prefixLines(
+        defvars.map(
+          function(varName) {
+            return varName + ': _;';
+          }
+        ).join(',\n'), 
+        Blockly.Rust.INDENT),
       '}',
       ''
     ].join('\n');
