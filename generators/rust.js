@@ -124,8 +124,17 @@ Blockly.Rust.init = function(workspace) {
 
   // Declare all of the variables.
   if (defvars.length) {
-    Blockly.Rust.definitions_['variables'] =
-        '//  Globals: ' + defvars.join(', ') + ';';
+    Blockly.Rust.definitions_['variables'] = [
+      '/// Application State',
+      '#[derive(Clone, Data, Default)]',
+      'struct State {',
+      '/// Counter value in our Application State',
+      'count: u32,',
+      '}',
+    ].join('\n');
+    defvars.forEach(function(varName) {
+    });
+    //  '//  Globals: ' + defvars.join(', ') + ';';
   }
 };
 
@@ -327,6 +336,14 @@ use mynewt::{
     Strn, coap, d,          // Import Mynewt macros    
 };
 use mynewt_macros::{ infer_type, init_strn, strn };  // Import Mynewt procedural macros
+use druid::{
+  AppLauncher, Data, EventCtx, LocalizedString, Widget, WindowDesc,
+  widget::{
+      Align, Button, Column, Label, Padding,
+  },
+  argvalue::ArgValue,
+  env::Env,
+};
 `;
 
 // Trailer for the source file

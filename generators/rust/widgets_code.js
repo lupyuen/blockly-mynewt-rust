@@ -89,7 +89,6 @@ Blockly.Rust['widgets_defreturn'] = function(block) {
       '}'
     ].join('');  
   }
-  console.log(['code', funcName, code]); ////
   code = Blockly.Rust.scrub_(block, code);
   // Add % so as not to collide with helper functions in definitions list.
   Blockly.Rust.definitions_['%' + funcName] = code;
