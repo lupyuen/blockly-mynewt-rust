@@ -28,11 +28,13 @@ goog.provide('Blockly.Rust.widgets');
 
 goog.require('Blockly.Rust');
 
-
 Blockly.Rust['widgets_defreturn'] = function(block) {
-  // Define a procedure with a return value.
-  var funcName = Blockly.Rust.variableDB_.getName(block.getFieldValue('NAME'),
-      Blockly.Procedures.NAME_TYPE);
+  // Define a Widget event with a return value.
+  var widgetName = Blockly.Rust.variableDB_.getName(block.getFieldValue('NAME'),
+  Blockly.Procedures.NAME_TYPE);  //  e.g. my_label
+  var eventName = 'show';  //  TODO
+  var funcName = ['on', widgetName, eventName].join('_');  //  e.g. on_my_label_show
+
   var branch = Blockly.Rust.statementToCode(block, 'STACK');
   if (Blockly.Rust.STATEMENT_PREFIX) {
     var id = block.id.replace(/\$/g, '$$$$');  // Issue 251.
@@ -121,7 +123,7 @@ Blockly.Rust['widgets_callreturn'] = function(block) {
 Blockly.Rust['widgets_callnoreturn'] = function(block) {
   // Call a procedure with no return value.
   var funcName = Blockly.Rust.variableDB_.getName(block.getFieldValue('NAME'),
-      Blockly.Procedures.NAME_TYPE);
+      Blockly.Procedures.NAME_TYPE);  //  e.g. my_button
   funcName = funcName.split('__').join('::');  //  TODO: Convert sensor__func to sensor::func
   var args = [];
   for (var i = 0; i < block.arguments_.length; i++) {
