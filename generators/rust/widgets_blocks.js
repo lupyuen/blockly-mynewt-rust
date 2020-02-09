@@ -403,7 +403,7 @@ Blockly.Blocks['widgets_defreturn'] = {
   init: function() {
     Blockly.Msg['WIDGETS_DEFRETURN_TITLE'] = ''; ////
     Blockly.Msg['WIDGETS_DEFRETURN_RETURN'] = 'return'; ////
-    Blockly.Msg['WIDGETS_DEFRETURN_COMMENT'] = 'WIDGETS_DEFRETURN_COMMENT'; ////
+    Blockly.Msg['WIDGETS_DEFRETURN_COMMENT'] = ''; ////
     Blockly.Msg['WIDGETS_DEFRETURN_TOOLTIP'] = 'WIDGETS_DEFRETURN_TOOLTIP'; ////
     Blockly.Msg['WIDGETS_DEFRETURN_HELPURL'] = 'WIDGETS_DEFRETURN_HELPURL'; ////
     var nameField = new Blockly.FieldTextInput('',
