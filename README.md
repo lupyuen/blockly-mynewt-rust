@@ -26,9 +26,10 @@ https://github.com/lupyuen/pinetime-rust-mynewt/blob/dispatch/rust/app/src/visua
 
 ## Type Inference
 
-`#[infer_type]` is a Rust Procedural Macro that infers the missing types denoted by `_` like...
+`#[infer_type]` is a Rust Procedural Macro that infers the missing types denoted by underscore (`_`) like this...
 
 ```rust
+#[infer_type]  //  Infer the missing types
 struct State {
     count: _,
 }
