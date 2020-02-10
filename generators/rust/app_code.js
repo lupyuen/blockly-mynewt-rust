@@ -9,6 +9,7 @@ Blockly.Rust['on_start'] = function(block) {
   //  TODO: Allow multiple `on_start` blocks.
   code = [
     '/// Will be run upon startup to launch the app',
+    '#[infer_type]  //  Infer the missing types',
     'pub fn on_start() -> MynewtResult<()> {',
     Blockly.Rust.prefixLines([
       'console::print("on_start\\n");',
