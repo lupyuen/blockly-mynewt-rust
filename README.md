@@ -14,6 +14,32 @@ Read the articles:
 
 3.  [_Visual Programming with Embedded Rust? Yes we can with Apache Mynewt and Google Blockly!_](https://medium.com/@ly.lee/visual-programming-with-embedded-rust-yes-we-can-with-apache-mynewt-and-google-blockly-8b67ef7412d7)
 
+## PineTime Watch Apps
+
+`blockly-mynewt-rust` is now being extended to allow creation of PineTime Watch Apps based on the druid UI framework...
+
+[_Porting [druid] Rust Widgets to PineTime Smart Watch_](https://medium.com/@ly.lee/porting-druid-rust-widgets-to-pinetime-smart-watch-7e1d5a5d977a?source=friends_link&sk=09b153c68483f7fa9e63350efd167b07)
+
+The generated Rust source file will be placed here for building...
+
+https://github.com/lupyuen/pinetime-rust-mynewt/blob/dispatch/rust/app/src/visual.rs
+
+## Type Inference
+
+`#[infer_type]` is a Rust Procedural Macro that infers the missing types denoted by `_` like...
+
+```rust
+struct State {
+    count: _,
+}
+...
+state.count = 0;  //  `count` is inferred as integer type (i32)
+```
+
+The macro is being updated to support druid...
+
+https://github.com/lupyuen/pinetime-rust-mynewt/blob/dispatch/rust/macros/src/infer_type.rs
+
 ## Rust Code Generator
 
 The following have been added into the existing [`generators`](generators) folder to generate Rust code and to add blocks specific to Mynewt...
