@@ -56,11 +56,11 @@ Blockly.Rust['widgets_defreturn'] = function(block) {
   switch(eventName) {  //  TODO
     case 'show':
       returnType = 'ArgValue';
-      desc = '///  Callback function that will be called to create the formatted text for the label ' + widgetName;
+      desc = '/// Callback function that will be called to create the formatted text for the label `' + widgetName + '`';
       break;
     case 'press':
       returnType = 'void';
-      desc = '///  Callback function that will be called when the button ' + widgetName + ' is pressed';
+      desc = '/// Callback function that will be called when the button `' + widgetName + '` is pressed';
       break;
   }
   returnValue = Blockly.Rust.INDENT + 'Ok(' + (returnValue || '()') + ')\n';
