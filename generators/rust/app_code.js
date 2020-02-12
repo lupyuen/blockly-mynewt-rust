@@ -59,8 +59,8 @@ Blockly.Rust['app'] = function(block) {
         '',
         '//  Create a column',
         'let mut col = Column::new();',
-        //  Insert the elements.
-        elements.join('\n'),
+        //  Insert the non-empty elements.
+        elements.filter(s => s != "''").join('\n'),
         '//  Return the column containing the widgets',
         'col',  
       ].join('\n'), 
