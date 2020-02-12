@@ -63,7 +63,7 @@ Blockly.Rust['widgets_defreturn'] = function(block) {
       desc = '/// Callback function that will be called when the button `' + widgetName + '` is pressed';
       break;
   }
-  returnValue = Blockly.Rust.INDENT + 'Ok(' + (returnValue || '()') + ')\n';
+  returnValue = Blockly.Rust.INDENT + 'Ok(' + (returnValue ? returnValue + '.into()' : '()') + ')\n';
 
   //  Get the function name
   var funcName = ['on', widgetName, eventName].join('_');  //  e.g. on_my_label_show
