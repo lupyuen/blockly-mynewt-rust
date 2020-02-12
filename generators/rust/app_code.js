@@ -65,7 +65,7 @@ Blockly.Rust['app'] = function(block) {
         'col',  
       ].join('\n'), 
       Blockly.Rust.INDENT),
-    '}',  //  TODO: Remove trailing semicolon
+    '}  //  ',  //  TODO: Remove trailing semicolon
   ].join('\n');
   return [code, Blockly.Rust.ORDER_NONE];
 };
