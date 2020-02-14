@@ -6,7 +6,11 @@ Try it here: https://lupyuen.github.io/blockly-mynewt-rust/demos/code/
 
 Sample XML (Copy into the XML Tab): https://github.com/lupyuen/blockly-mynewt-rust/blob/master/sample.xml
 
-Watch the demo: https://youtu.be/5hWq5TDEpIg
+Which generates this Rust code (in the Rust Tab): https://twitter.com/MisterTechBlog/status/1228289867815112705?s=20
+
+Which compiles into this PineTime Smart Watch Firmware: https://youtu.be/6NBqJMNibCw
+
+Watch an older demo: https://youtu.be/5hWq5TDEpIg
 
 Read the articles: 
 
