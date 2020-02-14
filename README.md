@@ -37,9 +37,19 @@ struct State {
 state.count = 0;  //  `count` is inferred as integer type (i32)
 ```
 
-The macro is being updated to support druid...
+The macro has being updated to support druid UI framework...
 
 https://github.com/lupyuen/pinetime-rust-mynewt/blob/dispatch/rust/macros/src/infer_type.rs
+
+## Static Widgets
+
+`#[derive(Data)]` is a Rust Procedural Macro that generates custom data types in the druid UI framework...
+
+https://github.com/lupyuen/druid-embedded/blob/master/druid-derive/src/data.rs
+
+The macro has been extended to support Static Widgets on PineTime...
+
+https://github.com/lupyuen/druid-embedded/blob/master/druid-derive/src/widget.rs
 
 ## Rust Code Generator
 
