@@ -43,11 +43,11 @@ https://github.com/lupyuen/pinetime-rust-mynewt/blob/dispatch/rust/macros/src/in
 
 ## Static Widgets
 
-`#[derive(Data)]` is a Rust Procedural Macro that generates custom data types in the druid UI framework...
+`#[derive(Data)]` is a Rust Procedural Macro that generates custom data types (for Application State) in the druid UI framework...
 
 https://github.com/lupyuen/druid-embedded/blob/master/druid-derive/src/data.rs
 
-The macro has been extended to support Static Widgets on PineTime...
+The macro has been extended to support Static Widgets on PineTime, which does not have heap storage...
 
 https://github.com/lupyuen/druid-embedded/blob/master/druid-derive/src/widget.rs
 
