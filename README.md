@@ -18,7 +18,7 @@ Read the articles:
 
 ## PineTime Watch Apps
 
-`blockly-mynewt-rust` is now being extended to allow creation of PineTime Watch Apps based on the druid UI framework...
+`blockly-mynewt-rust` create PineTime Watch Apps based on the druid UI framework...
 
 [_Porting [druid] Rust Widgets to PineTime Smart Watch_](https://medium.com/@ly.lee/porting-druid-rust-widgets-to-pinetime-smart-watch-7e1d5a5d977a?source=friends_link&sk=09b153c68483f7fa9e63350efd167b07)
 
