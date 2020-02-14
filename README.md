@@ -1,8 +1,10 @@
 # blockly-mynewt-rust
 
-Create a Visual Embedded Rust program in a web browser and deploy it with Apache Mynewt to STM32 Blue Pill. 
+Create a Visual Embedded Rust program in a web browser and automatically generate Rust + Mynewt OS code for PineTime Smart Watch
 
 Try it here: https://lupyuen.github.io/blockly-mynewt-rust/demos/code/
+
+Sample XML (Copy into the XML Tab): https://github.com/lupyuen/blockly-mynewt-rust/blob/master/sample.xml
 
 Watch the demo: https://youtu.be/5hWq5TDEpIg
 
