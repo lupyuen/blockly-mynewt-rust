@@ -104,12 +104,13 @@ Blockly.Rust['label'] = function(block) {
 Blockly.Rust['button'] = function(block) {
   //  Generate a Button Widget
   var text_name = block.getFieldValue('NAME');  //  e.g. my_button
+  var title = block.getFieldValue('TITLE');  //  e.g. my_button
   var value_name = Blockly.Rust.valueToCode(block, 'name', Blockly.JavaScript.ORDER_ATOMIC);
 
   //  Create the Widget
   Blockly.Rust.widgets_[text_name] = [
     '//  Create a button widget `' + text_name + '`',
-    'let ' + text_name + ' = Button::new("increment", on_' + text_name + '_press);  //  Call `on_' + text_name + '_press` when pressed',  //  TODO
+    'let ' + text_name + ' = Button::new("' + title + '", on_' + text_name + '_press);  //  Call `on_' + text_name + '_press` when pressed',
   ].join('\n');
 
   //  Add the Widget

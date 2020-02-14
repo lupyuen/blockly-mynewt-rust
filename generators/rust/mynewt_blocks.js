@@ -210,7 +210,7 @@ var mynewt_blocks =
 },
 {
   "type": "button",
-  "message0": "button %1 %2 %3 padding %4 %5",
+  "message0": "button %1 %2 %3 title %4 %5 %6 padding %7 %8",
   "args0": [
     {
       "type": "input_dummy"
@@ -218,6 +218,17 @@ var mynewt_blocks =
     {
       "type": "field_input",
       "name": "NAME",
+      "text": "name"
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "field_input",
+      "name": "TITLE",
       "text": "name"
     },
     {
@@ -236,50 +247,6 @@ var mynewt_blocks =
   ],
   "inputsInline": true,
   "output": null,
-  "colour": 120,
-  "tooltip": "",
-  "helpUrl": ""
-},
-{
-  "type": "on_label_show",
-  "message0": "on label %1 show %2 %3",
-  "args0": [
-    {
-      "type": "field_input",
-      "name": "NAME",
-      "text": "name"
-    },
-    {
-      "type": "input_dummy"
-    },
-    {
-      "type": "input_statement",
-      "name": "NAME"
-    }
-  ],
-  "inputsInline": true,
-  "colour": 120,
-  "tooltip": "",
-  "helpUrl": ""
-},
-{
-  "type": "on_button_press",
-  "message0": "on button %1 press %2 %3",
-  "args0": [
-    {
-      "type": "field_input",
-      "name": "NAME",
-      "text": "name"
-    },
-    {
-      "type": "input_dummy"
-    },
-    {
-      "type": "input_statement",
-      "name": "NAME"
-    }
-  ],
-  "inputsInline": true,
   "colour": 120,
   "tooltip": "",
   "helpUrl": ""

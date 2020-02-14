@@ -25,6 +25,7 @@
     <value name="ADD1">
       <block type="button" id="C9k`r{IwfwWbtEqn9tw!">
         <field name="NAME">my_button</field>
+        <field name="TITLE">Press Me</field>
         <field name="PADDING">5</field>
       </block>
     </value>
